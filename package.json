@@ -16,6 +16,8 @@
     "AUTHORS.rst",
     "COPYING",
     "README.md",
+    "lib",
+    "libevm-wallet",
     "evm-wallet",
     "evm-wallet.js",
     "fs-worker.js",
@@ -32,16 +34,16 @@
     "ethereum"
   ],
   "homepage":
-    "https://github.com/themartiancompany/libevm.js",
+    "https://github.com/themartiancompany/evm-wallet.js",
   "bugs": {
     "url":
-      "https://github.com/themartiancompany/libevm.js/issues"
+      "https://github.com/themartiancompany/evm-wallet.js/issues"
   },
   "repository": {
     "type":
       "git",
     "url":
-      "git+https://github.com/themartiancompany/libevm.js.git"
+      "git+https://github.com/themartiancompany/evm-wallet.js.git"
   },
   "license":
     "AGPL-3.0-or-later",
@@ -77,6 +79,8 @@
     "ethereum-data":
       "^0.0.1",
     "evm-chains-info":
+      "^0.0.1",
+    "libevm":
       "^0.0.1",
     "yargs":
       "18.0.0"
