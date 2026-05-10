@@ -124,6 +124,11 @@ const
   _wallet_new =
     _wallet_new_module._wallet_new;
 
+function
+  _evm_wallet() {
+  true
+}
+
 module.exports = {
   _address_get:
     _address_get,

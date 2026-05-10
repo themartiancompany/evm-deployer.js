@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 /**    ----------------------------------------------------------------
- *     bin2txt
+ *     evm-wallet.js
  *     ----------------------------------------------------------------
  *     Copyright ©
  *       Pellegrino Prevete
@@ -53,13 +53,13 @@ _argv_get =
   _libcrash._argv_get;
 
 const
-  _encoding_tools =
+  _libevm_wallet =
     require(
-      "./encoding-tools");
+      "./libevm-wallet");
 /* global
-     _bin2txt */
-_bin2txt =
-  _encoding_tools._bin2txt;
+     _evm_wallet */
+_evm_wallet =
+  _libevm_wallet._evm_wallet;
 
 function
   _global_variables() {
@@ -67,7 +67,7 @@ function
        app_name:
          writable */
   app_name =
-    "bin2txt";
+    "evm-wallet.js";
   /* global
        app_opts:
          writable */
