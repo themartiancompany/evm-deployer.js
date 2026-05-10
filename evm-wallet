@@ -32,6 +32,11 @@ const
   require(
     'crash-js');
 /* global
+     _argv_get */
+const
+_argv_get =
+  _libcrash._argv_get;
+/* global
      _cmdline_check */
 const
   _cmdline_check =
@@ -57,10 +62,10 @@ const
   _msg_error =
     _libcrash._msg_error;
 /* global
-     _argv_get */
+     _process_exit */
 const
-_argv_get =
-  _libcrash._argv_get;
+_process_exit =
+  _libcrash._process_exit;
 
 const
   _libevm_wallet =
@@ -501,7 +506,7 @@ function
     console.log(
       _line);
   }
-  process.exit(
+  _process_exit(
     _exit_code);
 }
 
@@ -533,48 +538,183 @@ function
     _usage(
       0);
   }
+  // if ( typeof(
+  //        _argv) == "undefined" ||
+  //      _argv[
+  //        "_"].length < 1 ) {
+  //   _msg =
+  //     "Input file argument required.";
+  //   _msg_error(
+  //     _msg,
+  //     0);
+  //   _usage(
+  //     1);
+  // }
   if ( typeof(
-         _argv) == "undefined" ||
-       _argv[
-         "_"].length < 1 ) {
-    _msg =
-      "Input file argument required.";
-    _msg_error(
-      _msg,
-      0);
-    _usage(
-      1);
-  }
-  in_file =
-    _argv[
-      "_"][
-        0];
-  if ( _argv[
-         "_"].length < 2 ) {
-    out_txt_prefix =
-      in_file +
-      ".base64";
-  }
-  if ( "L" in _argv ) {
-    string_length =
+       _argv) != "undefined" &&
+       0 < _argv.length ) {
+    target_command =
       _argv[
-        "L"];
+        "_"][
+          0];
   }
-  if ( "string-length" in _argv ) {
-    string_length =
+  if ( typeof(
+       _argv) != "undefined" &&
+       1 < _argv.length ) {
+    if ( target_command == "list" ) {
+      target_key =
+        _argv[
+          "_"][
+            1];
+    }
+    else {
+      wallet_name =
+        _argv[
+          "_"][
+            1];
+    }
+  }
+  if ( typeof(
+       _argv) != "undefined" &&
+       1 < _argv.length ) {
+    if ( target_command == "list" ) {
+      target_key =
+        _argv[
+          "_"][
+            1];
+    }
+    else {
+      wallet_name =
+        _argv[
+          "_"][
+            1];
+    }
+  }
+  if ( typeof(
+       _argv) != "undefined" &&
+       2 < _argv.length ) {
+    target_key =
       _argv[
-        "string-length"];
+        "_"][
+          2];
   }
-  if ( "s" in _argv ) {
+  if ( typeof(
+       _argv) != "undefined" &&
+       3 < _argv.length ) {
+    target_value =
+      _argv[
+        "_"][
+          3];
+  }
+  if ( "R" in _argv ) {
+    rpc_selection =
+      _argv[
+        "R"];
+  }
+  if ( "rpc-selection" in _argv ) {
+    rpc_selection =
+      _argv[
+        "rpc-selection"];
+  }
+  if ( "S" in _argv ) {
+    explorer_selection =
+      _argv[
+        "S"];
+  }
+  if ( "explorer-selection" in _argv ) {
     amount_only =
       _argv[
-        "s"];
+        "explorer-selection"];
   }
-  if ( "amount-only" in _argv ) {
-    amount_only =
+  if ( "r" in _argv ) {
+    retries_max =
       _argv[
-        "amount-only"];
+        "r"];
   }
+  if ( "retries-max" in _argv ) {
+    retries_max =
+      _argv[
+        "retries-max"];
+  }
+  if ( "u" in _argv ) {
+    measure_unit =
+      _argv[
+        "u"];
+  }
+  if ( "measure-unit" in _argv ) {
+    measure_unit =
+      _argv[
+        "measure-unit"];
+  }
+  if ( "l" in _argv ) {
+    balance_lifespan =
+      _argv[
+        "l"];
+  }
+  if ( "balance-lifespan" in _argv ) {
+    balance_lifespan =
+      _argv[
+        "balance-lifespan"];
+  }
+  if ( "a" in _argv ) {
+    networks_all =
+      "y";
+  }
+  if ( "networks-all" in _argv ) {
+    networks_all =
+      "y";
+  }
+  if ( "P" in _argv ) {
+    tasks_parallel =
+      _argv[
+        "P"];
+  }
+  if ( "tasks-parallel" in _argv ) {
+    tasks_parallel =
+      _argv[
+        "tasks-parallel"];
+  }
+  if ( "Q" in _argv ) {
+    qr_support =
+      _argv[
+        "Q"];
+  }
+  if ( "qr-support" in _argv ) {
+    qr_support =
+      _argv[
+        "qr-support"];
+  }
+  if ( "o" in _argv ) {
+    output_type =
+      _argv[
+        "o"];
+  }
+  if ( "output-type" in _argv ) {
+    output_type =
+      _argv[
+        "output-type"];
+  }
+  if ( "t" in _argv ) {
+    currency_type =
+      _argv[
+        "t"];
+  }
+  if ( "currency-type" in _argv ) {
+    currency_type =
+      _argv[
+        "currency-type"];
+  }
+  if ( "C" in _argv ) {
+    currency_address =
+      _argv[
+        "C"];
+  }
+  if ( "currency-address" in _argv ) {
+    currency_address =
+      _argv[
+        "currency-address"];
+  }
+  _libevm_cmdline_parse();
   if ( "v" in _argv ) {
     verbose =
       _argv[
@@ -618,7 +758,7 @@ function
 
 _global_variables();
 if ( _cmdline_check(
-       "bin2txt.js") == true ) {
+       "evm-wallet.js") == true ) {
   _cmdline_parse();
 }
 _overrides_set();
@@ -631,6 +771,6 @@ app_opts = [
   buffer_size,
   amount_only 
 ];
-_bin2txt.apply(
+_evm_wallet.apply(
   null,
   app_opts);
