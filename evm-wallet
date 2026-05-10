@@ -233,6 +233,32 @@ function
   }
 }
 
+_output_type_check() {
+  let
+    _flag,
+    _output_types,
+    _type;
+  _flag =
+    "false";
+  _output_types = [
+    "",
+    "name",
+    "address",
+    "fingerprint"
+  ];
+  for ( _type of _output_types ) {
+    if ( output_type == _type ) {
+      _flag =
+        "true";
+      break
+    }
+  }
+  if ( flag == "false" ) {
+    _msg =
+      `Invalid output type '${output_type}'.`;
+  }
+}
+
 function 
   _overrides_set() {
   if ( call_date == "" ) {
@@ -304,6 +330,12 @@ function
     "y",
     "n");
   _key_fingerprint_auto_detect();
+  _output_type_check();
+  // See https://github.com/openpgpjs/openpgpjs/issues/2004
+  if ( qr_support == "" ) {
+    qr_support =
+      "n";
+  }
 }
 
 function
