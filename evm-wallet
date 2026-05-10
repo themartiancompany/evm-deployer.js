@@ -37,6 +37,16 @@ const
   _cmdline_check =
     _libcrash._cmdline_check;
 /* global
+     _homedir_get */
+const
+  _homedir_get =
+    _libcrash._homedir_get;
+/* global
+     _get_date_human */
+const
+  _get_date_human =
+    _libcrash._get_date_human;
+/* global
      _msg_info */
 const
   _msg_info =
@@ -74,34 +84,101 @@ function
   app_opts =
     [];
   /* global
-       encoding_format:
+       call_date:
          writable */
-  encoding_format =
+  call_date =
     "";
   /* global
-       buffer_size:
+       config_dir:
          writable */
-  buffer_size =
+  config_dir =
     "";
   /* global
-       string_length:
+       cache_dir:
          writable */
-  string_length =
+  cache_dir =
     "";
   /* global
-       in_file:
+       tasks_parallel:
          writable */
-  in_file =
+  tasks_parallel =
     "";
   /* global
-       out_txt_prefix:
+       target_networks:
          writable */
-  out_txt_prefix =
+  target_networks =
+    [];
+  /* global
+       target_command:
+         writable */
+  target_command =
     "";
   /* global
-       amount_only:
+       target_key:
          writable */
-  amount_only =
+  target_key =
+    "";
+  /* global
+       target_value:
+         writable */
+  target_value =
+    "";
+  /* global
+       output_type:
+         writable */
+  output_type =
+    "";
+  /* global
+       currency_type:
+         writable */
+  currency_type =
+    "";
+  /* global
+       currency_address:
+         writable */
+  currency_address =
+    "";
+  /* global
+       networks_all:
+         writable */
+  networks_all =
+    "";
+  /* global
+       rpc_selection:
+         writable */
+  rpc_selection =
+    "";
+  /* global
+       key_fingerprint:
+         writable */
+  key_fingerprint =
+    "";
+  /* global
+       explorer_selection:
+         writable */
+  explorer_selection =
+    "";
+  /* global
+       retries_max:
+         writable */
+  retries_max =
+    "";
+  /* global
+       call_timeout:
+         writable */
+  call_timeout =
+    "";
+  /* global
+       measure_unit:
+         writable */
+  measure_unit =
+    "";
+  /* global
+       balance_lifespan:
+         writable */
+  balance_lifespan =
+    "";
+  qr_support =
     "";
   /* global
        quiet:
@@ -110,16 +187,57 @@ function
     "";
 }
 
+function
+  _tasks_parallel_auto_detect() {
+  if ( networks_all == "y" ) {
+    tasks_parallel =
+      10;
+  }
+  else if ( networks_all == "n" ) {
+    tasks_parallel =
+      1;
+  }
+  else {
+    _msg =
+      `Invalid value '${tasks_parallel}' ` +
+      `for variable '${tasks_parallel}'`;
+  }
+}
+
+function
+  _call_timeout_auto_detect() {
+  if ( target_command == "get" ) {
+    call_timeout =
+      "30";
+  }
+  else {
+    call_timeout =
+      "300";
+  }
+}
+
+_config_dir_auto_detect() {
+  if ( ) {
+
+  }
+}
+
 function 
   _overrides_set() {
-  if ( encoding_format == "" ) {
-    encoding_format =
-      "base64";
+  if ( call_date == "" ) {
+    call_date =
+      _get_date_human();
   }
-  if ( string_length == "" ) {
-    string_length =
-      "10000";
+  if ( target_command == "" ) {
+    target_command =
+      "get";
   }
+  if ( networks_all == "" ) {
+    networks_all =
+      "n";
+  }
+  _tasks_parallel_auto_detect();
+  _call_timeout_auto_detect();
   if ( buffer_size == "" ) {
     buffer_size =
       "2000000"; // 2MB
