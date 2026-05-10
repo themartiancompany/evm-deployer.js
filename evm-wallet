@@ -216,9 +216,20 @@ function
   }
 }
 
-_config_dir_auto_detect() {
-  if ( ) {
+function
+  _target_key_auto_detect() {
+  if ( target_command == "get" ) {
+    target_key =
+      "name";
+  }
+}
 
+function
+  _key_fingerprint_auto_detect() {
+  if ( wallet_name != "" ) {
+    // TODO:
+    //   implement EVM GNUPG in Javascript
+    true
   }
 }
 
@@ -238,14 +249,61 @@ function
   }
   _tasks_parallel_auto_detect();
   _call_timeout_auto_detect();
-  if ( buffer_size == "" ) {
-    buffer_size =
-      "2000000"; // 2MB
+  if ( config_dir == "" ) {
+    config_dir =
+      `${_homedir_get()}/.config/evm-wallet`;
   }
-  if ( amount_only == "" ) {
-    amount_only =
-      "false";
+  if ( target_networks.length < 1 &&
+       networks_all == "n" ) {
+    target_networks.push(
+      100);
   }
+  _target_key_auto_detect();
+  if ( balance_lifespan == "" ) {
+    balance_lifespan =
+      "3600";
+  }
+  if ( retries_max == "" ) {
+    retries_max =
+      "2";
+  }
+  if ( measure_unit == "" ) {
+    measure_unit =
+      "ether";
+  }
+  if ( currency_type == "" ) {
+    if ( currency_address == "" ) {
+      currency_type =
+        "gas";
+    }
+    else if ( currency_address != "" ) {
+      currency_type =
+        "erc20";
+    }
+  }
+  if ( rpc_selection == "" ) {
+    // TODO:
+    //   remove all references to that
+    //   monster
+    rpc_selection =
+      "kirsh";
+  }
+  if ( explorer_selection == "" ) {
+    // TODO:
+    //   remove all references to that
+    //   humunculus
+    explorer_selection =
+      "kirsh";
+  }
+  // TODO:
+  //   explorers api keys, optional frankly
+  //   since theres the evm-contracts-source-index
+  _wallet_overrides_set( 
+    "evm-wallet",
+    wallet_name,
+    "y",
+    "n");
+  _key_fingerprint_auto_detect();
 }
 
 function

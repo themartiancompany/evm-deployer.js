@@ -134,6 +134,7 @@ npm \
   install \
     "evm-wallet.js"
 ```
+
 Be aware the mirrors could go offline any time as Github or NPM and more
 in general all HTTP resources are inherently unstable and censorable.
 
