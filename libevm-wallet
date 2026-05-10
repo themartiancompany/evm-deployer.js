@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 /**    ----------------------------------------------------------------
- *     libevm-chains-info
+ *     libevm-wallet
  *     ----------------------------------------------------------------
  *     Copyright ©
  *       Pellegrino Prevete
@@ -34,173 +34,123 @@
 //     require(
 //       '../libcrash-js/crash-js');
 const
-  _libcrash_module =
+  _address_get_module =
     require(
-      "crash-js");
-_file_exists =
-  _libcrash_module._file_exists;
-_json_read =
-  _libcrash_module._json_read;
-_path_join =
-  _libcrash_module._path_join;
-
-function
-  _evm_chains_db_path_get(
-    _user) {
-  let
-    _db_exists,
-    _path;
-  if ( _user == undefined ) {
-    _user =
-      false;
-  }
-  if ( _user == true ) {
-    _path =
-      _path_join(
-        [process.env.HOME,
-         ".local",
-         "share",
-         "evm-chains",
-         "chains.json"])
-    _db_exists =
-      _file_exists(
-        _db_path);
-    if ( _db_exists == false ) {
-      _user =
-        false;
-    }
-  }
-  if ( _user == false ) {
-    _path =
-      _path_join(
-        [process.env.NODE_PATH,
-         "..",
-         "evm-chains",
-         "chains.json"])
-  }
-  else {
-    _msg_error(
-      "Input variable '_user' must be a boolean",
-      0);
-  }
-  return _path;
-}
-
-function
-  _evm_chain_info_get(
-    _chain_id,
-    _chain_info,
-    _db_path) {
-  let
-    _db,
-    _db_exists;
-  if ( _db_path == undefined ) {
-    _db_path =
-      _evm_chains_db_path_get(
-        false);
-  }
-  _db_exists =
-    _file_exists(
-      _db_path);
-  if ( _db_exists == false ) {
-    _msg_error(
-      "Database file does not exists.",
-      1);
-  }
-  _db =
-    _json_read(
-      _db_path);
-  for ( _chain_info of _db) {
-    if ( _chain_info["chainId"] == _chain_id ) {
-      return _chain_info;
-    }
-  }
-  _msg_error(
-    `Network '${_chain_id}' not found.`,
-    1);
-}
-
-function
-  _rpc_backend_get(
-    _network_chain_id,
-    _selection_method,
-    _db_path) {
-  let
-    _chain_id,
-    _chain_info;
-  if ( _network_chain_id == undefined ) {
-    _msg_error(
-      "Network's ChainID not specified.",
-      1);
-  }
-  if ( _selection_method == undefined ) {
-    _selection_method =
-      "kirsh";
-  }
-  if ( _db_path == undefined ) {
-    _db_path =
-      _evm_chains_db_path_get(
-        false);
-  }
-  _chain_id =
-    Number(
-      _network_chain_id);
-  _chain_info =
-    _evm_chain_info_get(
-      _chain_id,
-      _db_path);
-  if ( _selection_method == "kirsh" ) {
-    return _chain_info["rpc"][0];
-  }
-  else {
-    _msg_error(
-      "Unknown selection method.",
-      1);
-  }
-}
-
-function _rpc_backends_get(
-    _networks_chain_ids,
-    _selection_method,
-    _db_path) {
-    let
-      _chain_id,
-      _rpc_backend_get_opts,
-      _rpcs;
-  if ( _selection_method == undefined ) {
-    _selection_method =
-      "kirsh";
-  }
-  if ( _db_path == undefined ) {
-    _db_path =
-      _evm_chains_db_path_get(
-        false);
-  }
-  _rpcs =
-    [];
-  for ( _chain_id of _networks_chain_ids ) {
-    _rpc_backend_get_opts = [
-      _chain_id,
-      _selection_method,
-      _db_path
-    ];
-    _rpc_backend =
-      _rpc_backend_get.apply(
-        null,
-        _rpc_backend_get_opts);
-    _rpcs.append(
-      _rpc_backend);
-  }
-  return _rpcs;
-}
+      "lib/address-get");
+const
+  _address_get =
+    _address_get_module._address_get;
+const
+  _balance_check_module =
+    require(
+      "lib/balance-check");
+const
+  _balance_check =
+    _balance_check_module._balance_check;
+const
+  _msg_error_balance_insufficient =
+    _balance_check_module._msg_error_balance_insufficient;
+const
+  _balance_get_module =
+    require(
+      "lib/balance-get");
+const
+  _balance_get =
+    _balance_get_module._balance_get;
+const
+  _balance_send_module =
+    require(
+      "lib/balance-send");
+const
+  _balance_send =
+    _balance_send_module._balance_send;
+const
+  _ethers_to_wei_module =
+    require(
+      "lib/ethers-to-wei");
+const
+  _ethers_to_wei =
+    _ethers_to_wei_module._ethers_to_wei;
+const
+  _network_provider_module =
+    require(
+      "lib/network-provider");
+const
+  _provider_get =
+    _network_provider_module._provider_get;
+const
+  _msg_info_provider_generated =
+    _network_provider_module._msg_info_provider_generated;
+const
+  _price_gas_get_module =
+    require(
+      "lib/price-gas-get");
+const
+  _price_gas_get =
+    _price_gas_get_module._price_gas_get;
+const
+  _price_gas_transaction_get_module =
+    require(
+      "lib/price-gas-transaction-get");
+const
+  _price_gas_transaction_get =
+    _price_gas_transaction_get_module._price_gas_transaction_get;
+const
+  _seed_new_module =
+    require(
+      "lib/seed-new");
+const
+  _seed_new =
+    _seed_new_module._seed_new;
+const
+  _token_send_module =
+    require(
+      "lib/token-send");
+const
+  _token_send =
+    _token_send_module._seed_new;
+const
+  _wallet_get_module =
+    require(
+      "lib/wallet-get");
+const
+  _wallet_get =
+    _wallet_get_module._wallet_get;
+const
+  _wallet_new_module =
+    require(
+      "lib/wallet-new");
+const
+  _wallet_new =
+    _wallet_new_module._wallet_new;
 
 module.exports = {
-  _evm_chains_db_path_get:
-    _evm_chains_db_path_get,
-  _evm_chain_info_get:
-    _evm_chain_info_get,
-  _rpc_backend_get:
-    _rpc_backend_get,
-  _rpc_backends_get:
-    _rpc_backends_get
+  _address_get:
+    _address_get,
+  _balance_check:
+    _balance_check,
+  _msg_error_balance_insufficient:
+    _msg_error_balance_insufficient,
+  _balance_get:
+    _balance_get,
+  _balance_send:
+    _balance_send,
+  _ethers_to_wei:
+    _ethers_to_wei,
+  _provider_get:
+    _provider_get,
+  _msg_info_provider_generated:
+    _msg_info_provider_generated,
+  _price_gas_get:
+    _price_gas_get,
+  _price_gas_transaction_get:
+    _price_gas_transaction_get,
+  _seed_new:
+    _seed_new,
+  _token_send:
+    _token_send,
+  _wallet_get:
+    _wallet_get,
+  _wallet_new:
+    _wallet_new
 };
