@@ -816,12 +816,27 @@ if ( _cmdline_check(
 _overrides_set();
 _config_show();
 app_opts = [
-  in_file,
-  out_txt_prefix,
-  encoding_format,  
-  string_length,
-  buffer_size,
-  amount_only 
+  target_command,
+  wallet_path,
+  wallet_password,
+  wallet_seed,
+  key_fingerprint,
+  config_dir,
+  cache_dir,
+  networks_all,
+  rpc_selection,
+  api_key,
+  retries_max,
+  tasks_parallel,
+  call_timeout,
+  measure_unit,
+  balance_lifespan,
+  currency_type,
+  currency_address,
+  output_type,
+  target_key,
+  target_value,
+  target_networks
 ];
 _evm_wallet.apply(
   null,

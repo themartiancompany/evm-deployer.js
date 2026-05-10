@@ -125,7 +125,28 @@ const
     _wallet_new_module._wallet_new;
 
 function
-  _evm_wallet() {
+  _evm_wallet(
+    _target_command,
+    _wallet_path,
+    _wallet_password,
+    _wallet_seed,
+    _key_fingerprint,
+    _config_dir,
+    _cache_dir,
+    _networks_all,
+    _rpc_selection,
+    _api_key,
+    _retries_max,
+    _tasks_parallel,
+    _call_timeout,
+    _measure_unit,
+    _balance_lifespan,
+    _currency_type,
+    _currency_address,
+    _output_type,
+    _target_key,
+    _target_value,
+    _target_networks) {
   true
 }
 
@@ -140,6 +161,8 @@ module.exports = {
     _balance_get,
   _balance_send:
     _balance_send,
+  _evm_wallet:
+    _evm_wallet,
   _ethers_to_wei:
     _ethers_to_wei,
   _provider_get:
