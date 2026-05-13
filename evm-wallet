@@ -818,6 +818,9 @@ if ( _cmdline_check(
        "evm-wallet.js") == true ) {
   _cmdline_parse();
 }
+else {
+  _url_parse();
+}
 _overrides_set();
 _config_show();
 app_opts = [
