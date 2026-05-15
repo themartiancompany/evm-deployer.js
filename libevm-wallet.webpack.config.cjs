@@ -32,7 +32,7 @@ const
       __dirname);
 const
   _input_file_name =
-    `libevm-chains-info`;
+    `libevm-wallet`;
 const
   _input_file_path =
     `./${_input_file_name}`;

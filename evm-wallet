@@ -524,11 +524,21 @@ function
 function 
   _cmdline_parse() {
   let
-    _argv,
     _help_display,
     _msg;
-  _argv =
-    _argv_get();
+  const
+    _argv_args = {
+      "booleans": [
+        "h",
+        "help",
+        "v",
+        "verbose"
+      ]
+    };
+  const
+    _argv =
+      _argv_get(
+        _argv_args);
   _options =
     _argv[
       "_"];
@@ -536,31 +546,28 @@ function
     "y";
   runtime_environment =
     "node";
-  if ( _options.indexOf(
-         "--help") > -1 ||
-       _options.indexOf(
-         "-h") > -1) {
+  if ( _argv["h"] == true ) {
+    _help_display =
+      true;
+  }
+  if ( _argv["help"] == true ) {
+    _help_display =
+      true;
+  }
+  if ( ( _options.indexOf(
+           "--help") > -1 ||
+         _options.indexOf(
+           "-h") > -1) ) {
     _help_display =
       true;
   }
   if ( _help_display ) {
     quiet =
       "n";
+    _overrides_set();
     _usage(
       0);
   }
-  // if ( typeof(
-  //        _argv) == "undefined" ||
-  //      _argv[
-  //        "_"].length < 1 ) {
-  //   _msg =
-  //     "Input file argument required.";
-  //   _msg_error(
-  //     _msg,
-  //     0);
-  //   _usage(
-  //     1);
-  // }
   if ( typeof(
        _argv) != "undefined" &&
        0 < _argv.length ) {
@@ -727,15 +734,12 @@ function
   }
   _libevm_cmdline_parse(
     _argv);
-  if ( "v" in _argv ) {
+  if ( _argv[
+         "v"] ||
+       _argv[
+         "verbose"]) {
     verbose =
-      _argv[
-        "v"];
-  }
-  if ( "verbose" in _argv ) {
-    verbose =
-      _argv[
-        "verbose"];
+      true;
   }
   if ( verbose ) {
     quiet =
