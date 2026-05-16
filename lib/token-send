@@ -53,7 +53,7 @@ _parse_units =
 const
   _evm_contracts_tools_module =
     require(
-      "evm-contracts-tools.js");
+      "evm-contracts-tools");
 _contract_run =
   _evm_contracts_tools_module._contract_run;
 
