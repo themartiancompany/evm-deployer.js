@@ -230,6 +230,11 @@ function
          writable */
   quiet =
     "";
+  /* global
+       verbose:
+         writable */
+  verbose =
+    "";
 }
 
 function
@@ -277,7 +282,7 @@ function
   if ( wallet_name != "" ) {
     // TODO:
     //   implement EVM GNUPG in Javascript
-    true
+    true;
   }
 }
 
@@ -303,8 +308,9 @@ function
     }
   }
   if ( flag == "false" ) {
-    _msg =
-      `Invalid output type '${output_type}'.`;
+    const
+      _msg =
+        `Invalid output type '${output_type}'.`;
   }
 }
 
@@ -419,7 +425,7 @@ function
       `          Network options:`,
       `            Maximum retries:   ${retries_max}`,
       `               Call timeout:   ${call_timeout}`,
-      `             Parallel tasks:   ${parallel_tasks}`,
+      `             Parallel tasks:   ${tasks_parallel}`,
       `           LibEVM options:`,
       `             Target network:   ${target_networks[0]}`,
       `      Application options:`,
@@ -679,7 +685,7 @@ function
         "S"];
   }
   if ( "explorer-selection" in _argv ) {
-    amount_only =
+    explorer_selection =
       _argv[
         "explorer-selection"];
   }
