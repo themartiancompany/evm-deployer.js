@@ -32,6 +32,8 @@
 /* global
      api_key */
 /* global
+     wallet_address */
+/* global
      wallet_password */
 /* global
      wallet_path */
@@ -302,13 +304,16 @@ function
     if ( output_type == _type ) {
       _flag =
         "true";
-      break
+      break;
     }
   }
   if ( flag == "false" ) {
     const
       _msg =
         `Invalid output type '${output_type}'.`;
+    _msg_error(
+      _msg,
+      1);
   }
 }
 
