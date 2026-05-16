@@ -190,8 +190,9 @@ function
     _exit);
 }
 
-_wallet_new_cmdline(
-  app_opts) {
+function
+  _wallet_new_cmdline(
+    app_opts) {
   let
     _wallet;
   _wallet =
