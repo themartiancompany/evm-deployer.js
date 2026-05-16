@@ -283,12 +283,13 @@ function
     _type;
   _flag =
     "false";
-  _output_types = [
-    "",
-    "name",
-    "address",
-    "fingerprint"
-  ];
+  const
+    _output_types = [
+      "",
+      "name",
+      "address",
+      "fingerprint"
+    ];
   for ( _type of _output_types ) {
     if ( output_type == _type ) {
       _flag =
