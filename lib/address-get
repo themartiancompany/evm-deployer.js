@@ -28,68 +28,54 @@ const
   { ethers } =
     require(
       "ethers");
-_ethers =
-  ethers;
-
-function
-  _libcrash_require() {
-  let
-    _libcrash;
-  try {
-    _libcrash =
-      require(
-        "crash-js");
-  } catch(
-      _error) {
-    console.log(
-      _error);
-    try {
-      _libcrash =
-        require(
-          "../libcrash-js/crash-js");
-    } catch(
-        _error) {
-      _msg =
-        "Install Crash Javascript.";
-      throw _msg;
-    }
-  }
-  return _libcrash
-}
-
+const
+  _ethers =
+    ethers;
 const
   _libcrash =
-    _libcrash_require();
-_cmdline_check =
-  _libcrash._cmdline_check;
-_dirname =
-  _libcrash._dirname;
-_file_read =
-  _libcrash._file_read;
-_file_write =
-  _libcrash._file_write;
-_path_join =
-  _libcrash._path_join;
-_msg_info =
-  _libcrash._msg_info;
-_msg_info_obj =
-  _libcrash._msg_info_obj;
-_msg_error =
-  _libcrash._msg_error;
+    require(
+      "crash-js");
+const
+  _cmdline_check =
+    _libcrash._cmdline_check;
+const
+  _dirname =
+    _libcrash._dirname;
+const
+  _file_read =
+    _libcrash._file_read;
+const
+  _file_write =
+    _libcrash._file_write;
+const
+  _path_join =
+    _libcrash._path_join;
+const
+  _msg_info =
+    _libcrash._msg_info;
+const
+  _msg_info_obj =
+    _libcrash._msg_info_obj;
+const
+  _msg_error =
+    _libcrash._msg_error;
 const
   _wallet_get_module =
     require(
       './wallet-get');
-_wallet_get =
-  _wallet_get_module._wallet_get;
+const
+  _wallet_get =
+    _wallet_get_module._wallet_get;
 const
   _network_provider =
     require(
       './network-provider');
-_provider_get =
-  _network_provider._provider_get;
-_msg_info_provider_generated =
-  _network_provider._msg_info_provider_generated;
+const
+  _provider_get =
+    _network_provider._provider_get;
+const
+  _msg_info_provider_generated =
+    _network_provider._msg_info_provider_generated;
 
 
 function

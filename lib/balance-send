@@ -28,40 +28,20 @@ const
   { ethers } =
     require(
       "ethers");
-_ethers =
-  ethers;
-_wei_to_ether =
-  _ethers.formatEther;
-_parse_units =
-  _ethers.parseUnits;
-
-function
-  _libcrash_require() {
-  let
-    _libcrash;
-  try {
-    _libcrash =
-      require(
-        "crash-js");
-  } catch(
-      _error) {
-    try {
-      _libcrash =
-        require(
-          "../libcrash-js/crash-js");
-    } catch(
-        _error) {
-      _msg =
-        "Install Crash Javascript.";
-      throw _msg;
-    }
-  }
-  return _libcrash
-}
+const
+  _ethers =
+    ethers;
+const
+  _wei_to_ether =
+    _ethers.formatEther;
+const
+  _parse_units =
+    _ethers.parseUnits;
 
 const
   _libcrash =
-    _libcrash_require();
+    require(
+      "crash-js");
 const
   _dirname =
     _libcrash._dirname;
@@ -101,15 +81,15 @@ const
   _msg_error_balance_insufficient =
     _balance_check_module._msg_error_balance_insufficient
 const
-  _network_provider =
+  _network_provider_module =
     require(
       './network-provider');
 const
   _provider_get =
-    _network_provider._provider_get;
+    _network_provider_module._provider_get;
 const
   _msg_info_provider_generated =
-    _network_provider._msg_info_provider_generated;
+    _network_provider_module._msg_info_provider_generated;
 
 function
   _global_variables() {
