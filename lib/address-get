@@ -79,13 +79,13 @@ _msg_error =
 const
   _wallet_get_module =
     require(
-      '../evm-wallet/wallet-get');
+      './wallet-get');
 _wallet_get =
   _wallet_get_module._wallet_get;
 const
   _network_provider =
     require(
-      '../evm-wallet/network-provider');
+      './network-provider');
 _provider_get =
   _network_provider._provider_get;
 _msg_info_provider_generated =

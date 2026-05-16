@@ -243,7 +243,8 @@ function
   }
 }
 
-_output_type_check() {
+function
+  _output_type_check() {
   let
     _flag,
     _output_types,
@@ -410,22 +411,22 @@ function
     "      <command-args>",
     "",
     "  commands:",
-    "    get,
+    "    get",
     "      <wallet-name>",
     "      <key>",
-    "    list,
+    "    list",
     "    <filter>",
-    "    set,
+    "    set",
     "      <wallet-name>",
     "      <key>",
     "      <value>",
-    "    send,
+    "    send",
     "      <address>",
     "      <amount>",
     "",
     "  keys:",
     "    address",
-    "    balance"
+    "    balance",
     "    name",
     "    seed",
     "",

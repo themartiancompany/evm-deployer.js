@@ -77,6 +77,7 @@ _msg_error =
   _libcrash._msg_error;
 _sleep =
   _libcrash._sleep;
+
 const
   _wallet_get_module =
     require(

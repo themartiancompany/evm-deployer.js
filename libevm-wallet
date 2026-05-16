@@ -29,21 +29,17 @@
  *     If not, see <https://www.gnu.org/licenses/>.
  */
 
-// const
-//   _libcrash =
-//     require(
-//       '../libcrash-js/crash-js');
 const
   _address_get_module =
     require(
-      "lib/address-get");
+      "./lib/address-get");
 const
   _address_get =
     _address_get_module._address_get;
 const
   _balance_check_module =
     require(
-      "lib/balance-check");
+      "./lib/balance-check");
 const
   _balance_check =
     _balance_check_module._balance_check;
@@ -53,28 +49,28 @@ const
 const
   _balance_get_module =
     require(
-      "lib/balance-get");
+      "./lib/balance-get");
 const
   _balance_get =
     _balance_get_module._balance_get;
 const
   _balance_send_module =
     require(
-      "lib/balance-send");
+      "./lib/balance-send");
 const
   _balance_send =
     _balance_send_module._balance_send;
 const
   _ethers_to_wei_module =
     require(
-      "lib/ethers-to-wei");
+      "./lib/ethers-to-wei");
 const
   _ethers_to_wei =
     _ethers_to_wei_module._ethers_to_wei;
 const
   _network_provider_module =
     require(
-      "lib/network-provider");
+      "./lib/network-provider");
 const
   _provider_get =
     _network_provider_module._provider_get;
@@ -84,42 +80,42 @@ const
 const
   _price_gas_get_module =
     require(
-      "lib/price-gas-get");
+      "./lib/price-gas-get");
 const
   _price_gas_get =
     _price_gas_get_module._price_gas_get;
 const
   _price_gas_transaction_get_module =
     require(
-      "lib/price-gas-transaction-get");
+      "./lib/price-gas-transaction-get");
 const
   _price_gas_transaction_get =
     _price_gas_transaction_get_module._price_gas_transaction_get;
 const
   _seed_new_module =
     require(
-      "lib/seed-new");
+      "./lib/seed-new");
 const
   _seed_new =
     _seed_new_module._seed_new;
 const
   _token_send_module =
     require(
-      "lib/token-send");
+      "./lib/token-send");
 const
   _token_send =
     _token_send_module._seed_new;
 const
   _wallet_get_module =
     require(
-      "lib/wallet-get");
+      "./lib/wallet-get");
 const
   _wallet_get =
     _wallet_get_module._wallet_get;
 const
   _wallet_new_module =
     require(
-      "lib/wallet-new");
+      "./lib/wallet-new");
 const
   _wallet_new =
     _wallet_new_module._wallet_new;

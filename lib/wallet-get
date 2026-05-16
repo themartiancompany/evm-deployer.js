@@ -68,14 +68,10 @@ _msg_info_obj =
   _libcrash._msg_info_obj;
 _msg_error = 
   _libcrash._msg_error;
-const 
-  _fs_utils =
-    require(
-      '../libcrash-js/fs-utils');
 _file_exists =
-  _fs_utils._file_exists
+  _libcrash._file_exists;
 _file_read =
-  _fs_utils._file_read;
+  _libcrash._file_read;
 
 
 function _global_variables() {
