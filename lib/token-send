@@ -74,11 +74,11 @@ _wei_to_ether =
 _parse_units =
   _ethers.parseUnits;
 const
-  _evm_contract_call_dynamic_module =
+  _evm_contracts_tools_module =
     require(
-      '../evm-contracts-tools/evm-contract-call-dynamic');
+      "evm-contracts-tools.js");
 _contract_run =
-  _evm_contract_call_dynamic_module._contract_run;
+  _evm_contracts_tools_module._contract_run;
 
 function
   _global_variables() {
