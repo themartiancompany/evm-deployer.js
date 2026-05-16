@@ -102,27 +102,39 @@ build-man:
 	    update \
 	    --init \
 	      "man" || \
-	true
+	true; \
 	mkdir \
 	  -p \
-	  "build/man"
+	  "build/man"; \
 	cp \
 	  "man/variables.rst" \
-	  "build/man"
+	  "build/man"; \
 	cp \
 	  "man/$(_PROJECT).1.rst" \
-	  "build/man"
+	  "build/man"; \
+	_tag="$$( \
+	  git \
+	    tag | \
+	    sort \
+	      -V | \
+              head \
+	        -n \
+	          1)"; \
+	sed \
+	  "s/insert.version.here/$${_tag}/" \
+	  -i \
+	  "build/man/variables.rst"; \
 	cat \
-	  "man/$(_PROJECT_NPM).1.rst" | \
+	  "man/$(_PROJECT).1.rst" | \
 	  sed \
 	    "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
-	    "build/man/$(_PROJECT_NPM).1.rst"
+	    "build/man/$(_PROJECT_NPM).1.rst"; \
 	rst2man \
 	  "build/man/$(_PROJECT_NPM).1.rst" \
-	  "build/man/$(_PROJECT_NPM).1"
+	  "build/man/$(_PROJECT_NPM).1"; \
 	rm \
 	  "build/man/$(_PROJECT).1.rst" \
-	  "build/man/$(_PROJECT_NPM).1.rst"
+	  "build/man/$(_PROJECT_NPM).1.rst"; \
 	rm \
 	  "build/man/variables.rst"
 
