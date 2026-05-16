@@ -77,7 +77,8 @@ const
     require(
       "./libevm-wallet");
 /* global
-     _evm_wallet */
+     _evm_wallet:
+       writable */
 _evm_wallet =
   _libevm_wallet._evm_wallet;
 const
@@ -295,7 +296,7 @@ function
       break;
     }
   }
-  if ( flag == "false" ) {
+  if ( _flag == "false" ) {
     const
       _msg =
         `Invalid output type '${output_type}'.`;
@@ -393,6 +394,8 @@ function
        api_key */
   /* global
        wallet_address */
+  /* global
+       wallet_name */
   /* global
        wallet_password */
   /* global
