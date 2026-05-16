@@ -83,7 +83,7 @@
     "evm-chains-info":
       "^0.0.16",
     "evm-contracts-tools":
-      "^0.0.2",
+      "^0.0.3",
     "libevm":
       "^0.0.6",
     "yargs":
