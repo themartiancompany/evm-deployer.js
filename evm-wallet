@@ -562,7 +562,7 @@ function
     `       <cache-dir>                   Default: '${cache_dir}'`,
     "",
     "     -h --help                       This message.",
-    "     -v --verbose                    Enable verbose output."
+    "     -v --verbose                    Enable verbose output.",
     "",
   ];
   for ( _line of _text ) {

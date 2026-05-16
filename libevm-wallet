@@ -160,7 +160,7 @@ function
     "offline",
     [ "node",
       "system" ],
-    "kirsh"
+    "kirsh",
     "",
     "n",
     _target_networks[0],
