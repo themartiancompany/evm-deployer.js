@@ -27,19 +27,6 @@
  *     If not, see <https://www.gnu.org/licenses/>.
  */
 
-/* LibEVM-defined global variables /*
-
-/* global
-     api_key */
-/* global
-     wallet_address */
-/* global
-     wallet_password */
-/* global
-     wallet_path */
-/* global
-     wallet_seed */
-
 const
   _libcrash =
   require(
@@ -248,9 +235,10 @@ function
       1;
   }
   else {
-    _msg =
-      `Invalid value '${tasks_parallel}' ` +
-      `for variable '${tasks_parallel}'`;
+    const
+      _msg =
+        `Invalid value '${tasks_parallel}' ` +
+        `for variable '${tasks_parallel}'`;
     _msg_error(
       _msg,
       1);
@@ -400,6 +388,17 @@ function
   _config_show() {
   let
     _line;
+  /* LibEVM-defined global variables /*
+  /* global
+       api_key */
+  /* global
+       wallet_address */
+  /* global
+       wallet_password */
+  /* global
+       wallet_path */
+  /* global
+       wallet_seed */
   const
     _text = [
       `${app_name} configuration:`,
@@ -588,9 +587,10 @@ function
     _argv =
       _argv_get(
         _argv_args);
-  _options =
-    _argv[
-      "_"];
+  const
+    _options =
+      _argv[
+        "_"];
   quiet = 
     "y";
   runtime_environment =
@@ -798,12 +798,11 @@ function
 
 function
   _url_parse() {
-  let
-    _argv;
+  const
+    _argv =
+      _argv_url_get();
   runtime_environment =
     "browser";
-  _argv =
-    _argv_url_get();
   rpc_selection =
     _argv_url_get(
       "rpc_selection")[
