@@ -563,6 +563,7 @@ function
     "",
     "     -h --help                       This message.",
     "     -v --verbose                    Enable verbose output."
+    "",
   ];
   for ( _line of _text ) {
     console.log(

@@ -30,6 +30,11 @@
  */
 
 const
+  _evm_chains_info_module =
+    require("evm-chains-info");
+_evm_chains_info =
+  _evm_chains_info_module._evm_chains_info;
+const
   _address_get_module =
     require(
       "./lib/address-get");
@@ -143,7 +148,28 @@ function
     _target_key,
     _target_value,
     _target_networks) {
-  true
+  let
+    _args,
+    _cmd,
+    _evm_chains_info_args,
+    _rpc;
+  _evm_chains_info_args = [
+    "get",
+    "id",
+    "rpc",
+    "offline",
+    [ "node",
+      "system" ],
+    "kirsh"
+    "",
+    "n",
+    _target_networks[0],
+    []
+  ];
+  _chain_info =
+    _evm_chains_info.apply(
+      null,
+      _evm_chains_info_args);
 }
 
 module.exports = {
