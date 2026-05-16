@@ -32,13 +32,6 @@ _ethers =
   ethers;
 _Wallet =
   _ethers.Wallet;
-const
-  _fs =
-    require(
-      'fs');
-_path =
-  require(
-    'path');
 
 function
   _libcrash_require() {
@@ -75,16 +68,12 @@ _msg_info_obj =
   _libcrash._msg_info_obj;
 _msg_error = 
   _libcrash._msg_error;
-const 
-  _fs_utils =
-    require(
-      '../libcrash-js/fs-utils');
 _dirname =
-  _fs_utils._dirname
+  _libcrash._dirname;
 _file_exists =
-  _fs_utils._file_exists
+  _libcrash._file_exists;
 _file_write =
-  _fs_utils._file_write
+  _libcrash._file_write;
 
 function
   _global_variables() {
