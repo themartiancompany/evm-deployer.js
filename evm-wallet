@@ -27,6 +27,19 @@
  *     If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* LibEVM-defined global variables /*
+
+/* global
+     api_key */
+/* global
+     wallet_password */
+/* global
+     wallet_path */
+/* global
+     wallet_seed */
+/* global
+     target_networks */
+
 const
   _libcrash =
   require(
@@ -80,6 +93,14 @@ const
      _evm_wallet */
 _evm_wallet =
   _libevm_wallet._evm_wallet;
+const
+  _libevm =
+    require(
+      "libevm");
+_libevm_cmdline_parse =
+  _libevm._libevm_cmdline_parse;
+_libevm_url_parse =
+  _libevm._libevm_url_parse;
 
 function
   _global_variables() {
@@ -88,6 +109,11 @@ function
          writable */
   app_name =
     "evm-wallet.js";
+  /* global
+       runtime_environment:
+         writable */
+  runtime_environment =
+    "";
   /* global
        app_opts:
          writable */
@@ -188,6 +214,9 @@ function
          writable */
   balance_lifespan =
     "";
+  /* global
+       qr_support:
+         writable */
   qr_support =
     "";
   /* global
@@ -211,6 +240,9 @@ function
     _msg =
       `Invalid value '${tasks_parallel}' ` +
       `for variable '${tasks_parallel}'`;
+    _msg_error(
+      _msg,
+      1);
   }
 }
 
@@ -352,42 +384,42 @@ function
 function
   _config_show() {
   let
-    _line,
-    _text;
-  _text = [
-    `${app_name} configuration:`,
-    `                  Call date:   ${call_date}`,
-    `             Target command:   ${target_command}`,
-    `                Wallet name:   ${wallet_name}`,
-    `                 Target key:   ${target_key}`,
-    `               Target value:   ${target_value}`,
-    `               All networks:   ${networks_all}`,
-    `       RPC selection method:   ${rpc_selection}`,
-    ` Explorers selection method:   ${explorer_selection}`,
-    `               Measure unit:   ${measure_unit}`,
-    `           Balance lifespan:   ${balance_lifespan}`,
-    `             Send options:`,
-    `              Currency type:   ${currency_type}`,
-    `           Currency address:   ${currency_address}`,
-    `             List options:`,
-    `                Output type:   ${output_type}`,
-    `      Credentials options:`,
-    `                Wallet path:   ${wallet_path}`,
-    `                Wallet seed:   ${wallet_seed}`,
-    `                    API Key:   ${api_key}`,
-    `             Wallet address:   ${wallet_address}`,
-    `            Key fingerprint:   ${key_fingerprint}`,
-    `  Quantum resistant ciphers:   ${qr_support}`,
-    `          Network options:`,
-    `            Maximum retries:   ${retries_max}`,
-    `               Call timeout:   ${call_timeout}`,
-    `             Parallel tasks:   ${parallel_tasks}`,
-    `           LibEVM options:`,
-    `             Target network:   ${target_networks[0]}`,
-    `      Application options:`,
-    `    Configuration directory:   ${config_dir}`,
-    `            Cache directory:   ${cache_dir}`,
-  ];
+    _line;
+  const
+    _text = [
+      `${app_name} configuration:`,
+      `                  Call date:   ${call_date}`,
+      `             Target command:   ${target_command}`,
+      `                Wallet name:   ${wallet_name}`,
+      `                 Target key:   ${target_key}`,
+      `               Target value:   ${target_value}`,
+      `               All networks:   ${networks_all}`,
+      `       RPC selection method:   ${rpc_selection}`,
+      ` Explorers selection method:   ${explorer_selection}`,
+      `               Measure unit:   ${measure_unit}`,
+      `           Balance lifespan:   ${balance_lifespan}`,
+      `             Send options:`,
+      `              Currency type:   ${currency_type}`,
+      `           Currency address:   ${currency_address}`,
+      `             List options:`,
+      `                Output type:   ${output_type}`,
+      `      Credentials options:`,
+      `                Wallet path:   ${wallet_path}`,
+      `                Wallet seed:   ${wallet_seed}`,
+      `                    API Key:   ${api_key}`,
+      `             Wallet address:   ${wallet_address}`,
+      `            Key fingerprint:   ${key_fingerprint}`,
+      `  Quantum resistant ciphers:   ${qr_support}`,
+      `          Network options:`,
+      `            Maximum retries:   ${retries_max}`,
+      `               Call timeout:   ${call_timeout}`,
+      `             Parallel tasks:   ${parallel_tasks}`,
+      `           LibEVM options:`,
+      `             Target network:   ${target_networks[0]}`,
+      `      Application options:`,
+      `    Configuration directory:   ${config_dir}`,
+      `            Cache directory:   ${cache_dir}`,
+    ];
   for ( _line of _text ) {
     _msg_info(
       _line);
@@ -808,7 +840,7 @@ function
     _argv_url_get(
       "cache_dir")[
         0];
-  _libevm_parse_url();
+  _libevm_url_parse();
   quiet =
     _argv_url_get(
       "quiet");
