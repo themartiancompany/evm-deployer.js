@@ -28,44 +28,25 @@ const
   { ethers } =
     require(
       "ethers");
-_ethers =
-  ethers;
-_fetch_request =
-  _ethers.FetchRequest;
-_get_default_provider =
-  _ethers.getDefaultProvider;
-_json_rpc_provider =
-  _ethers.JsonRpcProvider;
-_network_class =
-  _ethers.Network;
-
-function
-  _libcrash_require() {
-  let
-    _libcrash;
-  try {
-    _libcrash =
-      require(
-        "crash-js");
-  } catch(
-      _error) {
-    try {
-      _libcrash =
-        require(
-          "../libcrash-js/crash-js");
-    } catch(
-        _error) {
-      _msg =
-        "Install Crash Javascript.";
-      throw _msg;
-    }
-  }
-  return _libcrash
-}
-
+const
+  _ethers =
+    ethers;
+const
+  _fetch_request =
+    _ethers.FetchRequest;
+const
+  _get_default_provider =
+    _ethers.getDefaultProvider;
+const
+  _json_rpc_provider =
+    _ethers.JsonRpcProvider;
+const
+  _network_class =
+    _ethers.Network;
 const
   _libcrash =
-    _libcrash_require();
+    require(
+      "crash-js");
 _cmdline_check =
   _libcrash._cmdline_check;
 
