@@ -97,10 +97,16 @@ const
   _libevm =
     require(
       "libevm");
-_libevm_cmdline_parse =
-  _libevm._libevm_cmdline_parse;
-_libevm_url_parse =
-  _libevm._libevm_url_parse;
+/* global
+     _libevm_cmdline_parse */
+const
+  _libevm_cmdline_parse =
+    _libevm._libevm_cmdline_parse;
+/* global
+     _libevm_url_parse */
+const
+  _libevm_url_parse =
+    _libevm._libevm_url_parse;
 
 function
   _global_variables() {
