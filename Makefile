@@ -124,6 +124,11 @@ build-man:
 	  "s/insert.version.here/$${_tag}/" \
 	  -i \
 	  "build/man/variables.rst"; \
+	ls \
+	  -lsh \
+	  "build/man"; \
+	cat \
+	  "build/man/variables.rst"; \
 	cat \
 	  "man/$(_PROJECT).1.rst" | \
 	  sed \
