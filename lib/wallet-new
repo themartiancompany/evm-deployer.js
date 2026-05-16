@@ -31,36 +31,9 @@ const
 _ethers =
   ethers;
 const
-  _network_provider =
-    require(
-      './network-provider');
-function
-  _libcrash_require() {
-  let
-    _libcrash;
-  try {
-    _libcrash =
-      require(
-        "crash-js");
-  } catch(
-      _error) {
-    try {
-      _libcrash =
-        require(
-          "../libcrash-js/crash-js");
-    } catch(
-        _error) {
-      _msg =
-        "Install Crash Javascript.";
-      throw _msg;
-    }
-  }
-  return _libcrash
-}
-
-const
   _libcrash =
-    _libcrash_require();
+    require(
+      "crash-js");
 _cmdline_check =
   _libcrash._cmdline_check;
 _msg_info = 
@@ -69,6 +42,12 @@ _msg_info_obj =
   _libcrash._msg_info_obj;
 _msg_error = 
   _libcrash._msg_error;
+const
+  _network_provider_module =
+    require(
+      './network-provider');
+_provider_get =
+  _network_provider_module._provider_get;
 const
   _wallet_get_module =
     require(
@@ -119,7 +98,7 @@ async function
     _password_show,
     _provider;
   _provider =
-    _network_provider._provider_get(
+    _provider_get(
       _network,
       _api_key_path);
   _msg_info_obj(

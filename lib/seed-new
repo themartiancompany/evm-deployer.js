@@ -33,33 +33,10 @@ _ethers =
 _Wallet =
   _ethers.Wallet;
 
-function
-  _libcrash_require() {
-  let
-    _libcrash;
-  try {
-    _libcrash =
-      require(
-        "crash-js");
-  } catch(
-      _error) {
-    try {
-      _libcrash =
-        require(
-          "../libcrash-js/crash-js");
-    } catch(
-        _error) {
-      _msg =
-        "Install Crash Javascript.";
-      throw _msg;
-    }
-  }
-  return _libcrash
-}
-
 const
   _libcrash =
-    _libcrash_require();
+    require(
+      "crash-js");
 _app_name_get = 
   _libcrash._app_name_get;
 _msg_info = 
