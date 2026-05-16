@@ -37,8 +37,6 @@
      wallet_path */
 /* global
      wallet_seed */
-/* global
-     target_networks */
 
 const
   _libcrash =
@@ -401,6 +399,7 @@ function
     _text = [
       `${app_name} configuration:`,
       `                  Call date:   ${call_date}`,
+      `        Runtime environment:   ${runtime_environment}`,
       `             Target command:   ${target_command}`,
       `                Wallet name:   ${wallet_name}`,
       `                 Target key:   ${target_key}`,
