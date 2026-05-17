@@ -639,6 +639,8 @@ function
             1];
     }
     else {
+      /* eslint-disable-next-line
+           no-global-assign */
       wallet_name =
         _argv[
           "_"][
@@ -655,6 +657,8 @@ function
             1];
     }
     else {
+      /* eslint-disable-next-line
+           no-global-assign */
       wallet_name =
         _argv[
           "_"][
