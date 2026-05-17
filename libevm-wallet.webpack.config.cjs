@@ -47,14 +47,6 @@ const
       _output_file_name
 };
 const
-  _utils_ignore =
-  { resourceRegExp:
-      /^utils$/ };
-const
-  _web_worker_ignore =
-  { resourceRegExp:
-      /^web-worker$/ };
-const
   _yargs_ignore =
   { resourceRegExp:
       /^yargs$/ };
