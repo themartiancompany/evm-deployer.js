@@ -32,8 +32,9 @@
 const
   _evm_chains_info_module =
     require("evm-chains-info");
-_evm_chains_info =
-  _evm_chains_info_module._evm_chains_info;
+const
+  _evm_chains_info =
+    _evm_chains_info_module._evm_chains_info;
 const
   _address_get_module =
     require(
@@ -153,23 +154,48 @@ function
     _cmd,
     _evm_chains_info_args,
     _rpc;
+  const
+    _target_network =
+      _target_networks[
+        0];
   _evm_chains_info_args = [
-    "get",
-    "id",
-    "rpc",
-    "offline",
-    [ "node",
+    "get",            // command
+    "id",             // input type 
+    "rpc",            // output type
+    "offline",        // retrieval method
+    [ "node",         // db types
       "system" ],
-    "kirsh",
-    "",
-    "n",
-    _target_networks[0],
-    []
+    "kirsh",          // selection method
+    "",               // api key
+    "n",              // all networks
+    _target_network,
+    []                // db paths
   ];
   _chain_info =
     _evm_chains_info.apply(
       null,
       _evm_chains_info_args);
+  _msg =
+    `Got '${_chain_info}'.`;
+  _msg_info(
+    _msg);
+  if ( _target_command == "get" ) {
+    if ( target_key == "balance" ) {
+      // _balance_get probably
+      true;
+      _args =
+        [];
+    }
+    else if ( target_key == "address" ) {
+      // _address_get();
+      true; 
+  }
+  else if ( _target_command == "send" ) {
+    true;
+  }
+  else if ( _target_command == "run" ) {
+    true;
+  }
 }
 
 module.exports = {

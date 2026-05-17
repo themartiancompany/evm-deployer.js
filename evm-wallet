@@ -279,7 +279,6 @@ function
   _output_type_check() {
   let
     _flag,
-    _output_types,
     _type;
   _flag =
     "false";
