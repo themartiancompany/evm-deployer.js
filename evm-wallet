@@ -576,8 +576,7 @@ function
 function 
   _cmdline_parse() {
   let
-    _help_display,
-    _msg;
+    _help_display;
   const
     _argv_args = {
       "booleans": [

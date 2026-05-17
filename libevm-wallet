@@ -189,6 +189,7 @@ function
     else if ( target_key == "address" ) {
       // _address_get();
       true; 
+    }
   }
   else if ( _target_command == "send" ) {
     true;
