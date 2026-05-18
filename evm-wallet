@@ -326,7 +326,7 @@ function
       _get_date_human();
   }
   if ( typeof(
-         wallet_name == "undefined" ||
+         wallet_name) == "undefined" ||
        wallet_name == "" ) {
     wallet_name =
       "default";
