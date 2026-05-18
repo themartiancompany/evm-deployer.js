@@ -94,6 +94,11 @@ const
   _libevm_cmdline_parse =
     _libevm_module._libevm_cmdline_parse;
 /* global
+     _libevm_global_variables */
+const
+  _libevm_global_variables =
+    _libevm_module._libevm_global_variables;
+/* global
      _libevm_url_parse */
 const
   _libevm_url_parse =
@@ -881,6 +886,7 @@ function
 }
 
 _global_variables();
+_libevm_global_variables();
 if ( _cmdline_check(
        "evm-wallet.js") == true ) {
   _cmdline_parse();
