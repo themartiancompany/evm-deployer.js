@@ -901,7 +901,7 @@ _libevm_global_variables();
 if ( _cmdline_check(
        "evm-wallet.js") == true ||
      _cmdline_check(
-       "evm-wallet") == true {
+       "evm-wallet") == true ) {
   _cmdline_parse();
 }
 else {
