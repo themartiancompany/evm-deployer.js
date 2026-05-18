@@ -30,21 +30,6 @@
 /* eslint-disable
      no-unused-vars */
 
-/* LibEVM-defined global variables /*
-
-/* global
-     api_key */
-/* global
-     wallet_address */
-/* global
-     wallet_name */
-/* global
-     wallet_password */
-/* global
-     wallet_path */
-/* global
-     wallet_seed */
-
 const
   _libcrash =
   require(
@@ -410,6 +395,19 @@ function
 
 function
   _config_show() {
+  /* LibEVM-defined global variables */
+  /* global
+       api_key */
+  /* global
+       wallet_address */
+  /* global
+       wallet_name */
+  /* global
+       wallet_password */
+  /* global
+       wallet_path */
+  /* global
+       wallet_seed */
   let
     _line;
   const

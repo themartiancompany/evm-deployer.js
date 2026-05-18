@@ -35,9 +35,12 @@ export default defineConfig([
  {
    ignores: [
      "build/**",
-     "node_modules/**",
      "eslint.config.js",
+     "evm-wallet.js",
+     "fs-worker.js",
+     "libevm-wallet.js",
      "man/**"
+     "node_modules/**",
    ],
    rules:
      { semi:
@@ -61,8 +64,10 @@ export default defineConfig([
    ignores: [
      "build/**",
      "eslint.config.js",
-     "node_modules/**",
+     "evm-wallet.js",
+     "libevm-wallet.js",
      "man/**"
+     "node_modules/**",
    ],
    rules:
      { semi:

@@ -29,9 +29,18 @@
  *     If not, see <https://www.gnu.org/licenses/>.
  */
 
+
+const
+  _crash_js_module =
+    require(
+      "crash-js");
+const
+  _msg_info =
+    _crash_js_module._msg_info;
 const
   _evm_chains_info_module =
-    require("evm-chains-info");
+    require(
+      "evm-chains-info");
 const
   _evm_chains_info =
     _evm_chains_info_module._evm_chains_info;
@@ -151,42 +160,54 @@ function
     _target_networks) {
   let
     _args,
-    _cmd,
-    _evm_chains_info_args,
-    _rpc;
+    _msg;
+  const
+    _cmd =
+      "";
+  const
+    _rpc =
+      "";
   const
     _target_network =
       _target_networks[
         0];
-  _evm_chains_info_args = [
-    "get",            // command
-    "id",             // input type 
-    "rpc",            // output type
-    "offline",        // retrieval method
-    [ "node",         // db types
-      "system" ],
-    "kirsh",          // selection method
-    "",               // api key
-    "n",              // all networks
-    _target_network,
-    []                // db paths
-  ];
-  _chain_info =
-    _evm_chains_info.apply(
-      null,
-      _evm_chains_info_args);
+  const
+    _evm_chains_info_args = [
+      "get",            // command
+      "id",             // input type 
+      "rpc",            // output type
+      "offline",        // retrieval method
+      [ "node",         // db types
+        "system" ],
+      "kirsh",          // selection method
+      "",               // api key
+      "n",              // all networks
+      _target_network,
+      []                // db paths
+    ];
+  const
+    _chain_info =
+      _evm_chains_info.apply(
+        null,
+        _evm_chains_info_args);
   _msg =
     `Got '${_chain_info}'.`;
   _msg_info(
     _msg);
   if ( _target_command == "get" ) {
-    if ( target_key == "balance" ) {
+    if ( _target_key == "balance" ) {
       // _balance_get probably
-      true;
       _args =
         [];
+      _msg =
+        `Running command '${_cmd}' with ` +
+        `arguments '${_args}' on network ` +
+        `'${_target_networks}' through rpc ` +
+        `'${_rpc}'.`;
+      _msg_info(
+        _msg);
     }
-    else if ( target_key == "address" ) {
+    else if ( _target_key == "address" ) {
       // _address_get();
       true; 
     }
