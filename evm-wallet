@@ -325,6 +325,12 @@ function
     call_date =
       _get_date_human();
   }
+  if ( typeof(
+         wallet_name == "undefined" ||
+       wallet_name == "" ) {
+    wallet_name =
+      "default";
+  }
   if ( target_command == "" ) {
     target_command =
       "get";
