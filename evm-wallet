@@ -27,6 +27,13 @@
  *     If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* LibEVM writable globals */
+
+  /* global
+       wallet_name:
+         writable */
+
+
 /* eslint-disable
      no-unused-vars */
 
@@ -411,8 +418,6 @@ function
        api_key */
   /* global
        wallet_address */
-  /* global
-       wallet_name */
   /* global
        wallet_password */
   /* global
