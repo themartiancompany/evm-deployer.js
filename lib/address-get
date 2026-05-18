@@ -303,8 +303,11 @@ if ( _cmdline_check(
     app_opts);
 }
 else {
-  console.log(
-    "Running from browser.");
+  const
+    _msg =
+      "Program 'address-get' imported as a module.";
+  _msg_info(
+    _msg);
 }
 
 module.exports = {
