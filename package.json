@@ -85,9 +85,13 @@
     "evm-contracts-tools":
       "^0.0.20",
     "libevm":
-      "^0.0.15",
+      "^0.0.16",
     "yargs":
       "18.0.0"
+  },
+  "overrides": {
+    "evm-wallet.js":
+      "^0.0.30"
   },
   "type":
     "commonjs",
