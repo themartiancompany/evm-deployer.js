@@ -88,7 +88,8 @@ function
 
 function
   _msg_info_seed_loaded(
-    _seed) {
+    _seed,
+    _seed_type) {
   let
     _msg_obj,
     _phrase_show;
@@ -239,9 +240,11 @@ function _wallet_get(
   _msg_info_obj(
     'Wallet path',
     _path);
-  _msg_info_obj(
-    'Wallet password',
-    _password_show);
+  if ( _password_show != "" ) {
+    _msg_info_obj(
+      'Wallet password',
+      _password_show);
+  }
   _wallet_exists(
     _path);
   _phrase =

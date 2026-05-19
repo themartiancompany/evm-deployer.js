@@ -326,7 +326,7 @@ function
   }
 }
 
-function 
+async function 
   _overrides_set() {
   if ( call_date == "" ) {
     call_date =
@@ -397,11 +397,13 @@ function
   // TODO:
   //   explorers api keys, optional frankly
   //   since theres the evm-contracts-source-index
-  _wallet_overrides_set( 
-    "evm-wallet",
-    wallet_name,
-    "y",
-    "n");
+  const
+    _wallet_set_up =
+      await _wallet_overrides_set(
+        "evm-wallet",
+        wallet_name,
+        "y",
+        "n");
   _key_fingerprint_auto_detect();
   _output_type_check();
   // See https://github.com/openpgpjs/openpgpjs/issues/2004
@@ -409,6 +411,7 @@ function
     qr_support =
       "n";
   }
+  return true;
 }
 
 function
@@ -597,7 +600,7 @@ function
     _exit_code);
 }
 
-function 
+async function 
   _cmdline_parse() {
   let
     _help_display;
@@ -640,7 +643,7 @@ function
   if ( _help_display ) {
     quiet =
       "n";
-    _overrides_set();
+    await _overrides_set();
     _usage(
       0);
   }
@@ -896,6 +899,41 @@ function
   }
 }
 
+async function
+  _main() {
+  const
+    _overrides_set_up =
+      await _overrides_set();
+  _config_show();
+  const
+    app_opts = [
+      target_command,
+      wallet_path,
+      wallet_password,
+      wallet_seed,
+      key_fingerprint,
+      config_dir,
+      cache_dir,
+      networks_all,
+      rpc_selection,
+      api_key,
+      retries_max,
+      tasks_parallel,
+      call_timeout,
+      measure_unit,
+      balance_lifespan,
+      currency_type,
+      currency_address,
+      output_type,
+      target_key,
+      target_value,
+      target_networks
+    ];
+  _evm_wallet.apply(
+    null,
+    app_opts);
+}
+
 _global_variables();
 _libevm_global_variables();
 if ( _cmdline_check(
@@ -907,31 +945,4 @@ if ( _cmdline_check(
 else {
   _url_parse();
 }
-_overrides_set();
-_config_show();
-app_opts = [
-  target_command,
-  wallet_path,
-  wallet_password,
-  wallet_seed,
-  key_fingerprint,
-  config_dir,
-  cache_dir,
-  networks_all,
-  rpc_selection,
-  api_key,
-  retries_max,
-  tasks_parallel,
-  call_timeout,
-  measure_unit,
-  balance_lifespan,
-  currency_type,
-  currency_address,
-  output_type,
-  target_key,
-  target_value,
-  target_networks
-];
-_evm_wallet.apply(
-  null,
-  app_opts);
+_main();

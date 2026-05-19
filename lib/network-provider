@@ -74,6 +74,16 @@ function
     _timeout,
     _msg;
   if ( typeof (
+         _provider) == "object" ) {
+    if ( typeof(
+           _provider._getConnection) != "undefined" ) {
+      _msg =
+        "Probably a dummy connection method";
+      _msg_info(
+        _msg);
+    }
+  }
+  else if ( typeof (
          _provider) == "JsonRpcProvider" ) {
     _msg =
       "Json RPC provider."
@@ -101,7 +111,6 @@ function
     //   console.log(
     //     _provider.connection);
     // }
-    console.log(_provider);
     for ( _key in _provider) {
       _msg=
         `Provider key: ${_key}, ` +
