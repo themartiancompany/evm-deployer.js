@@ -128,10 +128,9 @@ function
   let
     _seed_type,
     _seed_words;
-  const
-    _seed_type =
-      typeof(
-        _seed);
+  _seed_type =
+    typeof(
+      _seed);
   if ( _seed_type == "undefined" ||
        _seed == "" ||
        _seed == [] ) {
@@ -163,15 +162,11 @@ function
           _seed_words.length == 24;
       if ( _seed_type == "string" &&
            _seed_is_phrase ) {
-        _seed_type =
-          "string";
         _phrase =
           _seed;
       }
       else if ( _seed_type == "object" &&
                 _seed_is_phrase ) {
-        _seed_type =
-          "array";
         _phrase =
           _seed.join(" ");
       }
