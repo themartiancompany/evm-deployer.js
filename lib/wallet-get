@@ -145,6 +145,7 @@ function
       if ( _seed_type == "string" ) {
         _seed_words =
           _seed.split(" ");
+      }
       else if ( _seed_type == "object" ) {
         _seed_words =
           _seed;
