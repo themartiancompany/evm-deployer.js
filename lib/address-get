@@ -56,11 +56,6 @@ const
   _file_write =
     _libcrash._file_write;
 /* global
-     _path_join */
-const
-  _path_join =
-    _libcrash._path_join;
-/* global
      _msg_info */
 const
   _msg_info =
@@ -75,6 +70,16 @@ const
 const
   _msg_error =
     _libcrash._msg_error;
+/* global
+     _path_join */
+const
+  _path_join =
+    _libcrash._path_join;
+/* global
+     _process_exit */
+const
+  _process_exit =
+    _libcrash._process_exit;
 const
   _wallet_get_module =
     require(
@@ -134,6 +139,14 @@ async function
     _wallet_dir,
     _wallet_password,
     _wallet_path_list;
+  if ( typeof(
+         _wallet_seed) == "undefined" ) {
+    _msg =
+      "No input seed file or phrase.";
+    _msg_error(
+      _msg,
+      1);
+  }
   _wallet_password =
     "";
   _wallet_dir =
@@ -192,18 +205,10 @@ function
     _line,
     _text;
   _text = [
-    "      Wallet seed: {wallet_seed}".replaceAll(
-      "{wallet_seed}",
-      wallet_seed),
-    "   Target network: {target_network}".replaceAll(
-      "{target_network}",
-      target_network),
-    "          API key: {api_key_path}".replace(
-      "{api_key_path}",
-      api_key_path),
-    "      Output file: {output_file}".replace(
-      "{output_file}",
-      output_file)
+    `      Wallet seed: ${wallet_seed}`,
+    `   Target network: ${target_network}`,
+    `          API key: ${api_key_path}`,
+    `      Output file: ${output_file}`,
   ]
   for ( _line of _text ) {
     _msg_info(
@@ -221,16 +226,16 @@ function
     "Usage:",
     "  address-get",
     "    <quiet>",
-    "    <seed_path>",
-    "    (<target_network>)",
-    "    (<api_key_path>)",
-    "    (<output_file>)"
+    "    <seed-path>",
+    "    (<target-network>)",
+    "    (<api-key-path>)",
+    "    (<output-file>)"
   ];
   for ( _line of _text ) {
     _msg_info(
       _line);
   }
-  process.exit(
+  process_exit(
     _exit_code);
 }
 
