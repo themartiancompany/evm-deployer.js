@@ -97,6 +97,7 @@ function
       "Seed file";
     _phrase_show =
       _seed;
+  }
   else if ( _seed_type == "string" ||
             _seed_type == "array" ) {
     _msg_obj =
