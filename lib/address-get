@@ -35,27 +35,43 @@ const
   _libcrash =
     require(
       "crash-js");
+/* global
+     _cmdline_check */
 const
   _cmdline_check =
     _libcrash._cmdline_check;
+/* global
+     _dirname */
 const
   _dirname =
     _libcrash._dirname;
+/* global
+     _file_read */
 const
   _file_read =
     _libcrash._file_read;
+/* global
+     _file_write */
 const
   _file_write =
     _libcrash._file_write;
+/* global
+     _path_join */
 const
   _path_join =
     _libcrash._path_join;
+/* global
+     _msg_info */
 const
   _msg_info =
     _libcrash._msg_info;
+/* global
+     _msg_info_obj */
 const
   _msg_info_obj =
     _libcrash._msg_info_obj;
+/* global
+     _msg_error */
 const
   _msg_error =
     _libcrash._msg_error;
@@ -63,6 +79,8 @@ const
   _wallet_get_module =
     require(
       './wallet-get');
+/* global
+     _wallet_get */
 const
   _wallet_get =
     _wallet_get_module._wallet_get;
@@ -70,13 +88,16 @@ const
   _network_provider =
     require(
       './network-provider');
+/* global
+     _provider_get */
 const
   _provider_get =
     _network_provider._provider_get;
+/* global
+     _msg_info_provider_generated */
 const
   _msg_info_provider_generated =
     _network_provider._msg_info_provider_generated;
-
 
 function
   _global_variables() {
@@ -97,7 +118,6 @@ function
   quiet =
     "";
 }
-
 
 async function
   _address_get(

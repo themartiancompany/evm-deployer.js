@@ -101,12 +101,13 @@ function
     //   console.log(
     //     _provider.connection);
     // }
+    console.log(_provider);
     for ( _key in _provider) {
-    _msg=
-      `Provider key: ${_key}, ` +
-      `value '${_provider[_key]}'`;
-    _msg_info(
-      _msg);
+      _msg=
+        `Provider key: ${_key}, ` +
+        `value '${_provider[_key]}'`;
+      _msg_info(
+        _msg);
     }
   }
 }
