@@ -16,15 +16,12 @@
     "AUTHORS.rst",
     "COPYING",
     "README.md",
+    "dist",
     "lib",
     "libevm-wallet",
-    "libevm-wallet.js",
     "libevm-wallet.webpack.config.js",
     "evm-wallet",
-    "evm-wallet.js",
-    "fs-worker.js",
     "fs-worker.webpack.config.js",
-    "index.html",
     "package.json",
     "serve.json",
     "webpack.config.js"
@@ -108,17 +105,17 @@
     },
   "scripts": {
     "build-fs-worker":
-      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-wallet'",
+      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-wallet' && cp 'fs-worker.js' 'dist/libevm-wallet'",
     "build-lib":
-      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details",
+      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details && mv 'libevm-wallet.js' 'dist/libevm-wallet'",
     "build":
-      "npm run lint && npm run build-fs-worker && npm run build-lib",
+      "npm run lint && npm run build-fs-worker && npm run build-lib && mv 'evm-wallet.js' 'dist/evm-wallet'",
     "lint":
       "npx eslint .",
     "publish-pnm":
       "npm run build && npm publish --access public",
     "start":
-      "npx safely-serve --help # index.html --port 3000 --https --no-cache",
+      "npx safely-serve 'dist/evm-wallet' --port 3000 --https --no-cache",
     "test":
       "echo \"Error: no test specified\" && exit 1"
   }
