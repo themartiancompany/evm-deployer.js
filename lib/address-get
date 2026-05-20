@@ -369,7 +369,7 @@ if ( _cmdline_check(
 else {
   const
     _msg =
-      "Program 'address-get' imported as a module.";
+      "Program 'address-get' ('eoa-fingerprint') imported as a module.";
   _msg_info(
     _msg);
 }
