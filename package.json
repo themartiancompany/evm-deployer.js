@@ -101,7 +101,9 @@
       "evm-wallet":
         "evm-wallet",
       "evm-wallet.js":
-        "evm-wallet"
+        "evm-wallet",
+      "eoa-fingerprint":
+        "lib/address-get"
     },
   "scripts": {
     "build-fs-worker":

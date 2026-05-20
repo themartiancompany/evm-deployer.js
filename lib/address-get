@@ -222,19 +222,50 @@ function
   _usage(
     _exit_code) {
   let
-    _line,
-    _text;
-  _text = [
-    "Usage:",
-    "  address-get",
-    "    <quiet>",
-    "    <seed-path>",
-    "    (<target-network>)",
-    "    (<api-key-path>)",
-    "    (<output-file>)"
-  ];
+    _line;
+  if ( typeof(
+         _exit_code) == "undefined" ||
+       _exit_code == "" ) {
+    _exit_code =
+      0;
+  }
+  const
+    _argv =
+      _argv_get();
+  const
+    _program =
+      _argv[
+        1];
+  const
+    _text = [
+      "Returns the EOA fingerprint of a seed (the address)",
+      "",
+      "usage:",
+      `  ${_program}`,
+      "    <quiet>",
+      "    <seed>",
+      "    (<target-network>)",
+      "    (<api-key-path>)",
+      "    (<output-file>)",
+      "",
+      "args:",
+      "",
+      "  seed               A seed path or a seed phrase",
+      "",
+      "  target-network     Not needed.",
+      "",
+      "  api-key-path       Not needed.",
+      "",
+      "  output-file        If specified will save the output",
+      "                     to a file, otherwise will print it."
+      "",
+      "options:",
+      "",
+      "  -h, --help         Displays this help.",
+      ""
+    ];
   for ( _line of _text ) {
-    _msg_info(
+    console.log(
       _line);
   }
   process_exit(
@@ -272,6 +303,7 @@ function _cmdline_parse() {
       }
       if ( _value == "-h" ||
            _value == "--help" ) {
+        _overrides_set();
         quiet =
           "n";
         _usage(
@@ -279,11 +311,12 @@ function _cmdline_parse() {
       }
   });
   if ( wallet_seed == "" ) {
+    _overrides_set();
+    quiet =
+      "n";
     _msg_error(
       "No arguments given.",
       0);
-    quiet =
-      "n";
     _usage(
       0);
   }
@@ -294,7 +327,9 @@ function
   // if ( target_network == "" ) {
   //   target_network = "https://127.0.0.1";
   // }
-  if ( chain_id == "" ) {
+  if ( typeof(
+         chain_id) == "undefined" ||
+       chain_id == "" ) {
     chain_id = "100";
   }
 }
@@ -313,7 +348,9 @@ async function
 }
 
 if ( _cmdline_check(
-       "address-get") ) {
+       "address-get") ||
+     _cmdline_check(
+       "eoa-fingerprint") ) {
   _global_variables();
   _cmdline_parse();
   _overrides_set();
