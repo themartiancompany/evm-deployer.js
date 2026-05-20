@@ -36,6 +36,11 @@ const
     require(
       "crash-js");
 /* global
+     _argv_get */
+const
+  _argv_get =
+    _libcrash._argv_get;
+/* global
      _cmdline_check */
 const
   _cmdline_check =
@@ -257,7 +262,7 @@ function
       "  api-key-path       Not needed.",
       "",
       "  output-file        If specified will save the output",
-      "                     to a file, otherwise will print it."
+      "                     to a file, otherwise will print it.",
       "",
       "options:",
       "",
@@ -268,7 +273,7 @@ function
     console.log(
       _line);
   }
-  process_exit(
+  _process_exit(
     _exit_code);
 }
 
