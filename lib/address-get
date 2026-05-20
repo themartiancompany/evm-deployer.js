@@ -140,7 +140,9 @@ async function
     _wallet_password,
     _wallet_path_list;
   if ( typeof(
-         _wallet_seed) == "undefined" ) {
+         _wallet_seed) == "undefined" ||
+       _wallet_seed == "" ||
+       _wallet_seed == [] ) {
     _msg =
       "No input seed file or phrase.";
     _msg_error(
