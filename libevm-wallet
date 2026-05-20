@@ -114,13 +114,6 @@ const
   _seed_new =
     _seed_new_module._seed_new;
 const
-  _token_send_module =
-    require(
-      "./lib/token-send");
-const
-  _token_send =
-    _token_send_module._seed_new;
-const
   _wallet_get_module =
     require(
       "./lib/wallet-get");
@@ -245,8 +238,6 @@ module.exports = {
     _price_gas_transaction_get,
   _seed_new:
     _seed_new,
-  _token_send:
-    _token_send,
   _wallet_get:
     _wallet_get,
   _wallet_new:

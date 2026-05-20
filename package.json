@@ -1,6 +1,6 @@
 { "name": "evm-wallet.js",
   "version":
-    "0.0.37",
+    "0.0.38",
   "description":
     "Cryptocurrency wallet for Ethereum Virtual Machine (EVM) compatible blockchain networks written in Javascript, part of the EVM Toolchain, depending on the Ethers library.",
   "funding": {
@@ -89,13 +89,11 @@
   },
   "optionalDependencies": {
     "erc20-tools":
-      "^0.0.2"
+      "^0.0.3"
   },
   "overrides": {
-    "evm-contracts-tools":
-      "^0.0.21",
     "evm-wallet.js":
-      "^0.0.35"
+      "^0.0.37"
   },
   "type":
     "commonjs",
@@ -110,7 +108,7 @@
     },
   "scripts": {
     "build-fs-worker":
-      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details",
+      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-wallet'",
     "build-lib":
       "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details",
     "build":
