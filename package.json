@@ -74,7 +74,7 @@
   },
   "dependencies": {
     "crash-js":
-      "^0.1.107",
+      "^0.1.108",
     "ethers":
       "^6.13.2",
     "evm-chains-info":
@@ -109,6 +109,8 @@
     },
   "yargs": {
     "parse-numbers":
+      false,
+    "parse-positional-numbers":
       false
   },
   "scripts": {
