@@ -268,13 +268,17 @@ function
 
 function
   _call_timeout_auto_detect() {
-  if ( target_command == "get" ) {
-    call_timeout =
-      "30";
-  }
-  else {
-    call_timeout =
-      "300";
+  if ( typeof(
+         call_timeout) == "undefined" ||
+       call_timeout == "" ) {
+    if ( target_command == "get" ) {
+      call_timeout =
+        "30000";
+    }
+    else {
+      call_timeout =
+        "300000";
+    }
   }
 }
 
@@ -711,9 +715,10 @@ async function
        _argv) != "undefined" &&
        3 < _argv.length ) {
     target_value =
-      _argv[
-        "_"][
-          3];
+      String(
+        _argv[
+          "_"][
+            3]);
   }
   if ( "R" in _argv ) {
     rpc_selection =
