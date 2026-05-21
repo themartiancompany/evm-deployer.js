@@ -280,9 +280,14 @@ function
 
 function
   _target_key_auto_detect() {
-  if ( target_command == "get" ) {
-    target_key =
-      "name";
+  if ( typeof(
+         target_key) == "undefined" ||
+       target_key == "" ) {
+    console.log("Hello");
+    if ( target_command == "get" ) {
+      target_key =
+        "name";
+    }
   }
 }
 
@@ -675,20 +680,17 @@ async function
   }
   if ( typeof(
        _argv) != "undefined" &&
-       1 < _argv.length ) {
+       2 < _argv.length ) {
     if ( target_command == "list" ) {
-      target_key =
-        _argv[
-          "_"][
-            1];
+      true;
     }
     else {
       /* eslint-disable-next-line
            no-global-assign */
-      wallet_name =
+      target_key =
         _argv[
           "_"][
-            1];
+            2];
     }
   }
   if ( typeof(
@@ -707,6 +709,7 @@ async function
         "_"][
           3];
   }
+  console.log(target_value);
   if ( "R" in _argv ) {
     rpc_selection =
       _argv[

@@ -206,7 +206,24 @@ function
     }
   }
   else if ( _target_command == "send" ) {
+    if ( _currency_type == "gas" ) {
+      true;
+      _balance_send();
+    }
+    else if ( _currency_type == "gas" ) {
+      const
+        _erc20_tools_module =
+          require(
+            "erc20-tools");
+      const
+        _token_send =
+          _erc20_tools_module._token_send;
     true;
+    }
+    else {
+      _msg =
+        `Unknown currency type '${_currency_type}'.`;
+    }
   }
   else if ( _target_command == "run" ) {
     true;

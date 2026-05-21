@@ -41,6 +41,11 @@ const
   _argv_get =
     _libcrash._argv_get;
 /* global
+     _basename */
+const
+  _basename =
+    _libcrash._basename;
+/* global
      _cmdline_check */
 const
   _cmdline_check =
@@ -239,8 +244,9 @@ function
       _argv_get();
   const
     _program =
-      _argv[
-        1];
+      _basename(
+        _argv[
+          "$0"]);
   const
     _text = [
       "Returns the EOA fingerprint of a seed (the address)",
@@ -255,11 +261,13 @@ function
       "",
       "args:",
       "",
+      "  quiet              It can be 'y' or 'n'.",
+      "",
       "  seed               A seed path or a seed phrase",
       "",
-      "  target-network     Not needed.",
+      "  target-network     Chain ID or RPC address, optional.",
       "",
-      "  api-key-path       Not needed.",
+      "  api-key-path       Etherscan-like service API key, optional.",
       "",
       "  output-file        If specified will save the output",
       "                     to a file, otherwise will print it.",
