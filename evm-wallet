@@ -626,8 +626,8 @@ async function
         "v",
         "verbose"
       ],
-     "string":
-       true
+      "string":
+        true
     };
   const
     _argv =
@@ -699,10 +699,11 @@ async function
       true;
     }
     else if ( target_command == "send" ) {
+      const _key = _argv._[2];
       console.log(
-          _argv[
-            "_"][
-              2]);
+        _key);
+      console.log(
+        _argv.plaintext);
       target_key =
           _argv[
             "_"][
