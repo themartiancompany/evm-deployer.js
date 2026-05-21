@@ -219,7 +219,9 @@ async function
       if ( ! _file_exists(
                _balance_dir) ) {
         _mkdir(
-	  _balance_dir);
+	  _balance_dir,
+          { "recursive":
+              true });
       }
       const
         _balance_get_args = [
@@ -236,7 +238,7 @@ async function
           await _balance_get.apply(
             null,
             _balance_get_args);
-      return balance;
+      return _balance;
     }
     else if ( _target_key == "address" ) {
       const

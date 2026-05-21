@@ -356,6 +356,10 @@ async function
     config_dir =
       `${_homedir_get()}/.config/evm-wallet`;
   }
+  if ( cache_dir == "" ) {
+    cache_dir =
+      `${_homedir_get()}/.cache/evm-wallet`;
+  }
   if ( target_networks.length < 1 &&
        networks_all == "n" ) {
     target_networks.push(
