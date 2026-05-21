@@ -41,6 +41,11 @@ const
     require(
       "crash-js");
 /* global
+     _argv_get */
+const
+  _argv_get =
+    _libcrash._argv_get;
+/* global
      dirname */
 const
   _dirname =
