@@ -159,9 +159,6 @@ async function
     _cmd =
       "";
   const
-    _rpc =
-      "";
-  const
     _target_network =
       _target_networks[
         0];
@@ -180,12 +177,13 @@ async function
       []                // db paths
     ];
   const
-    _chain_info =
+    _rpc =
       _evm_chains_info.apply(
         null,
-        _evm_chains_info_args);
+        _evm_chains_info_args)[
+        0];
   _msg =
-    `Got '${_chain_info}'.`;
+    `Got rpc '${_rpc}'.`;
   _msg_info(
     _msg);
   if ( _target_command == "get" ) {
@@ -200,7 +198,7 @@ async function
       const
         _balance_get_args = [
           _wallet_seed,
-          _target_network,
+          _rpc,
           _api_key,
           "",                  // Target address, using seed
           _measure_unit,
