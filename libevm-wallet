@@ -328,6 +328,9 @@ async function
     const
       _target_address =
         _target_key;
+    const
+      _target_amount =
+        _target_value;
     if ( _currency_type == "gas" ) {
       const
         _balance_send_args = [
