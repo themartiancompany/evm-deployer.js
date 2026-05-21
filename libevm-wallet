@@ -325,6 +325,9 @@ async function
     }
   }
   else if ( _target_command == "send" ) {
+    const
+      _target_address =
+        _target_key;
     if ( _currency_type == "gas" ) {
       const
         _balance_send_args = [
@@ -361,7 +364,7 @@ async function
           token_compiler_output_path,
           measure_unit,
           receipt_file_path,
-          target_recipient,
+          target_address,
           target_amount
 	];
       const
