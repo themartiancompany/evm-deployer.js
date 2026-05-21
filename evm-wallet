@@ -696,6 +696,13 @@ async function
     if ( target_command == "list" ) {
       true;
     }
+    else if ( target_command == "send" ) {
+      target_key =
+        String(
+          _argv[
+            "_"][
+              2]);
+    }
     else {
       /* eslint-disable-next-line
            no-global-assign */
@@ -719,10 +726,9 @@ async function
        3 < _argv[
              "_"].length ) {
     target_value =
-      String(
-        _argv[
-          "_"][
-            3]);
+      _argv[
+        "_"][
+          3].toFixed();
   }
   console.log(
     target_value);
