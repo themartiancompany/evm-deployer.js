@@ -231,7 +231,7 @@ async function
     if ( _target_network.startsWith(
            "https://") ) {
       _rpc =
-        "_target_network";
+        _target_network;
     }
   }
   if ( typeof(
@@ -252,12 +252,11 @@ async function
         _target_network,
         []                // db paths
       ];
-    const
-      _rpc =
-        _evm_chains_info.apply(
-          null,
-          _evm_chains_info_args)[
-          0];
+    _rpc =
+      _evm_chains_info.apply(
+        null,
+        _evm_chains_info_args)[
+        0];
   }
   _msg =
     `Using RPC address '${_rpc}'.`;
