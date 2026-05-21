@@ -50,6 +50,11 @@ const
   _msg_info =
     _crash_js_module._msg_info;
 /* global
+     _msg_error */
+const
+  _msg_info =
+    _crash_js_module._msg_error;
+/* global
      _path_join */
 const
   _path_join =
@@ -58,6 +63,8 @@ const
   _evm_chains_info_module =
     require(
       "evm-chains-info");
+/* global
+     _evm_chains_info */
 const
   _evm_chains_info =
     _evm_chains_info_module._evm_chains_info;
@@ -65,6 +72,8 @@ const
   _address_get_module =
     require(
       "./lib/address-get");
+/* global
+     _address_get */
 const
   _address_get =
     _address_get_module._address_get;
@@ -72,9 +81,13 @@ const
   _balance_check_module =
     require(
       "./lib/balance-check");
+/* global
+     _balance_check */
 const
   _balance_check =
     _balance_check_module._balance_check;
+/* global
+     _msg_error_balance_insufficient */
 const
   _msg_error_balance_insufficient =
     _balance_check_module._msg_error_balance_insufficient;
@@ -82,6 +95,8 @@ const
   _balance_get_module =
     require(
       "./lib/balance-get");
+/* global
+     _balance_get */
 const
   _balance_get =
     _balance_get_module._balance_get;
@@ -89,6 +104,8 @@ const
   _balance_send_module =
     require(
       "./lib/balance-send");
+/* global
+     _balance_send */
 const
   _balance_send =
     _balance_send_module._balance_send;
@@ -96,6 +113,8 @@ const
   _ethers_to_wei_module =
     require(
       "./lib/ethers-to-wei");
+/* global
+     _ethers_to_wei */
 const
   _ethers_to_wei =
     _ethers_to_wei_module._ethers_to_wei;
@@ -103,9 +122,13 @@ const
   _network_provider_module =
     require(
       "./lib/network-provider");
+/* global
+     _provider_get */
 const
   _provider_get =
     _network_provider_module._provider_get;
+/* global
+     _msg_info_provider_generated */
 const
   _msg_info_provider_generated =
     _network_provider_module._msg_info_provider_generated;
@@ -113,6 +136,8 @@ const
   _price_gas_get_module =
     require(
       "./lib/price-gas-get");
+/* global
+     _price_gas_get */
 const
   _price_gas_get =
     _price_gas_get_module._price_gas_get;
@@ -120,6 +145,8 @@ const
   _price_gas_transaction_get_module =
     require(
       "./lib/price-gas-transaction-get");
+/* global
+     _price_gas_transaction_get */
 const
   _price_gas_transaction_get =
     _price_gas_transaction_get_module._price_gas_transaction_get;
@@ -127,6 +154,8 @@ const
   _seed_new_module =
     require(
       "./lib/seed-new");
+/* global
+     _seed_new */
 const
   _seed_new =
     _seed_new_module._seed_new;
@@ -134,6 +163,8 @@ const
   _wallet_get_module =
     require(
       "./lib/wallet-get");
+/* global
+     _wallet_get */
 const
   _wallet_get =
     _wallet_get_module._wallet_get;
@@ -141,6 +172,8 @@ const
   _wallet_new_module =
     require(
       "./lib/wallet-new");
+/* global
+     _wallet_new */
 const
   _wallet_new =
     _wallet_new_module._wallet_new;
@@ -171,7 +204,8 @@ async function
     _target_networks) {
   let
     _args,
-    _msg;
+    _msg,
+    _rpc;
   const
     _cmd =
       "";
@@ -179,28 +213,35 @@ async function
     _target_network =
       _target_networks[
         0];
-  const
-    _evm_chains_info_args = [
-      "get",            // command
-      "id",             // input type 
-      "rpc",            // output type
-      "offline",        // retrieval method
-      [ "node",         // db types
-        "system" ],
-      "kirsh",          // selection method
-      "",               // api key
-      "n",              // all networks
-      _target_network,
-      []                // db paths
-    ];
-  const
+  if ( _target_network.startsWith(
+         "https://") {
     _rpc =
-      _evm_chains_info.apply(
-        null,
-        _evm_chains_info_args)[
-        0];
+      "_target_network";
+  }
+  else {
+    const
+      _evm_chains_info_args = [
+        "get",            // command
+        "id",             // input type 
+        "rpc",            // output type
+        "offline",        // retrieval method
+        [ "node",         // db types
+          "system" ],
+        "kirsh",          // selection method
+        "",               // api key
+        "n",              // all networks
+        _target_network,
+        []                // db paths
+      ];
+    const
+      _rpc =
+        _evm_chains_info.apply(
+          null,
+          _evm_chains_info_args)[
+          0];
+  }
   _msg =
-    `Got rpc '${_rpc}'.`;
+    `Using RPC address '${_rpc}'.`;
   _msg_info(
     _msg);
   if ( _target_command == "get" ) {
