@@ -34,9 +34,26 @@ const
   _crash_js_module =
     require(
       "crash-js");
+/* global
+     _file_exists */
+const
+  _file_exists =
+    _crash_js_module._file_exists;
+/* global
+     _mkdir */
+const
+  _mkdir =
+    _crash_js_module._mkdir;
+/* global
+     _msg_info */
 const
   _msg_info =
     _crash_js_module._msg_info;
+/* global
+     _path_join */
+const
+  _path_join =
+    _crash_js_module._path_join;
 const
   _evm_chains_info_module =
     require(
@@ -189,12 +206,21 @@ async function
   if ( _target_command == "get" ) {
     if ( _target_key == "balance" ) {
       const
-        _balance_file =
+        _balance_dir =
           _path_join( [
             _cache_dir,
             _wallet_name,
-            _target_network.toString(),
+            _target_network.toString() ]);
+      const
+        _balance_file =
+          _path_join( [
+            _balance_dir,
             "balance"]);
+      if ( ! _file_exists(
+               _balance_dir) ) {
+        _mkdir(
+	  _balance_dir);
+      }
       const
         _balance_get_args = [
           _wallet_seed,
