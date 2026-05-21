@@ -107,6 +107,10 @@
       "gas-balance":
         "lib/balance-get"
     },
+  "yargs": {
+    "parse-numbers":
+      false
+  },
   "scripts": {
     "build-fs-worker":
       "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-wallet' && cp 'fs-worker.js' 'dist/libevm-wallet'",

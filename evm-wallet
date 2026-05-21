@@ -625,7 +625,9 @@ async function
         "help",
         "v",
         "verbose"
-      ]
+      ],
+     "string":
+       true
     };
   const
     _argv =
@@ -697,11 +699,14 @@ async function
       true;
     }
     else if ( target_command == "send" ) {
-      target_key =
-        String(
+      console.log(
           _argv[
             "_"][
               2]);
+      target_key =
+          _argv[
+            "_"][
+              2].toString();
     }
     else {
       /* eslint-disable-next-line
@@ -728,7 +733,7 @@ async function
     target_value =
       _argv[
         "_"][
-          3].toFixed();
+          3].toFixed(18);
   }
   console.log(
     target_value);
