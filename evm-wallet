@@ -716,7 +716,8 @@ async function
   }
   if ( typeof(
        _argv) != "undefined" &&
-       3 < _argv.length ) {
+       3 < _argv[
+             "_"].length ) {
     target_value =
       String(
         _argv[
