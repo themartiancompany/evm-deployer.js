@@ -214,7 +214,7 @@ async function
       _target_networks[
         0];
   if ( _target_network.startsWith(
-         "https://") {
+         "https://") ) {
     _rpc =
       "_target_network";
   }
