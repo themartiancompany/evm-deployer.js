@@ -700,10 +700,6 @@ async function
     }
     else if ( target_command == "send" ) {
       const _key = _argv._[2];
-      console.log(
-        _key);
-      console.log(
-        _argv.plaintext);
       target_key =
           _argv[
             "_"][
@@ -734,10 +730,8 @@ async function
     target_value =
       _argv[
         "_"][
-          3].toFixed(18);
+          3];
   }
-  console.log(
-    target_value);
   if ( "R" in _argv ) {
     rpc_selection =
       _argv[
