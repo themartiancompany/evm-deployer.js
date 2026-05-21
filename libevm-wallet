@@ -266,6 +266,15 @@ async function
   }
   else if ( _target_command == "send" ) {
     if ( _currency_type == "gas" ) {
+      const
+        _balance_send_args = [
+          _wallet_seed,
+          _target_address,
+          _target_amount,
+          _rpc,
+          _api_key,
+          _measure_unit
+	];
       true;
       _balance_send();
     }
