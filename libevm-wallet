@@ -52,7 +52,7 @@ const
 /* global
      _msg_error */
 const
-  _msg_info =
+  _msg_error =
     _crash_js_module._msg_error;
 /* global
      _path_join */
