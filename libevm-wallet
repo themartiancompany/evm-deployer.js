@@ -342,7 +342,7 @@ async function
           _measure_unit
 	];
       _balance_sent =
-        _balance_send.apply(
+        await _balance_send.apply(
           null,
           _balance_send_args);
     }
@@ -372,7 +372,7 @@ async function
 	];
       const
         _token_sent =
-          _token_send.apply(
+          await _token_send.apply(
             null,
             _token_send_args);
       return _token_sent;
