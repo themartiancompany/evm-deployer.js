@@ -147,16 +147,18 @@ async function
     false;
   _wallet_password =
     "";
-  _wallet_dir =
-    _dirname(
-      _wallet_seed);
-  _wallet_path_list = [
-    _wallet_dir,
-    "wallet.dat"
-  ];
-  _wallet_path =
-    _path_join(
-      _wallet_path_list);
+  if ( _wallet_seed != "" ) {
+    _wallet_dir =
+      _dirname(
+        _wallet_seed);
+    _wallet_path_list = [
+      _wallet_dir,
+      "wallet.dat"
+    ];
+    _wallet_path =
+      _path_join(
+        _wallet_path_list);
+  }
   _provider_get_opts = [
     _target_network,
   ];
@@ -407,7 +409,9 @@ async function
 
 
 if ( _cmdline_check(
-       "balance-get") ) {
+       "balance-get") ||
+     _cmdline_check(
+       "gas-balance-get")) {
   _global_variables();
   _cmdline_parse();
   _config_show();

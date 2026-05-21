@@ -283,7 +283,6 @@ function
   if ( typeof(
          target_key) == "undefined" ||
        target_key == "" ) {
-    console.log("Hello");
     if ( target_command == "get" ) {
       target_key =
         "name";
@@ -712,7 +711,6 @@ async function
         "_"][
           3];
   }
-  console.log(target_value);
   if ( "R" in _argv ) {
     rpc_selection =
       _argv[
@@ -843,6 +841,10 @@ function
       _argv_url_get();
   runtime_environment =
     "browser";
+  wallet_name =
+    _argv_url_get(
+      "wallet_name")[
+        0];
   rpc_selection =
     _argv_url_get(
       "rpc_selection")[
@@ -907,6 +909,8 @@ function
 
 async function
   _main() {
+  let
+    _result;
   const
     _overrides_set_up =
       await _overrides_set();
@@ -914,6 +918,7 @@ async function
   const
     app_opts = [
       target_command,
+      wallet_name,
       wallet_path,
       wallet_password,
       wallet_seed,
@@ -935,9 +940,38 @@ async function
       target_value,
       target_networks
     ];
-  _evm_wallet.apply(
-    null,
-    app_opts);
+  const
+    _results =
+      await _evm_wallet.apply(
+        null,
+        app_opts);
+  if ( typeof(
+         _results) == "string" ) {
+    console.log(
+      _results);
+  }
+  else if ( typeof(
+         _results) == "object" ) {
+    for ( _result of _results ) {
+      console.log(
+        _result);
+    }
+  }
+  else if ( typeof(
+         _results) == "undefined" ) {
+    _msg =
+      `No results.`;
+    _msg_error(
+      _msg,
+      1);
+  }
+  else {
+    _msg =
+      "Error retrieving results for command.";
+    _msg_error(
+      _msg,
+      1);
+  }
 }
 
 _global_variables();

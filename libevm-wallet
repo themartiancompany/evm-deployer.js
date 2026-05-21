@@ -128,9 +128,10 @@ const
   _wallet_new =
     _wallet_new_module._wallet_new;
 
-function
+async function
   _evm_wallet(
     _target_command,
+    _wallet_name,
     _wallet_path,
     _wallet_password,
     _wallet_seed,
@@ -189,20 +190,46 @@ function
     _msg);
   if ( _target_command == "get" ) {
     if ( _target_key == "balance" ) {
-      // _balance_get probably
-      _args =
-        [];
-      _msg =
-        `Running command '${_cmd}' with ` +
-        `arguments '${_args}' on network ` +
-        `'${_target_networks}' through rpc ` +
-        `'${_rpc}'.`;
-      _msg_info(
-        _msg);
+      const
+        _balance_file =
+          _path_join( [
+            _cache_dir,
+            _wallet_name,
+            _target_network.toString(),
+            "balance"]);
+      const
+        _balance_get_args = [
+          _wallet_seed,
+          _target_network,
+          _api_key,
+          "",                  // Target address, using seed
+          _measure_unit,
+          _balance_file,
+          _retries_max
+        ];
+      const
+        _balance =
+          await _balance_get.apply(
+            null,
+            _balance_get_args);
+      return balance;
     }
     else if ( _target_key == "address" ) {
-      // _address_get();
-      true; 
+      const
+        _address_get_args = [
+          _wallet_seed,
+          "",                 // Network
+          "",                 // API Key
+          "",                 // Chain ID
+          "",                 // Chain name
+          ""                  // Output file
+        ];
+      const
+        _wallet_address =
+          _address_get.apply(
+            null,
+            _address_get_args);
+      return _wallet_address;
     }
     else {
       _msg =
