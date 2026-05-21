@@ -335,8 +335,10 @@ async function
           _api_key,
           _measure_unit
 	];
-      true;
-      _balance_send();
+      _balance_sent =
+        _balance_send.apply(
+          null,
+          _balance_send_args);
     }
     else if ( _currency_type == "erc20" ) {
       const
