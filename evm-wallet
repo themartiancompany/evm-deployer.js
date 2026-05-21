@@ -346,7 +346,9 @@ async function
     wallet_name =
       "default";
   }
-  if ( target_command == "" ) {
+  if ( typeof(
+         target_command) == "undefined" ||
+       target_command == "" ) {
     target_command =
       "get";
   }
@@ -661,7 +663,8 @@ async function
   }
   if ( typeof(
        _argv) != "undefined" &&
-       0 < _argv.length ) {
+       0 < _argv[
+             "_"].length ) {
     target_command =
       _argv[
         "_"][
@@ -720,6 +723,8 @@ async function
           "_"][
             3]);
   }
+  console.log(
+    target_value);
   if ( "R" in _argv ) {
     rpc_selection =
       _argv[
