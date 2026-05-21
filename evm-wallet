@@ -662,7 +662,8 @@ async function
   }
   if ( typeof(
        _argv) != "undefined" &&
-       1 < _argv.length ) {
+       1 < _argv[
+             "_"].length ) {
     if ( target_command == "list" ) {
       target_key =
         _argv[
@@ -680,7 +681,8 @@ async function
   }
   if ( typeof(
        _argv) != "undefined" &&
-       2 < _argv.length ) {
+       2 < _argv[
+             "_"].length ) {
     if ( target_command == "list" ) {
       true;
     }
@@ -695,7 +697,8 @@ async function
   }
   if ( typeof(
        _argv) != "undefined" &&
-       2 < _argv.length ) {
+       2 < _argv[
+             "_"].length ) {
     target_key =
       _argv[
         "_"][

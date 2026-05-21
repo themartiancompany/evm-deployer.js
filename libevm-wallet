@@ -204,6 +204,12 @@ function
       // _address_get();
       true; 
     }
+    else {
+      _msg =
+        `Unknown key '${_target_key}'.`;
+      _msg_info(
+        _msg);
+    }
   }
   else if ( _target_command == "send" ) {
     if ( _currency_type == "gas" ) {
@@ -227,6 +233,13 @@ function
   }
   else if ( _target_command == "run" ) {
     true;
+  }
+  else {
+    _msg =
+      `Unknown command '${_target_command}'.`;
+    _msg_error(
+      _msg,
+      1);
   }
 }
 
