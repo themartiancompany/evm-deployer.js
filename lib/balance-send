@@ -31,35 +31,62 @@ const
 const
   _ethers =
     ethers;
+/* global
+     _wei_to_ether */
 const
   _wei_to_ether =
     _ethers.formatEther;
+/* global
+     _parse_units */
 const
   _parse_units =
     _ethers.parseUnits;
-
 const
   _libcrash =
     require(
       "crash-js");
+/* global
+     _argv_get */
+const
+  _argv_get =
+    _libcrash._argv_get;
+/* global
+     _basename */
+const
+  _basename =
+    _libcrash._basename;
+/* global
+     _dirname */
 const
   _dirname =
     _libcrash._dirname;
+/* global
+     _file_read */
 const
   _file_read =
     _libcrash._file_read;
+/* global
+     _path_join */
 const
   _path_join =
     _libcrash._path_join;
+/* global
+     _msg_info */
 const
   _msg_info =
     _libcrash._msg_info;
+/* global
+     _msg_info_obj */
 const
   _msg_info_obj =
     _libcrash._msg_info_obj;
+/* global
+     _msg_error */
 const
   _msg_error =
     _libcrash._msg_error;
+/* global
+     _process_exit */
 const
   _process_exit =
     _libcrash._process_exit;
@@ -67,6 +94,8 @@ const
   _wallet_get_module =
     require(
       './wallet-get');
+/* global
+     _wallet_get */
 const
   _wallet_get =
     _wallet_get_module._wallet_get;
@@ -74,9 +103,13 @@ const
   _balance_check_module =
     require(
       './balance-check');
+/* global
+     _balance_check */
 const
   _balance_check =
     _balance_check_module._balance_check;
+/* global
+     _msg_error_balance_insufficient */
 const
   _msg_error_balance_insufficient =
     _balance_check_module._msg_error_balance_insufficient
@@ -84,9 +117,13 @@ const
   _network_provider_module =
     require(
       './network-provider');
+/* global
+     _provider_get */
 const
   _provider_get =
     _network_provider_module._provider_get;
+/* global
+     _msg_info_provider_generated */
 const
   _msg_info_provider_generated =
     _network_provider_module._msg_info_provider_generated;
@@ -356,31 +393,47 @@ function
 function
   _usage() {
   let
-    _line,
-    _text;
-  _text = [
-    "Usage:",
-    "  balance-send",
-    "    <quiet>",
-    "    <seed_path>",
-    "    <target_address>",
-    "    <amount>",
-    "    (<target_network>)",
-    "    (<api_key>)",
-    "    (<measure_unit>)",
-    "",
-    "Args:",
-    "  <seed_path>         Path on disk of the file",
-    "                      containing the seed phrase.",
-    "  <target_address>    Address to send some balance to.",
-    "  <amount>            How much balance to send.",
-    "  <target_network>    Name of the network to connect to.",
-    "  <api_key>           Path on disk of the API key for",
-    "                      the network service provider.",
-    "                      Default: the wallet address.",
-    "  <measure_unit>      Can be 'wei' or 'ether'.",
-    "                      Default: 'ether'",
-  ];
+    _line;
+  const
+    _argv =
+      _argv_get();
+  const
+    _program =
+      _basename(
+        _argv[
+          "$0"]);
+  const
+    _text = [
+      "Transfer gas from an address to another.",
+      "",
+      "Usage:",
+      `  ${_program}`,
+      "    <quiet>",
+      "    <seed-path>",
+      "    <target-address>",
+      "    <amount>",
+      "    (<target-network>)",
+      "    (<api-key>)",
+      "    (<measure-unit>)",
+      "",
+      "Args:",
+      "",
+      "  <seed-path>         Path on disk of the file",
+      "                      containing the seed phrase.",
+      "",
+      "  <target-address>    Address to send some balance to.",
+      "",
+      "  <amount>            How much balance to send.",
+      "",
+      "  <target-network>    Name of the network to connect to.",
+      "",
+      "  <api-key>           Path on disk of the API key for",
+      "                      the network service provider.",
+      "                      Default: the wallet address.",
+      "",
+      "  <measure-unit>      Can be 'wei' or 'ether'.",
+      `                      Default: ${measure_unit}`,
+    ];
   for ( _line of _text ) {
     console.log(
       _line);
@@ -389,6 +442,8 @@ function
 }
 
 function _cmdline_parse() {
+  let
+    _msg;
   quiet =
     "y";
   process.argv.forEach(
@@ -423,6 +478,14 @@ function _cmdline_parse() {
       if ( _index == 8 ) {
         measure_unit =
         _value;
+      }
+      if ( _value == "-h" ||
+           _value == "--help" ) {
+        _overrides_set();
+        quiet =
+          "n";
+        _usage(
+          0);
       }
   });
   if ( typeof(
@@ -464,10 +527,34 @@ function _cmdline_parse() {
   }
 }
 
+async function
+  _balance_send_cmdline(
+    app_opts) {
+  let
+    _receipt,
+    _tx;
+  [ _tx,
+    _receipt ] =
+  await _balance_send.apply(
+    null,
+    app_opts);
+  console.log(
+    "Transaction response:");
+  console.log(
+    _tx);
+  console.log(
+    "Transaction receipt:");
+  console.log(
+    _receipt);
+}
+
 if ( _cmdline_check(
-       "balance-send") == true ) {
+        "balance-send") ||
+      _cmdline_check(
+        "gas-transfer") ) {
   _global_variables();
   _cmdline_parse();
+  _overrides_set();
   _config_show();
   app_opts = [
     wallet_seed,
@@ -477,7 +564,7 @@ if ( _cmdline_check(
     api_key,
     measure_unit
   ];
-  _balance_send.apply(
+  _balance_send_cmdline.apply(
     null,
     app_opts);
 }
