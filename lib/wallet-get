@@ -212,15 +212,20 @@ function _wallet_get(
   _password,
   _seed,
   _provider,
-  _wallet) {
+  _wallet,
+  _verbose) {
   let
     _password_show,
-    _phrase,
     _phrase_show,
     _seed_exists,
     _seed_type;
   _password_show =
     "";
+  if ( typeof(
+         _verbose) == "undefined" ||
+       _verbose == "" ) {
+    _verbose="n" 
+  }
   if ( typeof(
          _password) == "undefined" ||
        _password != "" ) {
@@ -237,19 +242,22 @@ function _wallet_get(
     _seed_missing_error(
       _seed);
   }
-  _msg_info_obj(
-    'Wallet path',
-    _path);
-  if ( _password_show != "" ) {
+  if ( _verbose == "y" ) {
     _msg_info_obj(
-      'Wallet password',
-      _password_show);
+      'Wallet path',
+      _path);
+    if ( _password_show != "" ) {
+      _msg_info_obj(
+        'Wallet password',
+        _password_show);
+    }
   }
   _wallet_exists(
     _path);
-  _phrase =
-    _phrase_get(
-      _seed);
+  const
+    _phrase =
+      _phrase_get(
+        _seed);
   _wallet =
     _hdnode_wallet.fromPhrase(
       _phrase);

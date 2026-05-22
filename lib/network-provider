@@ -76,7 +76,7 @@ function
   if ( typeof (
          _provider) == "object" ) {
     if ( typeof(
-           _provider._getConnection) != "undefined" ) {
+           _provider._getConnection) == "undefined" ) {
       _msg =
         "Probably a dummy connection method";
       _msg_info(

@@ -185,11 +185,13 @@ async function
     _target_amount,
     _target_network,
     _api_key_path,
-    _measure_unit) {
+    _measure_unit,
+    _verbose) {
   let
     _amount,
     _balance_check_opts,
     _measure_unit_converted,
+    _msg,
     _provider_get_opts,
     _send_opts;
   const
@@ -200,6 +202,12 @@ async function
          _measure_unit == "" ) {
     _measure_unit =
       "ether";
+  }
+  if ( typeof(
+         _verbose) === "undefined"  ||
+         _verbose == "" ) {
+    _verbose =
+      "n";
   }
   const
     _wallet_password =
@@ -295,16 +303,28 @@ async function
     _tx =
       await _wallet.sendTransaction(
         _send_opts);
-  console.log(
-    _tx);
+  if ( _verbose == "y" ) {
+    _msg =
+      "Transaction response:";
+    _msg_info(
+      _msg);
+    console.log(
+      _tx);
+  }
   const
     _receipt =
       await _tx.wait(
         1,
         _call_timeout);
-  console.log(
-    _receipt);
-  return _receipt;
+  if ( _verbose == "y" ) {
+    _msg =
+      "Transaction receipt:";
+    _msg_info(
+      _msg);
+    console.log(
+      _receipt);
+  }
+  return [ _tx, _receipt ];
 }
 
 function
@@ -405,10 +425,42 @@ function _cmdline_parse() {
         _value;
       }
   });
-  if ( wallet_seed == "" ||
-       target_address == "" ||
+  if ( typeof(
+         wallet_seed) == "undefined" ||
+       wallet_seed == "") {
+    _msg =
+      "No seed phrase given in input.";
+    _msg_error(
+      _msg,
+      0);
+    _usage(
+      1);
+  }
+  if ( typeof(
+         target_address) == "undefined" ||
+       target_address == "") {
+    _overrides_set();
+    quiet =
+      "n";
+    _msg =
+      "No target address given in input.";
+    _msg_error(
+      _msg,
+      0);
+    _usage(
+      1);
+  }
+  if ( typeof(
+         target_amount) == "undefined" ||
        target_amount == "") {
-    _usage();
+    _overrides_set()
+    _msg =
+      "No target address given in input.";
+    _msg_error(
+      _msg,
+      0);
+    _usage(
+      1);
   }
 }
 
