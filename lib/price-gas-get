@@ -117,7 +117,8 @@ async function
     _target_address,
     _output_type,
     _output_file,
-    _retries_max) {
+    _retries_max,
+    _verbose) {
   let
     _fee_data,
     _msg,
@@ -131,6 +132,12 @@ async function
     _wallet_dir,
     _wallet_password,
     _wallet_path_list;
+  if ( typeof(
+         _verbose) == 'undefined' ||
+       _verbose == "" ) {
+    _verbose =
+      "n";
+  }
   if ( typeof(
          _output_type) == 'undefined' ||
        _output_type == "" ) {
@@ -211,7 +218,7 @@ async function
     try {
       _fee_data = await
         _provider.getFeeData();
-      if ( quiet == "n" ) {
+      if ( _verbose == "y" ) {
         console.log(
           _fee_data);
       }
@@ -430,8 +437,8 @@ async function
       await _price_gas_get.apply(
         null,
         _app_opts);
-    console.log(
-      _price_gas.toString());
+    // console.log(
+    //   _price_gas.toString());
     // process.stdout.write(
     //   _balance.toString());
   }

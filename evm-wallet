@@ -971,7 +971,11 @@ async function
     _results_type =
       typeof(
         _results);
-  if ( _results_type == "string" ) {
+  if ( _results_type == "bigint" ) {
+    console.log(
+      _results.toString());
+  }
+  else if ( _results_type == "string" ) {
     console.log(
       _results);
   }
