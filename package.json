@@ -110,6 +110,8 @@
         "lib/address-get",
       "gas-balance":
         "lib/balance-get"
+      "gas-transfer":
+        "lib/balance-send"
     },
   "yargs": {
     "parse-numbers":

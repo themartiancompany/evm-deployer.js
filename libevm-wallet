@@ -206,7 +206,9 @@ async function
     _args,
     _msg,
     _rpc,
-    _target_network;
+    _target_network,
+    _tx,
+    _receipt;
   const
     _cmd =
       "";
@@ -278,7 +280,7 @@ async function
       if ( ! _file_exists(
                _balance_dir) ) {
         _mkdir(
-	  _balance_dir,
+          _balance_dir,
           { "recursive":
               true });
       }
@@ -340,10 +342,13 @@ async function
           _api_key,
           _measure_unit
 	];
-      _balance_sent =
+      [ _tx,
+        _receipt ] =
         await _balance_send.apply(
           null,
           _balance_send_args);
+      return [ _tx,
+               _receipt ];
     }
     else if ( _currency_type == "erc20" ) {
       const
