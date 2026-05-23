@@ -86,7 +86,7 @@
   },
   "optionalDependencies": {
     "erc20-tools":
-      "^0.0.9"
+      "^0.0.10"
   },
   "overrides": {
     "evm-wallet.js":

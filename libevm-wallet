@@ -262,7 +262,25 @@ async function
     `Using RPC address '${_rpc}'.`;
   _msg_info(
     _msg);
-  if ( _target_command == "get" ) {
+  if ( _target_command == "gas" ) {
+    const
+      _price_gas_get_args = [
+        "n",           // quiet
+        _rpc,
+        _api_key_path,
+        _measure_unit,
+        "",            // seed
+        "",            // target address
+        "",            // output file
+        _retries_max
+      ];
+    const
+      _price_gas =
+        await _price_gas_get.apply(
+          null,
+          _prices_gas_get_args);
+    return _price_gas;
+  else if ( _target_command == "get" ) {
     if ( _target_key == "balance" ) {
       const
         _balance_dir =
