@@ -373,6 +373,11 @@ async function
             _target_address,
             _target_amount
           ];
+        _msg =
+          `Running '_token_send' with ` +
+          `arguments '${_token_send_args}'.`;
+        _msg_info(
+	  _msg);
         const
           _token_sent =
             await _token_send.apply(
