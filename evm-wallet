@@ -967,20 +967,21 @@ async function
       await _evm_wallet.apply(
         null,
         app_opts);
-  if ( typeof(
-         _results) == "string" ) {
+  const
+    _results_type =
+      typeof(
+        _results);
+  if ( _results_type == "string" ) {
     console.log(
       _results);
   }
-  else if ( typeof(
-         _results) == "object" ) {
+  else if ( _results_type == "object" ) {
     for ( _result of _results ) {
       console.log(
         _result);
     }
   }
-  else if ( typeof(
-         _results) == "undefined" ) {
+  else if ( _results_type == "undefined" ) {
     _msg =
       `No results.`;
     _msg_error(
@@ -989,7 +990,8 @@ async function
   }
   else {
     _msg =
-      "Error retrieving results for command.";
+      "Error retrieving results for command. " +
+      `Type of return: '${_results_type}'.`;
     _msg_error(
       _msg,
       1);

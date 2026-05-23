@@ -265,7 +265,6 @@ async function
   if ( _target_command == "gas" ) {
     const
       _price_gas_get_args = [
-        "n",           // quiet
         _rpc,
         _api_key,
         _measure_unit,
