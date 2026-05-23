@@ -205,15 +205,11 @@ async function
     _target_value,
     _target_networks) {
   let
-    _args,
     _msg,
     _rpc,
     _target_network,
     _tx,
     _receipt;
-  const
-    _cmd =
-      "";
   if ( typeof(
          _target_networks) == "undefined" ||
        _target_networks == [] ||
