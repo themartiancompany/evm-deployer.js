@@ -835,10 +835,10 @@ async function
       _argv[
         "C"];
   }
-  if ( "currency-address" in _argv ) {
+  if ( "currency" in _argv ) {
     currency_address =
       _argv[
-        "currency-address"];
+        "currency"];
   }
   _libevm_cmdline_parse(
     _argv);
