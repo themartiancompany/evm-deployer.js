@@ -143,7 +143,7 @@ build-npm:
 
 	make \
 	  build-man
-	for _file in $(_NPM_FILES); do \
+	for _file in $(NPM_FILES); do \
 	  if [[ -d "$${_file}" ]]; then \
 	    mkdir \
 	      -p \
@@ -167,7 +167,9 @@ build-npm:
 	      "$${PWD}" \
 	      "version")"; \
 	npm \
-	  install; \
+	  install \
+	  --include \
+	    'optional'; \
 	npm \
 	  run \
 	    "build"; \
