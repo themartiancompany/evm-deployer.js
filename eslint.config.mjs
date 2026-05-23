@@ -31,17 +31,22 @@ const
   _project =
     "evm-wallet";
 
+const
+  _ignores = [
+    "build/**",
+    "dist/**",
+    "eslint.config.js",
+    "evm-wallet.js",
+    "fs-worker.js",
+    "libevm-wallet.js",
+    "man/**",
+    "node_modules/**"
+  ];
+
 export default defineConfig([
  {
-   ignores: [
-     "build/**",
-     "eslint.config.js",
-     "evm-wallet.js",
-     "fs-worker.js",
-     "libevm-wallet.js",
-     "man/**",
-     "node_modules/**"
-   ],
+   ignores:
+     _ignores,
    rules:
      { semi:
          "error",
@@ -61,15 +66,8 @@ export default defineConfig([
          {  ...globals.browser,
             ...globals.node } } },
  { 
-   ignores: [
-     "build/**",
-     "eslint.config.js",
-     "evm-wallet.js",
-     "fs-worker.js",
-     "libevm-wallet.js",
-     "man/**",
-     "node_modules/**"
-   ],
+   ignores:
+     _ignores,
    rules:
      { semi:
          "error",
