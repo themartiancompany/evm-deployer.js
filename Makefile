@@ -168,7 +168,8 @@ build-npm:
 	      "version")"; \
 	npm \
 	  install \
-	  --include='optional'; \
+	  --include='optional' \
+	  --save; \
 	npm \
 	  run \
 	    "build"; \
