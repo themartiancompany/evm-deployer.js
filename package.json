@@ -86,7 +86,7 @@
   },
   "optionalDependencies": {
     "erc20-tools":
-      "^0.0.6"
+      "^0.0.7"
   },
   "overrides": {
     "evm-wallet.js":
@@ -109,7 +109,7 @@
       "eoa-fingerprint":
         "lib/address-get",
       "gas-balance":
-        "lib/balance-get"
+        "lib/balance-get",
       "gas-transfer":
         "lib/balance-send"
     },
