@@ -94,7 +94,9 @@
     "libevm":
       "^0.0.20",
     "evm-chains-info":
-      "^0.0.21"
+      "^0.0.21",
+    "erc20-tools":
+      "^0.0.7"
   },
   "type":
     "commonjs",
