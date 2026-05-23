@@ -360,19 +360,19 @@ async function
           _erc20_tools_module._token_send;
       const
         _token_send_args = [
-          retries_max,
-          call_timeout,
-          wallet_seed,
-          api_key,
-          rpc,
-          currency_address,
-          token_abi_path,
-          token_bytecode_path,
-          token_compiler_output_path,
-          measure_unit,
-          receipt_file_path,
-          target_address,
-          target_amount
+          _retries_max,
+          _call_timeout,
+          _wallet_seed,
+          _api_key,
+          _rpc,                          // NOTE: data filled-in
+          _currency_address,             // by 'token-send':
+          "",                            //   erc20 abi
+          "",                            //   erc20 bytecode
+          "",                            //   erc20 hardhat artifact
+          _measure_unit,
+          "",                            // output path
+          _target_address,
+          _target_amount
 	];
       const
         _token_sent =
