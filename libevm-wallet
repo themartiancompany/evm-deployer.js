@@ -349,10 +349,20 @@ async function
                _receipt ];
     }
     else if ( _currency_type == "erc20" ) {
-      const
-        _erc20_tools_module =
-          require(
-            "erc20-tools");
+      try {
+        const
+          _erc20_tools_module =
+            require(
+              "erc20-tools");
+      }
+      catch(
+        _error) {
+        _msg =
+          "Install ERC-20 Tools ('ur erc20-tools')";
+        _msg_error(
+          _msg,
+          1);
+      }
       const
         _token_send =
           _erc20_tools_module._token_send;
