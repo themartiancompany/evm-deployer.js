@@ -267,7 +267,7 @@ async function
       _price_gas_get_args = [
         "n",           // quiet
         _rpc,
-        _api_key_path,
+        _api_key,
         _measure_unit,
         "",            // seed
         "",            // target address
@@ -278,7 +278,7 @@ async function
       _price_gas =
         await _price_gas_get.apply(
           null,
-          _prices_gas_get_args);
+          _price_gas_get_args);
     return _price_gas;
   }
   else if ( _target_command == "get" ) {
