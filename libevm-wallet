@@ -280,6 +280,7 @@ async function
           null,
           _prices_gas_get_args);
     return _price_gas;
+  }
   else if ( _target_command == "get" ) {
     if ( _target_key == "balance" ) {
       const
