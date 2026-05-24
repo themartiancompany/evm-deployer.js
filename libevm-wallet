@@ -229,7 +229,9 @@ async function
           _balance_file);
     console.log(
       _file_info);
-    }
+    _balance =
+      _cat(
+        _file_info);
   }
   return _balance;
 }
