@@ -36,6 +36,11 @@ const
     require(
       "crash-js");
 /* global
+     _cat */
+const
+  _cat =
+    _crash_js_module._cat;
+/* global
      _file_exists */
 const
   _file_exists =
@@ -185,7 +190,10 @@ const
     _wallet_new_module._wallet_new;
 
 async function
-  _balance_update() {
+  _balance_update(
+    _cache_dir,
+    _wallet_name,
+    _target_network) {
   const
     _balance_dir =
       _path_join( [
@@ -340,7 +348,10 @@ async function
     if ( _target_key == "balance" ) {
       const
         _balance =
-          await _balance_update();
+          await _balance_update(
+	    _cache_dir,
+            _wallet_name,
+            _target_network);
       return _balance;
     }
     else if ( _target_key == "address" ) {
