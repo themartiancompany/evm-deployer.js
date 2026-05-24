@@ -280,6 +280,7 @@ async function
     _target_value,
     _target_networks) {
   let
+    _info_retrieve,
     _msg,
     _rpc,
     _target_network,
@@ -307,12 +308,20 @@ async function
            "https://") ) {
       _rpc =
         _target_network;
+      _info_retrieve =
+        "n";
+    }
+    else {
+      _info_retrieve =
+        "y";
     }
   }
   if ( typeof(
-         _target_network) == "number" ||
-       ( ! _target_network.startsWith(
-           "https://") ) ) {
+         _target_network) == "number" ) {
+    _info_retrieve =
+      "y";
+  }
+  if ( _info_retrieve == "y" ) {
     const
       _evm_chains_info_args = [
         "get",            // command
