@@ -196,7 +196,8 @@ async function
     _wallet_seed,
     _target_network,
     _rpc,
-    _api_key) {
+    _api_key,
+    _measure_unit) {
   let
     _balance;
   const
@@ -376,8 +377,10 @@ async function
           _wallet_seed,
           _target_network,
           _rpc,
-          _api_key
+          _api_key,
+          _measure_unit
         ];
+      console.log(_balance_update_args);
       const
         _balance =
           await _balance_update.apply(
