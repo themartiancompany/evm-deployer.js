@@ -194,7 +194,8 @@ async function
     _cache_dir,
     _wallet_name,
     _wallet_seed,
-    _target_network) {
+    _target_network,
+    _rpc) {
   let
     _balance;
   const
@@ -367,13 +368,17 @@ async function
   }
   else if ( _target_command == "get" ) {
     if ( _target_key == "balance" ) {
+      _balance_update_args = [
+        _cache_dir,
+        _wallet_name,
+        _wallet_seed,
+        _target_network,
+        _rpc);
       const
         _balance =
-          await _balance_update(
-	    _cache_dir,
-            _wallet_name,
-            _wallet_seed,
-            _target_network);
+          await _balance_update.apply(
+            null,
+            _balance_update_args);
       return _balance;
     }
     else if ( _target_key == "address" ) {
