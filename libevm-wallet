@@ -339,38 +339,8 @@ async function
   else if ( _target_command == "get" ) {
     if ( _target_key == "balance" ) {
       const
-        _balance_dir =
-          _path_join( [
-            _cache_dir,
-            _wallet_name,
-            _target_network.toString() ]);
-      const
-        _balance_file =
-          _path_join( [
-            _balance_dir,
-            "balance"]);
-      if ( ! _file_exists(
-               _balance_dir) ) {
-        _mkdir(
-          _balance_dir,
-          { "recursive":
-              true });
-      }
-      const
-        _balance_get_args = [
-          _wallet_seed,
-          _rpc,
-          _api_key,
-          "",                  // Target address, using seed
-          _measure_unit,
-          _balance_file,
-          _retries_max
-        ];
-      const
         _balance =
-          await _balance_get.apply(
-            null,
-            _balance_get_args);
+          await _balance_update.();
       return _balance;
     }
     else if ( _target_key == "address" ) {
