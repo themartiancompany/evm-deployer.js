@@ -197,7 +197,8 @@ async function
     _target_network,
     _rpc,
     _api_key,
-    _measure_unit) {
+    _measure_unit,
+    _retries_max) {
   let
     _balance;
   const
@@ -379,6 +380,7 @@ async function
           _rpc,
           _api_key,
           _measure_unit
+          _retries_max
         ];
       console.log(_balance_update_args);
       const
