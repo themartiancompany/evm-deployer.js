@@ -193,6 +193,7 @@ async function
   _balance_update(
     _cache_dir,
     _wallet_name,
+    _wallet_seed,
     _target_network) {
   let
     _balance;
@@ -371,6 +372,7 @@ async function
           await _balance_update(
 	    _cache_dir,
             _wallet_name,
+            _wallet_seed,
             _target_network);
       return _balance;
     }
