@@ -340,7 +340,7 @@ async function
     if ( _target_key == "balance" ) {
       const
         _balance =
-          await _balance_update.();
+          await _balance_update();
       return _balance;
     }
     else if ( _target_key == "address" ) {
