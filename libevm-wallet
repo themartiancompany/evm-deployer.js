@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 /**    ----------------------------------------------------------------
@@ -61,6 +60,11 @@ const
 const
   _path_join =
     _crash_js_module._path_join;
+/* global
+     _stat */
+const
+  _stat =
+    _crash_js_module._stat;
 const
   _evm_chains_info_module =
     require(
@@ -179,6 +183,56 @@ const
 const
   _wallet_new =
     _wallet_new_module._wallet_new;
+
+async function
+  _balance_update() {
+  const
+    _balance_dir =
+      _path_join( [
+        _cache_dir,
+        _wallet_name,
+        _target_network.toString() ]);
+  const
+    _balance_file =
+      _path_join( [
+        _balance_dir,
+        "balance"]);
+  if ( ! _file_exists(
+           _balance_dir) ) {
+    _mkdir(
+      _balance_dir,
+      { "recursive":
+          true });
+  }
+  if ( ! _file_exists(
+           _balance_file) ) {
+    const
+      _balance_get_args = [
+        _wallet_seed,
+        _rpc,
+        _api_key,
+        "",                  // Target address, using seed
+        _measure_unit,
+        _balance_file,
+        _retries_max
+      ];
+    const
+      _balance =
+        await _balance_get.apply(
+          null,
+          _balance_get_args);
+  }
+  else {
+    const
+      _file_info =
+        _stat(
+          _balance_file);
+    console.log(
+      _file_info);
+    }
+  }
+  return _balance;
+}
 
 async function
   _evm_wallet(
