@@ -194,6 +194,8 @@ async function
     _cache_dir,
     _wallet_name,
     _target_network) {
+  let
+    _balance;
   const
     _balance_dir =
       _path_join( [
@@ -205,6 +207,16 @@ async function
       _path_join( [
         _balance_dir,
         "balance"]);
+  const
+    _balance_get_args = [
+      _wallet_seed,
+      _rpc,
+      _api_key,
+      "",                  // Target address, using seed
+      _measure_unit,
+      _balance_file,
+      _retries_max
+    ];
   if ( ! _file_exists(
            _balance_dir) ) {
     _mkdir(
@@ -214,32 +226,31 @@ async function
   }
   if ( ! _file_exists(
            _balance_file) ) {
+    _balance =
+      await _balance_get.apply(
+        null,
+        _balance_get_args);
+  }
+  else {
     const
-      _balance_get_args = [
-        _wallet_seed,
-        _rpc,
-        _api_key,
-        "",                  // Target address, using seed
-        _measure_unit,
-        _balance_file,
-        _retries_max
-      ];
+      _balance_file_modified =
+        _stat(
+          _balance_file).mtimeMs;
     const
+      _life =
+        Date.now() -
+        _balance_file_modified;
+    if ( _balance_lifespan < _life ) {
       _balance =
         await _balance_get.apply(
           null,
           _balance_get_args);
-  }
-  else {
-    const
-      _file_info =
-        _stat(
+    }
+    else {
+      _balance =
+        _cat(
           _balance_file);
-    console.log(
-      _file_info);
-    _balance =
-      _cat(
-        _file_info);
+    }
   }
   return _balance;
 }

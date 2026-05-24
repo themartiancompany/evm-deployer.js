@@ -376,11 +376,15 @@ async function
     balance_lifespan =
       "3600";
   }
-  if ( retries_max == "" ) {
+  if ( typeof(
+         retries_max) == "undefined" ||
+       retries_max == "" ) {
     retries_max =
       "2";
   }
-  if ( measure_unit == "" ) {
+  if ( typeof(
+         measure_unit) == "undefined" ||
+       measure_unit == "" ) {
     measure_unit =
       "ether";
   }
