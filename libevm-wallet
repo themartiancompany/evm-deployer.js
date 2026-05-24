@@ -195,7 +195,8 @@ async function
     _wallet_name,
     _wallet_seed,
     _target_network,
-    _rpc) {
+    _rpc,
+    _api_key) {
   let
     _balance;
   const
@@ -374,7 +375,8 @@ async function
           _wallet_name,
           _wallet_seed,
           _target_network,
-          _rpc
+          _rpc,
+          _api_key
         ];
       const
         _balance =
