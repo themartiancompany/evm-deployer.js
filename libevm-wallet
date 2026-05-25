@@ -216,7 +216,7 @@ async function
         _path_join( [
           _cache_dir,
           _wallet_name,
-          _target_network.toString() ]);
+          _network.toString() ]);
     const
       _balance_file =
         _path_join( [
