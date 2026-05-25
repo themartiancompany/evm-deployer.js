@@ -66,11 +66,6 @@ const
   _file_write =
     _libcrash._file_write;
 /* global
-     _path_join */
-const
-  _path_join =
-    _libcrash._path_join;
-/* global
      _msg_info */
 const
   _msg_info =
@@ -85,6 +80,16 @@ const
 const
   _msg_error =
     _libcrash._msg_error;
+/* global
+     _path_join */
+const
+  _path_join =
+    _libcrash._path_join;
+/* global
+     _process_exit */
+const
+  _process_exit =
+    _libcrash._process_exit;
 /* global
      _sleep */
 const
@@ -321,6 +326,12 @@ function
     retries_max =
       "1";
   }
+  if ( typeof(
+         call_timeout) == "undefined" ||
+       call_timeout == "" ) {
+    call_timeout =
+      "1";
+  }
 }
 
 function
@@ -374,6 +385,7 @@ function
       "    (<display-unit>)",
       "    (<output-file>)",
       "    (<retries-max>)",
+      "    (<call-timeout>)",
       "",
       "Arguments:",
       "",
@@ -401,12 +413,15 @@ function
       "",
       "  <retries-max>       Maximum number of retries.",
       `                      Default: ${retries_max}`,
+      "",
+      "  <call-timeout>      Timeout before declaring the call failed.",
+      `                      Default: ${call-timeout}`,
   ];
   for ( _line of _text ) {
     console.log(
       _line);
   }
-  process.exit(
+  _process_exit(
     _exit_code);
 }
 
@@ -452,6 +467,18 @@ function _cmdline_parse() {
       if ( _index == 9 ) {
         retries_max =
           _value;
+      }
+      if ( _index == 10 ) {
+        call_timeout =
+          _value;
+      }
+      if ( _value == "-h" ||
+           _value == "--help" ) {
+        _overrides_set();
+        quiet =
+          "n";
+        _usage(
+          0);
       }
   });
   if ( wallet_seed == "" &&
