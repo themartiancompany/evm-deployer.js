@@ -33,17 +33,15 @@ _msg_error =
 _path_join =
   _libcrash._path_join;
 const
-  _wallet_get_module =
+  _evm_wallet_module =
     require(
-      '../evm-wallet/wallet-get');
-_wallet_get =
-  _wallet_get_module._wallet_get;
+      "evm-wallet.js");
 const
-  _network_provider =
-    require(
-      '../evm-wallet/network-provider');
-_provider_get =
-  _network_provider._provider_get;
+  _wallet_get =
+    _evm_wallet_module._wallet_get;
+const
+  _provider_get =
+    _evm_wallet_module._provider_get;
 
 function
   _global_variables() {
