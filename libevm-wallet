@@ -326,7 +326,7 @@ async function
         "libevm");
   const
     _rpc_get =
-      libevm_module._rpc_get;
+      _libevm_module._rpc_get;
   if ( typeof(
          _target_networks) == "undefined" ||
        _target_networks == [] ||

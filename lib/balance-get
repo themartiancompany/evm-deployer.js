@@ -340,9 +340,6 @@ function
   if ( typeof(
          target_network) == "number" ) {
     const
-      _msg =
-        ``;
-    const
       _libevm_module =
         require(
           "libevm");
