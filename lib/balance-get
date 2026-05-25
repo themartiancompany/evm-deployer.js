@@ -262,9 +262,20 @@ async function
   while ( _success == false &&
           _retry < _retries_max ) {
     try {
-      _balance_wei = await
-        _provider.getBalance(
-          _target_address);
+      const
+        _provider_get_balance_args = [
+          _target_address
+        ];
+      _balance_wei =
+        _run(
+          _provider.getBalance,
+          _provider_get_balance_args,
+          "_provider_get_balance",
+          _call_timeout,
+          "native");
+      // _balance_wei = await
+      //   _provider.getBalance(
+      //     _target_address);
       if ( _display_unit == "" ) {
         _display_unit =
           "ether";
