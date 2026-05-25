@@ -501,7 +501,7 @@ function
       "  <amount>            How much balance to send.",
       "",
       "  <target-network>    Name of the network to connect to.",
-      `                      Default: ${_target_network}`,
+      `                      Default: ${target_network}`,
       "",
       "  <api-key>           Path on disk of the API key for",
       "                      the network service provider.",
