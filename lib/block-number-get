@@ -289,8 +289,7 @@ async function
 function
   _overrides_set() {
   let
-    _info_get,
-    _target_network_type;
+    _info_get;
   _info_get =
     false;
   const
@@ -301,7 +300,7 @@ function
     _info_get =
       true;
   }
-  else if ( _target_network_type) == "string" ) {
+  else if ( _target_network_type == "string" ) {
     if ( target_network.startsWith(
            "https://") ) {
       _info_get =
