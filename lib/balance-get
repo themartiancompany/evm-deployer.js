@@ -367,7 +367,7 @@ function
     const
       _msg =
         `Unknown type '${_target_network_type}' ` +
-	`for network variable.`;
+        `for network variable.`;
     _msg_error(
       _msg,
       1);
