@@ -269,16 +269,17 @@ async function
     try {
       const
         _provider_get_balance_cmd = [
-          _provider.getBalance,
+          _provider,
           _target_address
         ];
       _balance_wei =
-        _run(
+        await _run(
           "sync",
           _provider_get_balance_cmd,
           "_provider_get_balance",
           _call_timeout,
-          "native");
+          "native",
+          "getBalance");
       // _balance_wei = await
       //   _provider.getBalance(
       //     _target_address);

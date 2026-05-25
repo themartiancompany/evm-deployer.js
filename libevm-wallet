@@ -381,12 +381,14 @@ async function
       "";
   }
   if ( _target_networks.length == 1 ) {
-    const
-      _commas =
-        _target_networks[0].split(",");
-    if ( 2 < _commas.length ) {
-      _target_networks =
-        _commas;
+    if ( _target_networks[0].includes(",") ) {
+      const
+        _commas =
+          _target_networks[0].split(",");
+      if ( 2 < _commas.length ) {
+        _target_networks =
+          _commas;
+      }
     }
   }
   const
