@@ -79,6 +79,8 @@
       "^6.13.2",
     "evm-chains-info":
       "^0.0.22",
+    "evm-wallet.js":
+      "^0.0.45",
     "libevm":
       "^0.0.26",
     "yargs":
@@ -89,10 +91,12 @@
   "overrides": {
     "evm-deployer":
       "^0.0.1",
-    "libevm":
-      "^0.0.26",
+    "evm-wallet.js":
+      "^0.0.45",
     "evm-chains-info":
-      "^0.0.22"
+      "^0.0.22",
+    "libevm":
+      "^0.0.26"
   },
   "type":
     "commonjs",
