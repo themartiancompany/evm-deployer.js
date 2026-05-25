@@ -381,7 +381,6 @@ async function
       "";
   }
   if ( _target_networks.length == 1 ) {
-    console.log(_target_networks);
     const
       _commas =
         _target_networks[0].split(",");
