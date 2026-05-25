@@ -238,7 +238,7 @@ async function
       _api_key);
   }
   _provider_get_opts.push(
-    _timeout);
+    _call_timeout);
   _provider =
     _provider_get.apply(
       null,
