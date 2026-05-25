@@ -2,7 +2,7 @@
   "version":
     "0.0.1",
   "description":
-    "Cryptocurrency wallet for Ethereum Virtual Machine (EVM) compatible blockchain networks written in Javascript, part of the EVM Toolchain, depending on the Ethers library.",
+    "Solidity smart contracts deployer for Ethereum Virtual Machine (EVM) compatible blockchain networks.",
   "funding": {
     "type":
       "patreon",
@@ -15,7 +15,16 @@
   "files": [
     "AUTHORS.rst",
     "COPYING",
-    "README.md"
+    "README.md",
+    "dist",
+    "lib",
+    "libevm-deployer",
+    "libevm-deployer.webpack.config.js",
+    "evm-deployer",
+    "fs-worker.webpack.config.js",
+    "package.json",
+    "serve.json",
+    "webpack.config.js"
   ],
   "keywords": [
     "ur",
@@ -24,16 +33,16 @@
     "ethereum"
   ],
   "homepage":
-    "https://github.com/themartiancompany/evm-wallet",
+    "https://github.com/themartiancompany/evm-deployer",
   "bugs": {
     "url":
-      "https://github.com/themartiancompany/evm-wallet.js/issues"
+      "https://github.com/themartiancompany/evm-deployer.js/issues"
   },
   "repository": {
     "type":
       "git",
     "url":
-      "git+https://github.com/themartiancompany/evm-wallet.js.git"
+      "git+https://github.com/themartiancompany/evm-deployer.js.git"
   },
   "license":
     "AGPL-3.0-or-later",
@@ -80,8 +89,8 @@
       "^0.0.12"
   },
   "overrides": {
-    "evm-wallet.js":
-      "^0.0.43",
+    "evm-deployer":
+      "^0.0.1",
     "libevm":
       "^0.0.26",
     "evm-chains-info":
@@ -90,21 +99,11 @@
   "type":
     "commonjs",
   "main":
-    "libevm-wallet",
+    "libevm-deployer",
   "bin":
     { 
-      "block-number":
-        "lib/block-number-get",
-      "evm-wallet":
-        "evm-wallet",
-      "evm-wallet.js":
-        "evm-wallet",
-      "eoa-fingerprint":
-        "lib/address-get",
-      "gas-balance":
-        "lib/balance-get",
-      "gas-transfer":
-        "lib/balance-send"
+      "evm-deployer":
+        "evm-deployer"
     },
   "yargs": {
     "parse-numbers":
@@ -114,11 +113,11 @@
   },
   "scripts": {
     "build-bin":
-      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details && mv 'evm-wallet.js' 'dist/evm-wallet'",
+      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details && mv 'evm-deployer.js' 'dist/evm-wallet'",
     "build-fs-worker":
-      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-wallet' && cp 'fs-worker.js' 'dist/libevm-wallet'",
+      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-deployer' && cp 'fs-worker.js' 'dist/libevm-deployer'",
     "build-lib":
-      "npx webpack --mode 'production' --config 'libevm-wallet.webpack.config.cjs' --stats-error-details && mv 'libevm-wallet.js' 'dist/libevm-wallet'",
+      "npx webpack --mode 'production' --config 'libevm-wallet.webpack.config.cjs' --stats-error-details && mv 'libevm-deployer.js' 'dist/libevm-deployer'",
     "build":
       "npm run lint && npm run build-fs-worker && npm run build-lib && npm run build-bin",
     "lint":
@@ -126,7 +125,7 @@
     "publish-pnm":
       "npm run build && npm publish --access public",
     "start":
-      "npx safely-serve 'dist/evm-wallet' --port 3000 --https --no-cache",
+      "npx safely-serve 'dist/evm-deployer' --port 3000 --https --no-cache",
     "test":
       "echo \"Error: no test specified\" && exit 1"
   }
