@@ -301,7 +301,7 @@ function
       true;
   }
   else if ( _target_network_type == "string" ) {
-    if ( target_network.startsWith(
+    if ( ! target_network.startsWith(
            "https://") ) {
       _info_get =
         true;

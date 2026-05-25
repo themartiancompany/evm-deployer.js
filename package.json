@@ -74,7 +74,7 @@
   },
   "dependencies": {
     "crash-js":
-      "^0.1.110",
+      "^0.1.111",
     "ethers":
       "^6.13.2",
     "evm-chains-info":
@@ -86,7 +86,7 @@
   },
   "optionalDependencies": {
     "erc20-tools":
-      "^0.0.11"
+      "^0.0.12"
   },
   "overrides": {
     "evm-wallet.js":
