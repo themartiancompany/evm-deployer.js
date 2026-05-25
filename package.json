@@ -115,7 +115,7 @@
   },
   "scripts": {
     "build-bin":
-      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details && mv 'evm-deployer.js' 'dist/evm-wallet'",
+      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details && mv 'evm-deployer.js' 'dist/evm-deployer'",
     "build-fs-worker":
       "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-deployer' && cp 'fs-worker.js' 'dist/libevm-deployer'",
     "build-lib":

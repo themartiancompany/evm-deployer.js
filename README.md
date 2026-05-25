@@ -1,74 +1,58 @@
-
 [comment]: <> (SPDX-License-Identifier: AGPL-3.0)
 
 [comment]: <> (----------------------------------------------------)
-[comment]: <> (Copyright © 2024, 2025, 2026  Pellegrino Prevete)
+[comment]: <> (Copyright © 2024, 2025, 2026)
+[comment]: <> (            Pellegrino Prevete)
 [comment]: <> (All rights reserved)
 [comment]: <> (----------------------------------------------------)
 
 [comment]: <> (This program is free software: you can redistribute)
-[comment]: <> (it and/or modify it under the terms of the GNU Affero)
-[comment]: <> (General Public License as published by the Free)
-[comment]: <> (Software Foundation, either version 3 of the License.)
+[comment]: <> (it and/or modify it under the terms of the)
+[comment]: <> (GNU Affero General Public License as published)
+[comment]: <> (by the Free Software Foundation, either version)
+[comment]: <> (3 of the License.)
 
-[comment]: <> (This program is distributed in the hope that it will be)
-[comment]: <> (useful, but WITHOUT ANY WARRANTY; without even the)
-[comment]: <> (implied warranty of MERCHANTABILITY or FITNESS FOR A)
-[comment]: <> (PARTICULAR PURPOSE.)
+[comment]: <> (This program is distributed in the hope that it)
+[comment]: <> (will be useful, but WITHOUT ANY WARRANTY;)
+[comment]: <> (without even the implied warranty of)
+[comment]: <> (MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.)
+[comment]: <> (See the GNU Affero General Public License)
+[comment]: <> (for more details.)
 
-[comment]: <> (See the GNU Affero General Public License for more)
-[comment]: <> (details. You should have received a copy of the GNU)
-[comment]: <> (Affero License along with this program.)
+[comment]: <> (You should have received a copy of the)
+[comment]: <> (GNU Affero General Public License)
+[comment]: <> (with this program.)
 [comment]: <> (If not, see <https://www.gnu.org/licenses/>.)
-[comment]: <> (SPDX-License-Identifier: AGPL-3.0)
 
-# EVM Wallet (`evm-wallet.js`)
+# EVM Deployer (`evm-deployer.js`)
 
-Cryptocurrency wallet for Ethereum Virtual Machine (EVM) compatible
-blockchain networks written in Javascript based on the
-[Ethers](
-  https://github.com/ethers-io/ethers.js) library and part of the
-EVM Toolchain.
+Javascript smart contracts deployer for Ethereum
+Virtual Machine (EVM) compatible blockchain networks.
 
-It depends on
+```bash
+man \
+  evm-deployer
+```
+
+It tightly integrates with
+[EVM Wallet](
+  https://github.com/themartiancompany/evm-wallet),
+and uses
+[Solidity compiler](
+  https://github.com/themartiancompany/solidity-compiler)
+to compile contracts,
 [EVM Chains Info](
   https://github.com/themartiancompany/evm-chains-info)
-and
-[EVM Chains Explorers](
-  https://github.com/themartiancompany/evm-chains-explorers)
-in order to automatically retrieve informations about
-blockchain networks, on
-[key-gen](
-  https://github.com/themartiancompany/key-gen),
-for which it is at the same time a seed-phrase provider,
-to generate secrets,
-and on the
-[Crash Bash](
-  https://github.com/themartiancompany/crash-bash)
-and
-[Crash JavaScript](
-  https://github.com/themartiancompany/crash-js)
-run-time libraries.
+to retrieve informations about the blockchain networks and
+[Ethers](
+  https://github.com/ethers-io/ethers)
+to deploy contracts.
 
-It is a dependency for the
-[EVM Contracts Tools](
-  https://github.com/themartiancompany/evm-contracts-tools),
-[libEVM](
-  https://github.com/themartiancompany/libevm),
-and so all the programs depending on it, such as the
-[EVM OpenPGP KeyServer](
-  https://github.com/themartiancompany/evm-openpgp-keyserver),
-the
-[Ethereum Virtual Machine File System](
-  https://github.com/themartiancompany/evmfs)
-and the uncensorable
-[Ur](
-  https://github.com/themartiancompany/ur)
-Life and DogeOS user repository and application store. 
+This program is part of the EVM Toolchain.
 
 ## Installation
 
-The wallet in this source repo
+The program in this source repo
 can be installed from source using GNU Make.
 
 ```bash
@@ -81,7 +65,7 @@ the uncensorable
 [Ur](
   https://github.com/themartiancompany/ur)
 user repository and application store as
-`evm-wallet`.
+`evm-deployer`.
 The source code is published on the
 [Ethereum Virtual Machine File System](
   https://github.com/themartiancompany/evmfs)
@@ -91,51 +75,15 @@ To install it from there just type
 
 ```bash
 ur \
-  evm-wallet
+  evm-deployer
 ```
 
 A censorable HTTP Github mirror of the recipe published there,
 containing a full list of the software dependencies needed to run the
-tools is hosted on
-[evm-wallet-ur](
-  https://github.com/themartiancompany/evm-wallet-ur).
-
-
-
-A censorable binary build for the GNU and Android bases of
-Life and
-[DogeOS](
-  https://github.com/themartiancompany/dogeos),
-also compatible with the Arch Linux distribution,
-the Termux pacman-based environment and Windows
-can be found on the
-[Fur](
-  https://github.com/themartiancompany/fur)
-and it can be installed by typing
-
-```bash
-fur \
-  evm-wallet
-```
-
-Direct links to the binary package can be directly accessed
-through
-[Github](
-https://github.com/themartiancompany/fur/tree/evm-wallet)
-in many ways.
-Check the Fur documentation for more information.
-
-The package has also been published
-on the NPM Registry as `evm-wallet.js`
-and so it can be installed from there by typing
-
-```bash
-npm \
-  install \
-    "evm-wallet.js"
-```
-
-Be aware the mirrors could go offline any time as Github or NPM and more
+program is hosted on
+[evm-deployer-ur](
+  https://github.com/themartiancompany/evm-deployer-ur).
+Be aware the mirror could go offline any time as Github and more
 in general all HTTP resources are inherently unstable and censorable.
 
 ## License
