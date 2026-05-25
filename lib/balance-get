@@ -91,6 +91,11 @@ const
   _process_exit =
     _libcrash._process_exit;
 /* global
+     _run */
+const
+  _run =
+    _libcrash._run;
+/* global
      _sleep */
 const
   _sleep =
