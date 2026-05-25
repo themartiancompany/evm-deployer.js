@@ -338,6 +338,13 @@ async function
 function
   _overrides_set() {
   if ( typeof(
+         target_network) == "number" ) {
+    target_network =
+      _rpc_get(
+        [ _target_network ][
+        target_network);
+  }
+  if ( typeof(
          display_unit) == "undefined" ||
        display_unit == "" ) {
     display_unit =
