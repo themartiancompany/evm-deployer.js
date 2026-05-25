@@ -208,6 +208,8 @@ async function
     _balance_get_args,
     _life,
     _network;
+  _balance =
+    {};
   for ( _network of _target_networks ) {
     const
       _balance_dir =
@@ -239,7 +241,8 @@ async function
     }
     if ( ! _file_exists(
              _balance_file) ) {
-      _balance =
+      _balance[
+        _network] =
         await _balance_get.apply(
           null,
           _balance_get_args);
@@ -260,7 +263,8 @@ async function
             _balance_get_args);
       }
       else {
-        _balance =
+        _balance[
+          _network] =
           _cat(
             _balance_file);
       }
