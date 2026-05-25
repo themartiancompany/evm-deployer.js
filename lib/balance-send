@@ -176,6 +176,11 @@ function
   measure_unit =
     "";
   /* global
+       call_timeout:
+         writable */
+  call_timeout =
+    "";
+  /* global
        quiet:
          writable */
   quiet =
@@ -223,6 +228,7 @@ async function
     _target_network,
     _api_key_path,
     _measure_unit,
+    _call_timeout,
     _verbose) {
   let
     _amount,
@@ -231,9 +237,12 @@ async function
     _msg,
     _provider_get_opts,
     _send_opts;
-  const
+  if ( typeof(
+         _call_timeout) === "undefined"  ||
+         _call_timeout == "" ) {
     _call_timeout =
       300000;
+  }
   if ( typeof(
          _measure_unit) === "undefined"  ||
          _measure_unit == "" ) {
@@ -366,8 +375,15 @@ async function
 
 function
   _overrides_set() {
-  if ( measure_unit == "" ) {
+  if ( typeof(
+         measure_unit) == "undefined" ||
+       measure_unit == "" ) {
     measure_unit = "ether";
+  }
+  if ( typeof(
+         call_timeout) == "undefined" ||
+       call_timeout == "" ) {
+    call_timeout = "ether";
   }
 }
 
@@ -415,6 +431,7 @@ function
       "    (<target-network>)",
       "    (<api-key>)",
       "    (<measure-unit>)",
+      "    (<call-timeout>)",
       "",
       "Args:",
       "",
@@ -433,6 +450,9 @@ function
       "",
       "  <measure-unit>      Can be 'wei' or 'ether'.",
       `                      Default: ${measure_unit}`,
+      "",
+      "  <call-timeout>      Timeout before declaring the call failed.",
+      `                      Default: ${call_timeout}`,
     ];
   for ( _line of _text ) {
     console.log(
@@ -477,6 +497,10 @@ function _cmdline_parse() {
       }
       if ( _index == 8 ) {
         measure_unit =
+        _value;
+      }
+      if ( _index == 9 ) {
+        call_timeout =
         _value;
       }
       if ( _value == "-h" ||
@@ -562,7 +586,8 @@ if ( _cmdline_check(
     target_amount,
     target_network,
     api_key,
-    measure_unit
+    measure_unit,
+    call_timeout
   ];
   _balance_send_cmdline.apply(
     null,

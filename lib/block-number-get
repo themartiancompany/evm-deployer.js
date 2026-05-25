@@ -371,7 +371,7 @@ function
       `                      Default: ${retries_max}`,
       "",
       "  <call-timeout>      Timeout before declaring the call failed.",
-      `                      Default: ${call-timeout}`,
+      `                      Default: ${call_timeout}`,
   ];
   for ( _line of _text ) {
     console.log(
@@ -464,18 +464,18 @@ async function
 
 
 if ( _cmdline_check(
-       "block-number-get") ) {
+       "block-number-get") ||
+     _cmdline_check(
+       "block-number") ) {
   _global_variables();
   _cmdline_parse();
   _config_show();
   app_opts = [
-    wallet_seed,
     target_network,
     api_key,
-    target_address,
-    display_unit,
     output_file,
-    retries_max
+    retries_max,
+    call_timeout
   ];
   _block_number_get_cmdline(
     app_opts);
