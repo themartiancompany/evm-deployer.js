@@ -198,7 +198,8 @@ async function
     _rpc,
     _api_key,
     _measure_unit,
-    _retries_max) {
+    _retries_max,
+    _balance_lifespan) {
   let
     _balance;
   const
@@ -380,7 +381,8 @@ async function
           _rpc,
           _api_key,
           _measure_unit,
-          _retries_max
+          _retries_max,
+          _balance_lifespan
         ];
       const
         _balance =
