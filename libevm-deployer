@@ -84,6 +84,81 @@ const
   _evm_chains_info =
     _evm_chains_info_module._evm_chains_info;
 const
+  _evm_wallet_module =
+    require(
+      "evm-wallet.js");
+/* global
+     _address_get */
+const
+  _address_get =
+    _evm_wallet_module._address_get;
+/* global
+     _balance_check */
+const
+  _balance_check =
+    _evm_wallet_module._balance_check;
+/* global
+     _msg_error_balance_insufficient */
+const
+  _msg_error_balance_insufficient =
+    _evm_wallet_module._msg_error_balance_insufficient;
+/* global
+     _balance_get */
+const
+  _balance_get =
+    _evm_wallet_module._balance_get;
+/* global
+     _balance_send */
+const
+  _balance_send =
+    _evm_wallet_module._balance_send;
+/* global
+     _block_number_get_get */
+const
+  _block_number_get =
+    _evm_wallet_module._block_number_get;
+/* global
+     _ethers_to_wei */
+const
+  _ethers_to_wei =
+    _evm_wallet_module._ethers_to_wei;
+/* global
+     _provider_get */
+const
+  _provider_get =
+    _evm_wallet_module._provider_get;
+/* global
+     _msg_info_provider_generated */
+const
+  _msg_info_provider_generated =
+    _evm_wallet_module._msg_info_provider_generated;
+/* global
+     _price_gas_get */
+const
+  _price_gas_get =
+    _evm_wallet_module._price_gas_get;
+/* global
+     _price_gas_transaction_get */
+const
+  _price_gas_transaction_get =
+    _evm_wallet_module._price_gas_transaction_get;
+/* global
+     _seed_new */
+const
+  _seed_new =
+    _evm_wallet_module._seed_new;
+/* global
+     _wallet_get */
+const
+  _wallet_get =
+    _evm_wallet_module._wallet_get;
+/* global
+     _wallet_new */
+const
+  _wallet_new =
+    _evm_wallet_module._wallet_new;
+
+const
   _deployer_module =
     require(
       "./lib/deployer");
@@ -92,453 +167,6 @@ const
 const
   _evm_deployer =
     _evm_deployer_module._evm_deployer;
-const
-  _address_get_module =
-    require(
-      "./lib/deployer");
-/* global
-     _address_get */
-const
-  _address_get =
-    _address_get_module._address_get;
-const
-  _balance_check_module =
-    require(
-      "./lib/balance-check");
-/* global
-     _balance_check */
-const
-  _balance_check =
-    _balance_check_module._balance_check;
-/* global
-     _msg_error_balance_insufficient */
-const
-  _msg_error_balance_insufficient =
-    _balance_check_module._msg_error_balance_insufficient;
-const
-  _balance_get_module =
-    require(
-      "./lib/balance-get");
-/* global
-     _balance_get */
-const
-  _balance_get =
-    _balance_get_module._balance_get;
-const
-  _balance_send_module =
-    require(
-      "./lib/balance-send");
-/* global
-     _balance_send */
-const
-  _balance_send =
-    _balance_send_module._balance_send;
-const
-  _block_number_get_module =
-    require(
-      "./lib/block-number-get");
-/* global
-     _block_number_get_get */
-const
-  _block_number_get =
-    _block_number_get_module._block_number_get;
-const
-  _ethers_to_wei_module =
-    require(
-      "./lib/ethers-to-wei");
-/* global
-     _ethers_to_wei */
-const
-  _ethers_to_wei =
-    _ethers_to_wei_module._ethers_to_wei;
-const
-  _network_provider_module =
-    require(
-      "./lib/network-provider");
-/* global
-     _provider_get */
-const
-  _provider_get =
-    _network_provider_module._provider_get;
-/* global
-     _msg_info_provider_generated */
-const
-  _msg_info_provider_generated =
-    _network_provider_module._msg_info_provider_generated;
-const
-  _price_gas_get_module =
-    require(
-      "./lib/price-gas-get");
-/* global
-     _price_gas_get */
-const
-  _price_gas_get =
-    _price_gas_get_module._price_gas_get;
-const
-  _price_gas_transaction_get_module =
-    require(
-      "./lib/price-gas-transaction-get");
-/* global
-     _price_gas_transaction_get */
-const
-  _price_gas_transaction_get =
-    _price_gas_transaction_get_module._price_gas_transaction_get;
-const
-  _seed_new_module =
-    require(
-      "./lib/seed-new");
-/* global
-     _seed_new */
-const
-  _seed_new =
-    _seed_new_module._seed_new;
-const
-  _wallet_get_module =
-    require(
-      "./lib/wallet-get");
-/* global
-     _wallet_get */
-const
-  _wallet_get =
-    _wallet_get_module._wallet_get;
-const
-  _wallet_new_module =
-    require(
-      "./lib/wallet-new");
-/* global
-     _wallet_new */
-const
-  _wallet_new =
-    _wallet_new_module._wallet_new;
-
-async function
-  _balance_update(
-    _cache_dir,
-    _wallet_name,
-    _wallet_seed,
-    _target_networks,
-    _rpc,
-    _api_key,
-    _measure_unit,
-    _retries_max,
-    _balance_lifespan,
-    _call_timeout) {
-  let
-    _balance_dir,
-    _balance_file,
-    _balance_file_modified,
-    _balance_get_args,
-    _life,
-    _network;
-  const
-    _balance =
-      {};
-  for ( _network of _target_networks ) {
-    const
-      _balance_dir =
-        _path_join( [
-          _cache_dir,
-          _wallet_name,
-          _network.toString() ]);
-    const
-      _balance_file =
-        _path_join( [
-          _balance_dir,
-          "balance"]);
-    const
-      _balance_get_args = [
-        _wallet_seed,
-        _rpc[
-          _network],
-        _api_key,
-        "",                  // Target address, using seed
-        _measure_unit,
-        _balance_file,
-        _retries_max,
-        _call_timeout
-      ];
-    if ( ! _file_exists(
-             _balance_dir) ) {
-      _mkdir(
-        _balance_dir,
-        { "recursive":
-            true });
-    }
-    if ( ! _file_exists(
-             _balance_file) ) {
-      _balance[
-        _network] =
-        await _balance_get.apply(
-          null,
-          _balance_get_args);
-    }
-    else {
-      const
-        _balance_file_modified =
-          _stat(
-            _balance_file).mtimeMs;
-      const
-        _life =
-          Date.now() -
-          _balance_file_modified;
-      if ( _balance_lifespan < _life ) {
-        _balance[
-          _network] =
-          await _balance_get.apply(
-            null,
-            _balance_get_args);
-      }
-      else {
-        _balance[
-          _network] =
-          _cat(
-            _balance_file);
-      }
-    }
-  }
-  return _balance;
-}
-
-async function
-  _evm_wallet(
-    _target_command,
-    _wallet_name,
-    _wallet_path,
-    _wallet_password,
-    _wallet_seed,
-    _key_fingerprint,
-    _config_dir,
-    _cache_dir,
-    _networks_all,
-    _rpc_selection,
-    _api_key,
-    _retries_max,
-    _tasks_parallel,
-    _call_timeout,
-    _measure_unit,
-    _balance_lifespan,
-    _currency_type,
-    _currency_address,
-    _output_type,
-    _target_key,
-    _target_value,
-    _target_networks) {
-  let
-    _msg,
-    _network,
-    _target_network,
-    _tx,
-    _receipt;
-  const
-    _libevm_module =
-      require(
-        "libevm");
-  const
-    _rpc_get =
-      _libevm_module._rpc_get;
-  if ( typeof(
-         _target_networks) == "undefined" ||
-       _target_networks == [] ||
-       _target_networks == "" ) {
-    _target_networks =
-      [];
-  }
-  if ( 0 < _target_networks.length ) {
-    _target_network =
-      _target_networks[
-        0];
-    if ( typeof(
-           _target_network) == "object" ) {
-      _target_networks =
-        _target_network;
-    }
-  }
-  else {
-    _target_network =
-      "";
-  }
-  if ( _target_networks.length == 1 ) {
-    if ( typeof(
-           _target_networks[0]) == "string" ) {
-      if ( _target_networks[0].includes(",") ) {
-        const
-          _commas =
-            _target_networks[0].split(",");
-        if ( 2 < _commas.length ) {
-          _target_networks =
-            _commas;
-        }
-      }
-    }
-  }
-  const
-    _rpc =
-      _rpc_get(
-        _target_networks);
-  _msg =
-    `Using RPC address:`;
-  _msg_info(
-    _msg);
-  if ( quiet == "n" ) {
-    console.log(
-      _rpc);
-  }
-  if ( _target_command == "gas" ) {
-    const
-      _price_gas_get_args = [
-        _rpc[
-          _target_network],
-        _api_key,
-        _measure_unit,
-        "",            // seed
-        "",            // target address
-        "",            // output file
-        _retries_max
-      ];
-    const
-      _price_gas =
-        await _price_gas_get.apply(
-          null,
-          _price_gas_get_args);
-    return _price_gas;
-  }
-  else if ( _target_command == "get" ) {
-    if ( _target_key == "balance" ) {
-      const
-        _balance_update_args = [
-          _cache_dir,
-          _wallet_name,
-          _wallet_seed,
-          _target_networks,
-          _rpc,
-          _api_key,
-          _measure_unit,
-          _retries_max,
-          _balance_lifespan,
-          _call_timeout
-        ];
-      const
-        _balance =
-          await _balance_update.apply(
-            null,
-            _balance_update_args);
-      return _balance;
-    }
-    else if ( _target_key == "address" ) {
-      const
-        _address_get_args = [
-          _wallet_seed,
-          "",                 // Network
-          "",                 // API Key
-          "",                 // Chain ID
-          "",                 // Chain name
-          ""                  // Output file
-        ];
-      const
-        _wallet_address =
-          _address_get.apply(
-            null,
-            _address_get_args);
-      return _wallet_address;
-    }
-    else {
-      _msg =
-        `Unknown key '${_target_key}'.`;
-      _msg_info(
-        _msg);
-    }
-  }
-  else if ( _target_command == "send" ) {
-    const
-      _target_address =
-        _target_key;
-    const
-      _target_amount =
-        _target_value;
-    if ( _currency_type == "gas" ) {
-      const
-        _balance_send_args = [
-          _wallet_seed,
-          _target_address,
-          _target_amount,
-          _rpc[
-            _target_network],
-          _api_key,
-          _measure_unit
-        ];
-      [ _tx,
-        _receipt ] =
-        await _balance_send.apply(
-          null,
-          _balance_send_args);
-      return [ _tx,
-               _receipt ];
-    }
-    else if ( _currency_type == "erc20" ) {
-      try {
-        const
-          _erc20_tools_module =
-            require(
-              "erc20-tools");
-        const
-          _token_send =
-            _erc20_tools_module._token_send;
-        const
-          _token_send_args = [
-            _retries_max,
-            _call_timeout,
-            _wallet_seed,
-            _api_key,
-            _rpc,                          // NOTE: data filled-in
-            _currency_address,             // by 'token-send':
-            "",                            //   erc20 abi
-            "",                            //   erc20 bytecode
-            "",                            //   erc20 hardhat artifact
-            _measure_unit,
-            "",                            // output path
-            _target_address,
-            _target_amount
-          ];
-        _msg =
-          `Running '_token_send' with ` +
-          `arguments '${_token_send_args}'.`;
-        _msg_info(
-          _msg);
-        const
-          _token_sent =
-            await _token_send.apply(
-              null,
-              _token_send_args);
-        return _token_sent;
-      }
-      catch(
-        _error) {
-        _msg =
-          "Install ERC-20 Tools ('ur erc20-tools')";
-        _msg_error(
-          _msg,
-          1);
-      }
-    }
-    else {
-      _msg =
-        `Unknown currency type '${_currency_type}'.`;
-      _msg_error(
-        _msg,
-        1);
-    }
-  }
-  else if ( _target_command == "run" ) {
-    true;
-  }
-  else {
-    _msg =
-      `Unknown command '${_target_command}'.`;
-    _msg_error(
-      _msg,
-      1);
-  }
-}
 
 module.exports = {
   _evm_deployer:
