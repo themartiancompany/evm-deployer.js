@@ -326,7 +326,7 @@ function
         _libevm_module._rpc_get;
     target_network =
       _rpc_get(
-        [ _target_network ][
+        [ target_network ][
         target_network]);
   }
   if ( typeof(
