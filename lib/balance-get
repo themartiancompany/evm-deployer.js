@@ -557,14 +557,16 @@ async function
       _balance.toString());
     // process.stdout.write(
     //   _balance.toString());
+    _process_exit(
+      0);
   }
   catch(
     _error) {
     _msg_error(
       _error,
       1);
-    process.exit(
-      1);
+    _process.exit(
+      0);
   }
 }
 

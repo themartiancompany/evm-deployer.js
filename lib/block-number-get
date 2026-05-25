@@ -470,13 +470,15 @@ async function
       _block_number.toString());
     // process.stdout.write(
     //   _block_number.toString());
+    _process_exit(
+      0);
   }
   catch(
     _error) {
     _msg_error(
       _error,
       1);
-    process.exit(
+    _process_exit(
       1);
   }
 }
