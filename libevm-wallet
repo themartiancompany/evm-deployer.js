@@ -202,6 +202,7 @@ async function
     _balance_lifespan) {
   let
     _balance;
+  for ( _network of _target_networks ) {
   const
     _balance_dir =
       _path_join( [
@@ -261,6 +262,55 @@ async function
   return _balance;
 }
 
+// will become async at some point
+function
+  _rpc_get(
+    _target_networks) {
+  for ( _network of _target_networks ) {
+    if ( typeof(
+           _network) == "string" ) {
+      if ( _network.startsWith(
+             "https://") ) {
+        _rpc[
+          _network] =
+          _network;
+        _info_retrieve =
+          "n";
+      }
+      else {
+        _info_retrieve =
+          "y";
+      }
+    }
+    else if ( typeof(
+                _network) == "number" ) {
+      _info_retrieve =
+        "y";
+    }
+    if ( _info_retrieve == "y" ) {
+      _evm_chains_info_args = [
+        "get",            // command
+        "id",             // input type 
+        "rpc",            // output type
+        "offline",        // retrieval method
+        [ "node",         // db types
+          "system" ],
+        "kirsh",          // selection method
+        "",               // api key
+        "n",              // all networks
+        _network,
+        []                // db paths
+      ];
+      _rpc[
+        _network] =
+        _evm_chains_info.apply(
+          null,
+          _evm_chains_info_args)[
+            0];
+    }
+  }
+}
+
 async function
   _evm_wallet(
     _target_command,
@@ -289,6 +339,7 @@ async function
     _evm_chains_info_args,
     _info_retrieve,
     _msg,
+    _network,
     _rpc,
     _target_network,
     _tx,
@@ -311,48 +362,9 @@ async function
     _target_network =
       "";
   }
-  for ( _network of _target_networks ) {
-    if ( typeof(
-           _target_network) == "string" ) {
-      if ( _target_network.startsWith(
-             "https://") ) {
-        _rpc[
-          _target_network] =
-          _target_network;
-        _info_retrieve =
-          "n";
-      }
-      else {
-        _info_retrieve =
-          "y";
-      }
-    }
-    else if ( typeof(
-                _target_network) == "number" ) {
-      _info_retrieve =
-        "y";
-    }
-    if ( _info_retrieve == "y" ) {
-      _evm_chains_info_args = [
-        "get",            // command
-        "id",             // input type 
-        "rpc",            // output type
-        "offline",        // retrieval method
-        [ "node",         // db types
-          "system" ],
-        "kirsh",          // selection method
-        "",               // api key
-        "n",              // all networks
-        _target_network,
-        []                // db paths
-      ];
-      _rpc[_network] =
-        _evm_chains_info.apply(
-          null,
-          _evm_chains_info_args)[
-            0];
-    }
-  }
+  _rpc =
+    _rpc_get(
+      _target_networks);
   _msg =
     `Using RPC address '${_rpc}'.`;
   _msg_info(
