@@ -31,6 +31,10 @@
 /* eslint-disable
      no-unused-vars */
 
+/* Crash Javascript global variables */
+/* global
+     quiet */
+
 const
   _crash_js_module =
     require(
@@ -293,6 +297,7 @@ function
   let
     _evm_chains_info_args,
     _info_retrieve,
+    _msg,
     _network,
     _network_type;
   const
