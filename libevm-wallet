@@ -194,7 +194,7 @@ async function
     _cache_dir,
     _wallet_name,
     _wallet_seed,
-    _target_network,
+    _target_networks,
     _rpc,
     _api_key,
     _measure_unit,
@@ -286,12 +286,15 @@ async function
     _target_value,
     _target_networks) {
   let
+    _evm_chains_info_args,
     _info_retrieve,
     _msg,
     _rpc,
     _target_network,
     _tx,
     _receipt;
+  _rpc =
+    {};
   if ( typeof(
          _target_networks) == "undefined" ||
        _target_networks == [] ||
@@ -308,27 +311,28 @@ async function
     _target_network =
       "";
   }
-  if ( typeof(
-         _target_network) == "string" ) {
-    if ( _target_network.startsWith(
-           "https://") ) {
-      _rpc =
-        _target_network;
-      _info_retrieve =
-        "n";
+  for ( _network of _target_networks ) {
+    if ( typeof(
+           _target_network) == "string" ) {
+      if ( _target_network.startsWith(
+             "https://") ) {
+        _rpc[
+          _target_network] =
+          _target_network;
+        _info_retrieve =
+          "n";
+      }
+      else {
+        _info_retrieve =
+          "y";
+      }
     }
-    else {
+    else if ( typeof(
+                _target_network) == "number" ) {
       _info_retrieve =
         "y";
     }
-  }
-  if ( typeof(
-         _target_network) == "number" ) {
-    _info_retrieve =
-      "y";
-  }
-  if ( _info_retrieve == "y" ) {
-    const
+    if ( _info_retrieve == "y" ) {
       _evm_chains_info_args = [
         "get",            // command
         "id",             // input type 
@@ -342,11 +346,12 @@ async function
         _target_network,
         []                // db paths
       ];
-    _rpc =
-      _evm_chains_info.apply(
-        null,
-        _evm_chains_info_args)[
-        0];
+      _rpc[_network] =
+        _evm_chains_info.apply(
+          null,
+          _evm_chains_info_args)[
+            0];
+    }
   }
   _msg =
     `Using RPC address '${_rpc}'.`;
@@ -355,7 +360,8 @@ async function
   if ( _target_command == "gas" ) {
     const
       _price_gas_get_args = [
-        _rpc,
+        _rpc[
+          _target_network],
         _api_key,
         _measure_unit,
         "",            // seed
@@ -377,8 +383,9 @@ async function
           _cache_dir,
           _wallet_name,
           _wallet_seed,
-          _target_network,
-          _rpc,
+          _target_networks,
+          _rpc[
+            _target_network],
           _api_key,
           _measure_unit,
           _retries_max,
@@ -428,10 +435,11 @@ async function
           _wallet_seed,
           _target_address,
           _target_amount,
-          _rpc,
+          _rpc[
+            _target_network],
           _api_key,
           _measure_unit
-	];
+        ];
       [ _tx,
         _receipt ] =
         await _balance_send.apply(
@@ -469,7 +477,7 @@ async function
           `Running '_token_send' with ` +
           `arguments '${_token_send_args}'.`;
         _msg_info(
-	  _msg);
+          _msg);
         const
           _token_sent =
             await _token_send.apply(
