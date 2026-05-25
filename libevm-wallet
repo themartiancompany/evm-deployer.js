@@ -241,6 +241,7 @@ async function
     }
     if ( ! _file_exists(
              _balance_file) ) {
+      console.log(_network);
       _balance[
         _network] =
         await _balance_get.apply(
@@ -280,13 +281,16 @@ function
   let
     _evm_chains_info_args,
     _info_retrieve,
-    _network;
+    _network,
+    _network_type;
   const
     _rpc =
       {};
   for ( _network of _target_networks ) {
-    if ( typeof(
-           _network) == "string" ) {
+    _network_type =
+      typeof(
+        _network);
+    if ( _network_type == "string" ) {
       if ( _network.startsWith(
              "https://") ) {
         _rpc[
@@ -300,10 +304,17 @@ function
           "y";
       }
     }
-    else if ( typeof(
-                _network) == "number" ) {
+    else if ( _network_type == "number" ) {
       _info_retrieve =
         "y";
+    }
+    else {
+      _msg =
+        `Unknown type '${_network_type}' ` +
+        `for network variable.`;
+      _msg_error(
+        _msg,
+        1);
     }
     if ( _info_retrieve == "y" ) {
       _evm_chains_info_args = [
@@ -395,14 +406,20 @@ async function
       }
     }
   }
+  console.log(
+    _target_networks);
   const
     _rpc =
       _rpc_get(
         _target_networks);
   _msg =
-    `Using RPC address '${_rpc}'.`;
+    `Using RPC address:`;
   _msg_info(
     _msg);
+  if ( quiet == "n" ) {
+    console.log(
+      _rpc);
+  }
   if ( _target_command == "gas" ) {
     const
       _price_gas_get_args = [

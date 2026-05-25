@@ -190,6 +190,7 @@ async function
     _retry,
     _request,
     _success,
+    _time_over,
     _wallet_dir,
     _wallet_password,
     _wallet_path_list;
@@ -267,22 +268,36 @@ async function
   while ( _success == false &&
           _retry < _retries_max ) {
     try {
+      _time_over =
+        false;
       const
         _provider_get_balance_cmd = [
           _provider,
           _target_address
         ];
+      // TODO:
+      //   to ask why this doesnt work
+      // _balance_wei =
+      //   await _run(
+      //     "sync",
+      //     _provider_get_balance_cmd,
+      //     "_provider_get_balance",
+      //     _call_timeout,
+      //     "native",
+      //     "getBalance");
       _balance_wei =
-        await _run(
-          "sync",
-          _provider_get_balance_cmd,
-          "_provider_get_balance",
-          _call_timeout,
-          "native",
-          "getBalance");
-      // _balance_wei = await
-      //   _provider.getBalance(
-      //     _target_address);
+        _provider.getBalance(
+          _target_address);
+      const
+        _exit_timeout =
+          () => {
+          _time_over =
+            true;
+        };
+      setTimeout(
+        _exit_timeout,
+        _timeout);
+      await _balance_wei;
       if ( _display_unit == "" ) {
         _display_unit =
           "ether";
