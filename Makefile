@@ -111,6 +111,9 @@ build-man:
 	  "man/variables.rst" \
 	  "build/man"; \
 	cp \
+	  "man/gas-transfer.1.rst" \
+	  "build/man"; \
+	cp \
 	  "man/$(_PROJECT).1.rst" \
 	  "build/man"; \
 	_tag="$$( \
@@ -130,6 +133,9 @@ build-man:
 	  sed \
 	    "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
 	    "build/man/$(_PROJECT_NPM).1.rst"; \
+	rst2man \
+	  "build/man/gas-transfer.1.rst" \
+	  "build/man/gas-transfer.1"; \
 	rst2man \
 	  "build/man/$(_PROJECT_NPM).1.rst" \
 	  "build/man/$(_PROJECT_NPM).1"; \
