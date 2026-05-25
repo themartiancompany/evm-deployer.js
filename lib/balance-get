@@ -268,14 +268,14 @@ async function
           _retry < _retries_max ) {
     try {
       const
-        _provider_get_balance_args = [
+        _provider_get_balance_cmd = [
+          _provider.getBalance,
           _target_address
         ];
       _balance_wei =
         _run(
           "sync",
-          _provider.getBalance,
-          _provider_get_balance_args,
+          _provider_get_balance_cmd,
           "_provider_get_balance",
           _call_timeout,
           "native");
