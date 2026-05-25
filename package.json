@@ -1,6 +1,6 @@
-{ "name": "evm-wallet.js",
+{ "name": "evm-deployer",
   "version":
-    "0.0.45",
+    "0.0.1",
   "description":
     "Cryptocurrency wallet for Ethereum Virtual Machine (EVM) compatible blockchain networks written in Javascript, part of the EVM Toolchain, depending on the Ethers library.",
   "funding": {
@@ -15,16 +15,7 @@
   "files": [
     "AUTHORS.rst",
     "COPYING",
-    "README.md",
-    "dist",
-    "lib",
-    "libevm-wallet",
-    "libevm-wallet.webpack.config.js",
-    "evm-wallet",
-    "fs-worker.webpack.config.js",
-    "package.json",
-    "serve.json",
-    "webpack.config.js"
+    "README.md"
   ],
   "keywords": [
     "ur",

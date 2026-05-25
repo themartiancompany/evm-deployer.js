@@ -26,8 +26,8 @@
 
 SHELL=bash
 PREFIX ?= /usr/local
-_PROJECT=evm-wallet
-_PROJECT_NPM=$(_PROJECT).js
+_PROJECT_NPM=evm-deployer
+_PROJECT=$(_PROJECT_NPM).js
 _NAMESPACE=themartiancompany
 DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
 USR_DIR=$(DESTDIR)$(PREFIX)
@@ -57,12 +57,11 @@ NPM_FILES=\
   "COPYING" \
   "AUTHORS.rst" \
   "dist" \
-  "lib" \
-  "lib$(_PROJECT)" \
-  "lib$(_PROJECT).webpack.config.cjs" \
-  "$(_PROJECT)" \
+  "evm-chains-info" \
   "eslint.config.mjs" \
   "fs-worker.webpack.config.cjs" \
+  "libevm-chains-info" \
+  "libevm-chains-info.webpack.config.cjs" \
   "package.json" \
   "webpack.config.cjs"
 
@@ -74,27 +73,19 @@ eslint:
 
 	npm \
 	  install \
-	  --save-dev; \
+	  --save-dev \
+	  "."; \
 	npx \
 	  eslint \
 	    "."
 
-install: install-scripts install-doc install-examples install-man
+clean:
 
-install-scripts:
-
-	$(_INSTALL_DIR) \
-	  "$(LIB_DIR)/node"
-	for _file in $(NPM_FILES); do
-	  $(_INSTALL_FILE) \
-	    "$${_file}" \
-	    "$(LIB_DIR)/node/$${_file}"; \
-	done
-	# ln \
-	#   -s \
-	#   "$(PREFIX)/lib/$(_PROJECT_NPM)/node/lib$(_PROJECT_NPM)" \
-	#   "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
-	# true
+	cd \
+	  "build"; \
+	rm \
+	  -rf \
+	  "node_modules"
 
 build-man:
 
@@ -108,42 +99,37 @@ build-man:
 	  -p \
 	  "build/man"; \
 	cp \
+	  -v \
 	  "man/variables.rst" \
 	  "build/man"; \
-	cp \
-	  "man/gas-transfer.1.rst" \
+	ls \
+	  -lsh \
 	  "build/man"; \
-	cp \
-	  "man/$(_PROJECT).1.rst" \
-	  "build/man"; \
-	_tag="$$( \
-	  git \
-	    tag | \
-	    sort \
-	      -V | \
-              head \
-	        -n \
-	          1)"; \
+	cat \
+	  "man/$(_PROJECT_NPM).1.rst" | \
+	  sed \
+	    "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
+	    "build/man/$(_PROJECT).1.rst"; \
+	_version="$$( \
+	  npm \
+	    view \
+	      "$${PWD}" \
+	      "version")"; \
+	sed \
+	  "s/insert.version.here/$${_version}/" \
+	  -i \
+	  "build/man/variables.rst"; \
 	sed \
 	  "s/insert.version.here/$${_tag}/" \
 	  -i \
 	  "build/man/variables.rst"; \
-	cat \
-	  "man/$(_PROJECT).1.rst" | \
-	  sed \
-	    "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
-	    "build/man/$(_PROJECT_NPM).1.rst"; \
 	rst2man \
-	  "build/man/gas-transfer.1.rst" \
-	  "build/man/gas-transfer.1"; \
-	rst2man \
-	  "build/man/$(_PROJECT_NPM).1.rst" \
-	  "build/man/$(_PROJECT_NPM).1"; \
-	rm \
 	  "build/man/$(_PROJECT).1.rst" \
-	  "build/man/$(_PROJECT_NPM).1.rst"; \
+	  "build/man/$(_PROJECT).1"; \
 	rm \
-	  "build/man/variables.rst"
+	  "build/man/$(_PROJECT).1.rst";
+	# rm \
+	#   "build/man/variables.rst"
 
 build-npm:
 
@@ -152,8 +138,8 @@ build-npm:
 	for _file in $(NPM_FILES); do \
 	  if [[ -d "$${_file}" ]]; then \
 	    mkdir \
-	      -p \
-	      "build/$${_file}"; \
+	     -p \
+	     "build/$${_file}"; \
 	    cp \
 	      -r \
 	      "$${_file}/"* \
@@ -163,8 +149,11 @@ build-npm:
 	      -r \
 	      "$${_file}" \
 	      "build"; \
+	    $(_INSTALL_FILE) \
+	      "$${_file}" \
+	      "build/$${_file}"; \
 	  fi; \
-	done
+	done;
 	cd \
 	  "build"; \
 	_version="$$( \
@@ -174,15 +163,49 @@ build-npm:
 	      "version")"; \
 	npm \
 	  install \
-	  --include="optional"; \
+	  "."; \
 	npm \
 	  run \
 	    "build"; \
 	npm \
+	  install \
+	  "."; \
+	chmod \
+	  +x \
+	  "evm-chains-info"; \
+	npm \
 	  pack; \
+	chmod \
+	  +x \
+	  "evm-chains-info"; \
 	mv \
 	  "$(_PROJECT_NPM)-$${_version}.tgz" \
 	  ".."
+
+
+install: install-npm install-scripts install-doc install-examples install-man
+
+install-scripts:
+
+	$(_INSTALL_DIR) \
+	  "$(LIB_DIR)"
+	for _file in $(NPM_FILES); do \
+	  if [[ -d "$${_file}" ]]; then \
+	    cp \
+	      -r \
+	      "$${_file}" \
+	      "$(LIB_DIR)/nodejs"; \
+	  elif [[ -e "$${_file}" ]]; then \
+	    $(_INSTALL_FILE) \
+	      "$${_file}" \
+	      "$(LIB_DIR)/nodejs/$${_file}"; \
+	  fi; \
+	done
+	ln \
+	  -s \
+	  "$(PREFIX)/lib/$(_PROJECT_NPM)/nodejs/lib$(_PROJECT_NPM)" \
+	  "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
+	true
 
 install-npm:
 
@@ -201,11 +224,16 @@ install-npm:
 	    "$${_npm_opts[@]}" \
 	    "$(_PROJECT_NPM)-$${_version}.tgz"; \
 	$(_INSTALL_DIR) \
-	  "$(DESTDIR)$(PREFIX)/lib"; \
+	  "$(DESTDIR)$(PREFIX)/lib/$(_PROJECT_NPM)"; \
 	ln \
 	  -s \
 	  "$(NODE_DIR)" \
-	  "$(LIB_DIR)" || \
+	  "$(DESTDIR)$(PREFIX)/lib/$(_PROJECT_NPM)/nodejs" || \
+	true
+	ln \
+	  -s \
+	  "$(NODE_DIR)/lib$(_PROJECT_NPM)" \
+	  "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
 	true
 
 publish-npm:
@@ -229,7 +257,7 @@ install-man:
 	$(_INSTALL_DIR) \
 	  "$(MAN_DIR)/man1"
 	$(_INSTALL_FILE) \
-	  "build/man/$(_PROJECT_NPM).1" \
-	  "$(MAN_DIR)/man1/$(_PROJECT_NPM).1"
+	  "build/man/$(_PROJECT).1" \
+	  "$(MAN_DIR)/man1/$(_PROJECT).1"
 
-.PHONY: check build-man build-npm install install-doc install-man install-npm install-scripts shellcheck
+.PHONY: check build-man build-npm clean install install-doc install-man install-npm install-scripts shellcheck
