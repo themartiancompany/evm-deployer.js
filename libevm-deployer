@@ -84,9 +84,18 @@ const
   _evm_chains_info =
     _evm_chains_info_module._evm_chains_info;
 const
+  _deployer_module =
+    require(
+      "./lib/deployer");
+/* global
+     _evm_deployer */
+const
+  _evm_deployer =
+    _evm_deployer_module._evm_deployer;
+const
   _address_get_module =
     require(
-      "./lib/address-get");
+      "./lib/deployer");
 /* global
      _address_get */
 const
@@ -532,34 +541,6 @@ async function
 }
 
 module.exports = {
-  _address_get:
-    _address_get,
-  _balance_check:
-    _balance_check,
-  _msg_error_balance_insufficient:
-    _msg_error_balance_insufficient,
-  _balance_get:
-    _balance_get,
-  _balance_send:
-    _balance_send,
-  _block_number_get:
-    _block_number_get,
-  _evm_wallet:
-    _evm_wallet,
-  _ethers_to_wei:
-    _ethers_to_wei,
-  _provider_get:
-    _provider_get,
-  _msg_info_provider_generated:
-    _msg_info_provider_generated,
-  _price_gas_get:
-    _price_gas_get,
-  _price_gas_transaction_get:
-    _price_gas_transaction_get,
-  _seed_new:
-    _seed_new,
-  _wallet_get:
-    _wallet_get,
-  _wallet_new:
-    _wallet_new
+  _evm_deployer:
+    _evm_deployer
 };
