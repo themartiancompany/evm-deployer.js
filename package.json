@@ -123,7 +123,7 @@
     "build-fs-worker":
       "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/evm-wallet' && cp 'fs-worker.js' 'dist/libevm-wallet'",
     "build-lib":
-      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details && mv 'libevm-wallet.js' 'dist/libevm-wallet'",
+      "npx webpack --mode 'production' --config 'libevm-wallet.webpack.config.cjs' --stats-error-details && mv 'libevm-wallet.js' 'dist/libevm-wallet'",
     "build":
       "npm run lint && npm run build-fs-worker && npm run build-lib && mv 'evm-wallet.js' 'dist/evm-wallet'",
     "lint":
