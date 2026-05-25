@@ -294,7 +294,6 @@ async function
           `Balance get ` +
           `timeout '${_call_timeout}' ` +
           `reached.' `;
-      console.log(_call_timeout);
       const
         _exit_timeout =
           () => {
