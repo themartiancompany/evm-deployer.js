@@ -201,71 +201,84 @@ async function
     _retries_max,
     _balance_lifespan) {
   let
-    _balance;
+    _balance,
+    _balance_dir,
+    _balance_file,
+    _balance_file_modified,
+    _balance_get_args,
+    _life,
+    _network;
   for ( _network of _target_networks ) {
-  const
-    _balance_dir =
-      _path_join( [
-        _cache_dir,
-        _wallet_name,
-        _target_network.toString() ]);
-  const
-    _balance_file =
-      _path_join( [
+    const
+      _balance_dir =
+        _path_join( [
+          _cache_dir,
+          _wallet_name,
+          _target_network.toString() ]);
+    const
+      _balance_file =
+        _path_join( [
+          _balance_dir,
+          "balance"]);
+    const
+      _balance_get_args = [
+        _wallet_seed,
+        _rpc,
+        _api_key,
+        "",                  // Target address, using seed
+        _measure_unit,
+        _balance_file,
+        _retries_max
+      ];
+    if ( ! _file_exists(
+             _balance_dir) ) {
+      _mkdir(
         _balance_dir,
-        "balance"]);
-  const
-    _balance_get_args = [
-      _wallet_seed,
-      _rpc,
-      _api_key,
-      "",                  // Target address, using seed
-      _measure_unit,
-      _balance_file,
-      _retries_max
-    ];
-  if ( ! _file_exists(
-           _balance_dir) ) {
-    _mkdir(
-      _balance_dir,
-      { "recursive":
-          true });
-  }
-  if ( ! _file_exists(
-           _balance_file) ) {
-    _balance =
-      await _balance_get.apply(
-        null,
-        _balance_get_args);
-  }
-  else {
-    const
-      _balance_file_modified =
-        _stat(
-          _balance_file).mtimeMs;
-    const
-      _life =
-        Date.now() -
-        _balance_file_modified;
-    if ( _balance_lifespan < _life ) {
+        { "recursive":
+            true });
+    }
+    if ( ! _file_exists(
+             _balance_file) ) {
       _balance =
         await _balance_get.apply(
           null,
           _balance_get_args);
     }
     else {
-      _balance =
-        _cat(
-          _balance_file);
+      const
+        _balance_file_modified =
+          _stat(
+            _balance_file).mtimeMs;
+      const
+        _life =
+          Date.now() -
+          _balance_file_modified;
+      if ( _balance_lifespan < _life ) {
+        _balance =
+          await _balance_get.apply(
+            null,
+            _balance_get_args);
+      }
+      else {
+        _balance =
+          _cat(
+            _balance_file);
+      }
     }
-  }
-  return _balance;
+    return _balance;
 }
 
 // will become async at some point
 function
   _rpc_get(
     _target_networks) {
+  let
+    _evm_chains_info_args,
+    _info_retrieve,
+    _network,
+    _rpc;
+  _rpc =
+    {};
   for ( _network of _target_networks ) {
     if ( typeof(
            _network) == "string" ) {
@@ -336,16 +349,11 @@ async function
     _target_value,
     _target_networks) {
   let
-    _evm_chains_info_args,
-    _info_retrieve,
     _msg,
     _network,
-    _rpc,
     _target_network,
     _tx,
     _receipt;
-  _rpc =
-    {};
   if ( typeof(
          _target_networks) == "undefined" ||
        _target_networks == [] ||
@@ -362,9 +370,10 @@ async function
     _target_network =
       "";
   }
-  _rpc =
-    _rpc_get(
-      _target_networks);
+  const
+    _rpc =
+      _rpc_get(
+        _target_networks);
   _msg =
     `Using RPC address '${_rpc}'.`;
   _msg_info(
