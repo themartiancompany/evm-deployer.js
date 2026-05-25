@@ -10,7 +10,7 @@
       "https://patreon.com/tallero"
   },
   "man": [
-    "./man/evm-wallet.js.1"
+    "./man/evm-deployer.1"
   ],
   "files": [
     "AUTHORS.rst",
