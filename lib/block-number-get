@@ -391,6 +391,8 @@ function
           "$0"]);
   const
     _text = [
+      "Returns current block number for a blockchain network",
+      "",
       "Usage:",
       `  ${_program}`,
       "    <quiet>",
