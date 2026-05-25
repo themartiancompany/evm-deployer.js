@@ -314,8 +314,7 @@ function
         _network,
         []                // db paths
       ];
-      _rpc[
-        _network] =
+      _rpc[_network] =
         _evm_chains_info.apply(
           null,
           _evm_chains_info_args)[
@@ -405,8 +404,7 @@ async function
           _wallet_name,
           _wallet_seed,
           _target_networks,
-          _rpc[
-            _target_network],
+          _rpc,
           _api_key,
           _measure_unit,
           _retries_max,
