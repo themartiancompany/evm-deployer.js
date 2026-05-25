@@ -280,10 +280,10 @@ function
   let
     _evm_chains_info_args,
     _info_retrieve,
-    _network,
-    _rpc;
-  _rpc =
-    {};
+    _network;
+  const
+    _rpc =
+      {};
   for ( _network of _target_networks ) {
     if ( typeof(
            _network) == "string" ) {
@@ -376,7 +376,6 @@ async function
       "";
   }
   if ( _target_networks.length == 1 ) {
-    console.log(_target_networks)
     const
       _commas =
         _target_networks[0].split(",");
