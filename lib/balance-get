@@ -273,6 +273,7 @@ async function
         ];
       _balance_wei =
         _run(
+          "sync",
           _provider.getBalance,
           _provider_get_balance_args,
           "_provider_get_balance",
