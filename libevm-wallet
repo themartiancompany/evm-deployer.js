@@ -199,7 +199,8 @@ async function
     _api_key,
     _measure_unit,
     _retries_max,
-    _balance_lifespan) {
+    _balance_lifespan,
+    _call_timeout) {
   let
     _balance,
     _balance_dir,
@@ -231,7 +232,8 @@ async function
         "",                  // Target address, using seed
         _measure_unit,
         _balance_file,
-        _retries_max
+        _retries_max,
+        _call_timeout
       ];
     if ( ! _file_exists(
              _balance_dir) ) {
@@ -259,7 +261,8 @@ async function
           Date.now() -
           _balance_file_modified;
       if ( _balance_lifespan < _life ) {
-        _balance =
+        _balance[
+          _network] =
           await _balance_get.apply(
             null,
             _balance_get_args);
@@ -396,7 +399,7 @@ async function
   if ( _target_networks.length == 1 ) {
     if ( typeof(
            _target_networks[0]) == "string" ) {
-      if ( _target_networks[0].include(",") ) {
+      if ( _target_networks[0].includes(",") ) {
         const
           _commas =
             _target_networks[0].split(",");
@@ -407,8 +410,6 @@ async function
       }
     }
   }
-  console.log(
-    _target_networks);
   const
     _rpc =
       _rpc_get(
@@ -452,7 +453,8 @@ async function
           _api_key,
           _measure_unit,
           _retries_max,
-          _balance_lifespan
+          _balance_lifespan,
+          _call_timeout
         ];
       const
         _balance =

@@ -265,39 +265,60 @@ async function
     _target_address =
       _wallet.address;
   }
+  _msg =
+    `Retrieving balance for ` +
+    `address '${_target_address}' on ` +
+    `network '${_target_network}'.`;
+  _msg_info(
+    _msg);
   while ( _success == false &&
           _retry < _retries_max ) {
     try {
       _time_over =
         false;
-      const
-        _provider_get_balance_cmd = [
-          _provider,
-          _target_address
-        ];
-      // TODO:
-      //   to ask why this doesnt work
+      // const
+      //   _provider_get_balance_cmd = [
+      //     () => _provider.getBalance,
+      //     _target_address
+      //   ];
+      // // TODO:
+      // //   to ask why this doesnt work
       // _balance_wei =
       //   await _run(
       //     "sync",
       //     _provider_get_balance_cmd,
       //     "_provider_get_balance",
       //     _call_timeout,
-      //     "native",
-      //     "getBalance");
-      _balance_wei =
-        _provider.getBalance(
-          _target_address);
+      //     "native");
+      // hurr
+      const
+        _timeout_msg =
+          `Balance get ` +
+          `timeout '${_call_timeout}' ` +
+          `reached.' `;
+      console.log(_call_timeout);
       const
         _exit_timeout =
           () => {
           _time_over =
             true;
+          _msg_info(
+            _timeout_msg);
+          throw _timeout_msg;
         };
-      setTimeout(
-        _exit_timeout,
-        _timeout);
-      await _balance_wei;
+      try {
+        setTimeout(
+          _exit_timeout,
+          _call_timeout);
+        true
+      }
+      catch(
+        _error) {
+        throw _timeout_msg;
+      }
+      _balance_wei =
+        await _provider.getBalance(
+          _target_address);
       if ( _display_unit == "" ) {
         _display_unit =
           "ether";
