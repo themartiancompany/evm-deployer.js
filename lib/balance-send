@@ -421,7 +421,7 @@ function
     target_network =
       _rpc_get(
         [ target_network ])[
-        _target_network];
+        target_network];
   }
   if ( typeof(
          measure_unit) == "undefined" ||
