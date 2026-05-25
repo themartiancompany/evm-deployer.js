@@ -3,6 +3,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 /**    ----------------------------------------------------------------------
+ *     block-number-get
+ *     ----------------------------------------------------------------------
  *     Copyright ©
  *       Pellegrino Prevete
  *         2024, 2025, 2026
@@ -127,7 +129,7 @@ const
 function
   _global_variables() {
   app_name =
-    "balance-get";
+    "block-number-get";
   /* global
        wallet_seed:
          writable */
@@ -149,11 +151,6 @@ function
   target_address =
     "";
   /* global
-       display_unit:
-         writable */
-  display_unit =
-    "";
-  /* global
        output_file:
          writable */
   output_file =
@@ -172,7 +169,7 @@ function
 
 
 async function
-  _balance_get(
+  _block_number_get(
     _wallet_seed,
     _target_network,
     _api_key_path,
@@ -182,9 +179,7 @@ async function
     _retries_max,
     _call_timeout) {
   let
-    _balance,
-    _balance_ether,
-    _balance_wei,
+    _block_number,
     _msg,
     _provider_get_opts,
     _retry,
@@ -266,8 +261,7 @@ async function
       _wallet.address;
   }
   _msg =
-    `Retrieving balance for ` +
-    `address '${_target_address}' on ` +
+    `Retrieving block number for ` +
     `network '${_target_network}'.`;
   _msg_info(
     _msg);
@@ -275,37 +269,27 @@ async function
           _retry < _retries_max ) {
     try {
       const
-        _provider_get_balance_cmd = [
-          _provider,
-          _target_address
+        _provider_get_block_number_cmd = [
+          _provider
         ];
-      _balance_wei =
+      // // TODO:
+      // //   to ask why this doesnt work
+      _block_number =
         await _run(
           "sync",
-          _provider_get_balance_cmd,
-          "_provider_get_balance",
+          _provider_get_block_number_cmd,
+          "_provider_get_block_number",
           _call_timeout,
           "native",
-	  "getBalance");
+	  "getBlockNumber");
       if ( _display_unit == "" ) {
         _display_unit =
           "ether";
       }
-      if ( _display_unit == "wei" ) {
-        _balance =
-          _balance_wei;
-      }
-      else if ( _display_unit == "ether" ) {
-        _balance_ether =
-          _wei_to_ether(
-            _balance_wei);
-        _balance =
-          _balance_ether;
-      }
       if ( _output_file != "" ) {
           _file_write(
             _output_file,
-            _balance.toString());
+            _block_number.toString());
       }
       _success =
         true;
@@ -314,7 +298,8 @@ async function
       _retry =
         _retry + 1;
       _msg =
-        `Error retrieving balance, ` +
+        `Error retrieving block number `+
+        `from network/rpc '${_target_network}', `
         `retrying (${_retry} of ${_retries_max})`;
       console.error(
         _err);
@@ -328,21 +313,14 @@ async function
   if ( _success == false &&
        _retry == _retries_max ) {
     _msg =
-      "Error retrieving balance.";
+      "Error retrieving block number.";
     throw _msg;
-    return _balance;
   }
-  return _balance;
+  return _block_number;
 }
 
 function
   _overrides_set() {
-  if ( typeof(
-         display_unit) == "undefined" ||
-       display_unit == "" ) {
-    display_unit =
-      "ether";
-  }
   if ( typeof(
          retries_max) == "undefined" ||
        retries_max == "" ) {
@@ -372,11 +350,8 @@ function
   const
     _text = [
       `  ${_program} configuration:`,
-      `      Wallet seed: ${wallet_seed}`,
       `   Target network: ${target_network}`,
       `          API Key: ${api_key}`,
-      `   Target address: ${target_address}`,
-      `     Display unit: ${display_unit}`,
       `      Output file: ${output_file}`,
       `  Maximum retries: ${retries_max}`
       `     Call timeout: ${call_timeout}`
@@ -411,19 +386,13 @@ function
       "Usage:",
       `  ${_program}`,
       "    <quiet>",
-      "    <seed-path>",
       "    <target-network>",
       "    (<api-keys-path)",
-      "    (<target-address>)",
-      "    (<display-unit>)",
       "    (<output-file>)",
       "    (<retries-max>)",
       "    (<call-timeout>)",
       "",
       "Arguments:",
-      "",
-      "  <seed-path>         Path on disk of the file",
-      "                      containing the seed phrase.",
       "",
       "  <target-network>    Name, chain ID or RPC address",
       "                      of the network to connect to.",
@@ -433,15 +402,7 @@ function
       "  <api-key-path>      Path on disk of the API key for",
       "                      the network service provider.",
       "",
-      "  <target-address>    Address of which to return",
-      "                      the balance of.",
-      "                      Default: the wallet address.",
-      "                      corresponding to the seed.",
-      "",
-      "  <display-unit>      Can be 'wei' or 'ether'.",
-      `                      Default: '${display_unit}'`,
-      "",
-      "  <output-file>       File in which to save the balance.",
+      "  <output-file>       File in which to save the block number.",
       `                      Default: '${output_file}'`,
       "",
       "  <retries-max>       Maximum number of retries.",
@@ -474,34 +435,22 @@ function _cmdline_parse() {
           _value;
       }
       if ( _index == 3 ) {
-        wallet_seed =
-          _value;
-      }
-      if ( _index == 4 ) {
         target_network =
           _value;
       }
-      if ( _index == 5 ) {
+      if ( _index == 4 ) {
         api_key =
           _value;
       }
-      if ( _index == 6 ) {
-        target_address =
-          _value;
-      }
-      if ( _index == 7 ) {
-        display_unit =
-          _value;
-      }
-      if ( _index == 8 ) {
+      if ( _index == 5 ) {
         output_file =
           _value;
       }
-      if ( _index == 9 ) {
+      if ( _index == 6 ) {
         retries_max =
           _value;
       }
-      if ( _index == 10 ) {
+      if ( _index == 7 ) {
         call_timeout =
           _value;
       }
@@ -514,12 +463,9 @@ function _cmdline_parse() {
           0);
       }
   });
-  if ( wallet_seed == "" &&
-       target_address == "" ) {
+  if ( target_network == "" ) {
     _msg =
-      "You need to input either " +
-      "a seed file path or a target " +
-      "address."
+      "No network given in input.";
     _msg_error(
       _msg,
       0);
@@ -530,19 +476,19 @@ function _cmdline_parse() {
 }
 
 async function
-  _balance_get_cmdline(
+  _block_number_get_cmdline(
     _app_opts) {
   let
-    _balance;
+    _block_number;
   try {
-    _balance =
-      await _balance_get.apply(
+    _block_number =
+      await _block_number_get.apply(
         null,
         _app_opts);
     console.log(
-      _balance.toString());
+      _block_number.toString());
     // process.stdout.write(
-    //   _balance.toString());
+    //   _block_number.toString());
   }
   catch(
     _error) {
@@ -556,9 +502,7 @@ async function
 
 
 if ( _cmdline_check(
-       "balance-get") ||
-     _cmdline_check(
-       "gas-balance")) {
+       "block-number-get") ) {
   _global_variables();
   _cmdline_parse();
   _config_show();
@@ -571,11 +515,11 @@ if ( _cmdline_check(
     output_file,
     retries_max
   ];
-  _balance_get_cmdline(
+  _block_number_get_cmdline(
     app_opts);
 }
 
 module.exports = {
-  _balance_get:
-    _balance_get
+  _block_number_get:
+    _block_number_get
 };

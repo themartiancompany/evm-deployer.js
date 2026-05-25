@@ -121,6 +121,15 @@ const
   _balance_send =
     _balance_send_module._balance_send;
 const
+  _block_number_get_module =
+    require(
+      "./lib/block-number-get");
+/* global
+     _block_number_get_get */
+const
+  _block_number_get =
+    _block_number_get_module._block_number_get;
+const
   _ethers_to_wei_module =
     require(
       "./lib/ethers-to-wei");
@@ -244,7 +253,6 @@ async function
     }
     if ( ! _file_exists(
              _balance_file) ) {
-      console.log(_network);
       _balance[
         _network] =
         await _balance_get.apply(
@@ -590,6 +598,8 @@ module.exports = {
     _balance_get,
   _balance_send:
     _balance_send,
+  _block_number_get:
+    _block_number_get,
   _evm_wallet:
     _evm_wallet,
   _ethers_to_wei:
