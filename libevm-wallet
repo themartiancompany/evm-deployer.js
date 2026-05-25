@@ -269,7 +269,8 @@ async function
             _balance_file);
       }
     }
-    return _balance;
+  }
+  return _balance;
 }
 
 // will become async at some point
