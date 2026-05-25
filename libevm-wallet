@@ -211,15 +211,15 @@ async function
     _balance_lifespan,
     _call_timeout) {
   let
-    _balance,
     _balance_dir,
     _balance_file,
     _balance_file_modified,
     _balance_get_args,
     _life,
     _network;
-  _balance =
-    {};
+  const
+    _balance =
+      {};
   for ( _network of _target_networks ) {
     const
       _balance_dir =
