@@ -320,6 +320,13 @@ async function
     _target_network,
     _tx,
     _receipt;
+  const
+    _libevm_module =
+      require(
+        "libevm");
+  const
+    _rpc_get =
+      libevm_module._rpc_get;
   if ( typeof(
          _target_networks) == "undefined" ||
        _target_networks == [] ||
