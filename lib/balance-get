@@ -274,8 +274,6 @@ async function
   while ( _success == false &&
           _retry < _retries_max ) {
     try {
-      _time_over =
-        false;
       // const
       //   _provider_get_balance_cmd = [
       //     () => _provider.getBalance,
@@ -292,7 +290,7 @@ async function
       //     "native");
       // hurr
       const
-        _timeout_msg =
+        _msg_timeout =
           `Balance get ` +
           `timeout '${_call_timeout}' ` +
           `reached.' `;
@@ -300,25 +298,20 @@ async function
       const
         _exit_timeout =
           () => {
-          _time_over =
-            true;
-          _msg_info(
-            _timeout_msg);
-          throw _timeout_msg;
+          throw _msg_timeout;
         };
       try {
         setTimeout(
           _exit_timeout,
           _call_timeout);
-        true
+        _balance_wei =
+          await _provider.getBalance(
+            _target_address);
       }
       catch(
         _error) {
         throw _timeout_msg;
       }
-      _balance_wei =
-        await _provider.getBalance(
-          _target_address);
       if ( _display_unit == "" ) {
         _display_unit =
           "ether";
