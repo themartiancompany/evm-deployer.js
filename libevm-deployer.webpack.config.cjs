@@ -32,7 +32,7 @@ const
       __dirname);
 const
   _input_file_name =
-    `libevm-wallet`;
+    `libevm-deployer`;
 const
   _input_file_path =
     `./${_input_file_name}`;
