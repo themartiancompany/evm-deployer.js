@@ -217,6 +217,7 @@ function
     _line,
     _text;
   _text = [
+    `  ${app_name} configuration:`,
     `      Wallet seed: ${wallet_seed}`,
     `   Target network: ${target_network}`,
     `          API key: ${api_key_path}`,
