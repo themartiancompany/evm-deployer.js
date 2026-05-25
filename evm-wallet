@@ -358,17 +358,15 @@ async function
   _tasks_parallel_auto_detect();
   _call_timeout_auto_detect();
   if ( config_dir == "" ) {
+    const
+      _home =
+        _homedir_get();
     config_dir =
-      `${_homedir_get()}/.config/evm-wallet`;
+      `${_home}/.config/evm-wallet`;
   }
   if ( cache_dir == "" ) {
     cache_dir =
       `${_homedir_get()}/.cache/evm-wallet`;
-  }
-  if ( target_networks.length < 1 &&
-       networks_all == "n" ) {
-    target_networks.push(
-      100);
   }
   _target_key_auto_detect();
   if ( balance_lifespan == "" ) {
@@ -421,6 +419,11 @@ async function
         wallet_name,
         "y",
         "n");
+  if ( target_networks.length < 1 &&
+       networks_all == "n" ) {
+    target_networks.push(
+      100);
+  }
   _key_fingerprint_auto_detect();
   _output_type_check();
   // See https://github.com/openpgpjs/openpgpjs/issues/2004

@@ -370,12 +370,18 @@ async function
     _target_network =
       _target_networks[
         0];
+    if ( typeof(
+           _target_network) == "object" ) {
+      _target_networks =
+        _target_network;
+    }
   }
   else {
     _target_network =
       "";
   }
   if ( _target_networks.length == 1 ) {
+    console.log(_target_networks);
     const
       _commas =
         _target_networks[0].split(",");
