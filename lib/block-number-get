@@ -161,6 +161,11 @@ function
   retries_max =
     "";
   /* global
+       call_timeout:
+         writable */
+  call_timeout =
+    "";
+  /* global
        quiet:
          writable */
   quiet =
@@ -315,7 +320,7 @@ function
       `   Target network: ${target_network}`,
       `          API Key: ${api_key}`,
       `      Output file: ${output_file}`,
-      `  Maximum retries: ${retries_max}`
+      `  Maximum retries: ${retries_max}`,
       `     Call timeout: ${call_timeout}`
     ];
   for ( _line of _text ) {

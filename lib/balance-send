@@ -392,13 +392,23 @@ function
   let
     _line;
   const
+    _argv =
+      _argv_get();
+  const
+    _program =
+      _basename(
+        _argv[
+          "$0"]);
+  const
     _text = [
+      `  ${_program} configuration:`,
       `      Wallet seed: ${wallet_seed}`,
       `   Target address: ${target_address}`,
       `    Target amount: ${target_amount}`,
       `   Target network: ${target_network}`,
       `          API Key: ${api_key}`,
       `     Measure unit: ${measure_unit}`,
+      `     Call timeout: ${call_timeout}`,
     ]
   for ( _line of _text ) {
     _msg_info(
