@@ -27,7 +27,7 @@
 SHELL=bash
 PREFIX ?= /usr/local
 _PROJECT_NPM=evm-deployer
-_PROJECT=$(_PROJECT_NPM).js
+_PROJECT=$(_PROJECT_NPM)
 _NAMESPACE=themartiancompany
 DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
 USR_DIR=$(DESTDIR)$(PREFIX)
@@ -57,11 +57,12 @@ NPM_FILES=\
   "COPYING" \
   "AUTHORS.rst" \
   "dist" \
-  "evm-chains-info" \
+  "lib" \
+  "evm-deployer" \
   "eslint.config.mjs" \
   "fs-worker.webpack.config.cjs" \
-  "libevm-chains-info" \
-  "libevm-chains-info.webpack.config.cjs" \
+  "libevm-deployer" \
+  "libevm-deployer.webpack.config.cjs" \
   "package.json" \
   "webpack.config.cjs"
 
@@ -172,12 +173,12 @@ build-npm:
 	  "."; \
 	chmod \
 	  +x \
-	  "evm-chains-info"; \
+	  "evm-deployer"; \
 	npm \
 	  pack; \
 	chmod \
 	  +x \
-	  "evm-chains-info"; \
+	  "evm-deployer"; \
 	mv \
 	  "$(_PROJECT_NPM)-$${_version}.tgz" \
 	  ".."
