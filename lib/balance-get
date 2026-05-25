@@ -169,7 +169,8 @@ async function
     _target_address,
     _display_unit,
     _output_file,
-    _retries_max) {
+    _retries_max,
+    _call_timeout) {
   let
     _balance,
     _balance_ether,
@@ -193,8 +194,12 @@ async function
       Number(
         _retries_max);
   }
-  _timeout =
-    100000;
+  if ( typeof(
+         _call_timeout) == 'undefined' ||
+       _call_timeout == "" ) {
+    _call_timeout =
+      100000;
+  }
   _retry =
     0;
   _success =
