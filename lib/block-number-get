@@ -170,11 +170,8 @@ function
 
 async function
   _block_number_get(
-    _wallet_seed,
     _target_network,
     _api_key_path,
-    _target_address,
-    _display_unit,
     _output_file,
     _retries_max,
     _call_timeout) {
@@ -185,10 +182,7 @@ async function
     _retry,
     _request,
     _success,
-    _time_over,
-    _wallet_dir,
-    _wallet_password,
-    _wallet_path_list;
+    _time_over;
   if ( typeof(
          _retries_max) == 'undefined' ||
        _retries_max == "" ) {
@@ -210,20 +204,6 @@ async function
     0;
   _success =
     false;
-  _wallet_password =
-    "";
-  if ( _wallet_seed != "" ) {
-    _wallet_dir =
-      _dirname(
-        _wallet_seed);
-    _wallet_path_list = [
-      _wallet_dir,
-      "wallet.dat"
-    ];
-    _wallet_path =
-      _path_join(
-        _wallet_path_list);
-  }
   _provider_get_opts = [
     _target_network,
   ];
@@ -246,20 +226,6 @@ async function
       _provider_get_opts);
   _msg_info_provider_generated(
     _provider);
-  if ( _target_address == "" ) {
-    _wallet_get_opts = [
-      _wallet_path,
-      _wallet_password,
-      _wallet_seed,
-      _provider
-    ];
-    _wallet =
-      _wallet_get.apply(
-        null,
-        _wallet_get_opts);
-    _target_address =
-      _wallet.address;
-  }
   _msg =
     `Retrieving block number for ` +
     `network '${_target_network}'.`;
@@ -282,10 +248,6 @@ async function
           _call_timeout,
           "native",
 	  "getBlockNumber");
-      if ( _display_unit == "" ) {
-        _display_unit =
-          "ether";
-      }
       if ( _output_file != "" ) {
           _file_write(
             _output_file,
