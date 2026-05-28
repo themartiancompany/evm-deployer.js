@@ -105,6 +105,8 @@
   "bin":
     { 
       "evm-deployer":
+        "evm-deployer",
+      "evm-deployer.js":
         "evm-deployer"
     },
   "yargs": {
